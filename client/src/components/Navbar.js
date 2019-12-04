@@ -14,7 +14,7 @@ const Navbar = props => {
   }
 
   return (
-    <Nav className="nav justify-content-end" bg="primary">
+    <Nav className="nav justify-content-end" bg="light">
       {props.user ? (
         <>
           <Link to="/">Home  {props.user.username}</Link>
