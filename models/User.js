@@ -7,13 +7,23 @@ const userSchema = new Schema({
   image: String,
   age: Number,
   genderEn: {
-    enum: ["diverse", "male", "female"]
+    enum: ["diverse", "female", "male"]
   },
-  role: {
+  genderDE: {
+    enum: ["divers", "weiblich", "männlich"]
+  },
+  languages: {
+    enum: []
+  },
+  roleEn: {
     type: String,
     enum: ["admin", "seeking", "volunteer", ""]
-  }
-
+  },
+  roleDe: {
+    type: String,
+    enum: ["admin", "auf der Suche", "freiwillig", ""]
+  },
+  about: String
 }, {
   timestamps: {
     createdAt: 'created_at',
