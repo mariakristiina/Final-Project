@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { signup } from "../services/auth"
 import { Alert, Form, Button} from "react-bootstrap"
 
+
 class Signup extends Component {
   state = {
     username: "",
@@ -34,7 +35,9 @@ class Signup extends Component {
 
   render() {
     return(
+      
       <div>
+        
       <h3>Create A New Account</h3>
       <Form onSubmit={this.handleSubmit}>
         <Form.Group>
