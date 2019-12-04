@@ -15,19 +15,21 @@ const Navbar = props => {
   return (
     <Nav className="nav justify-content-end" bg="light">
       {props.user ? (
+
         <>
-          <Link to="/">Home {props.user.username}</Link>
-          <Link to="/about">About</Link>
           <Link to="/" onClick={handleLogout}>
             Logout
-          </Link>
+      </Link>
+          <Link to="/profile/:id">Profile</Link>
         </>
       ) : (
-        <React.Fragment>
-          <Login />
-          <Link to="/signup">Signup</Link>
-        </React.Fragment>
-      )}
+          <React.Fragment>
+            <Link to="/">Home</Link>
+            <Link to="/about">About</Link>
+            <Link to="/signup">Signup</Link>
+            <Link to="/signup">Login</Link>
+          </React.Fragment>
+        )}
     </Nav>
   );
 };
