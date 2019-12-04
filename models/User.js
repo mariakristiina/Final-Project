@@ -4,24 +4,29 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
-  image: String,
+  image: {
+    data: Buffer,
+    contentType: String
+  },
   age: Number,
   genderEn: {
+    type: String,
     enum: ["diverse", "female", "male"]
   },
   genderDE: {
+    type: String,
     enum: ["divers", "weiblich", "männlich"]
   },
-  languages: {
-    enum: []
-  },
+  languages: String,
   roleEn: {
     type: String,
-    enum: ["admin", "seeking", "volunteer", ""]
+    enum: ["admin", "private", "company"],
+    default: "private"
   },
   roleDe: {
     type: String,
-    enum: ["admin", "auf der Suche", "freiwillig", ""]
+    enum: ["admin", "privat", "firma"],
+    default: "privat"
   },
   about: String
 }, {
