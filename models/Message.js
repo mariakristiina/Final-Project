@@ -6,9 +6,15 @@ const messageSchema = ({
   content: String,
   subject: {
     type: Schema.Types.ObjectId,
-    ref: Post
+    ref: "Post"
+  },
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: "User"
   }
-}, {
+}, 
+
+{
     timestamps: {
       createdAt: 'created_at',
       updatedAt: 'updated_at'

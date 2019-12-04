@@ -25,7 +25,7 @@ const postSchema = ({
     type: String,
     enum: ["Sprachunterricht", "Nachhilfe", "Behördentermin", "Arzttermin", "Leute kennenlernen", "Angebote für Kinder", "Angebote für Senioren"]
   },
-  details: String,
+  description: String,
   owner: {
     type: Schema.Types.ObjectId,
     ref: "User"
