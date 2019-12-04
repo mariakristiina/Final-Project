@@ -25,7 +25,10 @@ User.findOne({ username: username })
     return bcrypt.hash(password, salt);
   })
   .then(hash=> {
-    return User.create({ username: username, password: hash});
+    return User.create({ 
+      username: username, 
+      password: hash,
+    });
   })
   .then(newUser => {
     req.login(newUser, err => {

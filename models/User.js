@@ -1,35 +1,36 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
 const userSchema = new Schema({
   username: String,
   password: String,
-  image: {
-    data: Buffer,
-    contentType: String
-  },
   age: Number,
-  genderEn: {
+  gender: {
     type: String,
-    enum: ["diverse", "female", "male"]
+    enum: ["select", "diverse", "female", "male"],
+    default: "select"
   },
-  genderDE: {
-    type: String,
-    enum: ["divers", "weiblich", "männlich"]
-  },
+  // genderDE: {
+  //   type: String,
+  //   enum: ["divers", "weiblich", "männlich"]
+  // },
   languages: String,
-  roleEn: {
+  role: {
     type: String,
     enum: ["admin", "private", "company"],
     default: "private"
   },
-  roleDe: {
+  // roleDe: {
+  //   type: String,
+  //   enum: ["admin", "privat", "firma"],
+  //   default: "privat"
+  // },
+  about: {
     type: String,
-    enum: ["admin", "privat", "firma"],
-    default: "privat"
-  },
-  about: String
-}, {
+    default: "Write something about yourself" }
+}, 
+{
   timestamps: {
     createdAt: 'created_at',
     updatedAt: 'updated_at'

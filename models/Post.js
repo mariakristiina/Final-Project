@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const postSchema = ({
+const postSchema = new Schema ({
   title: String,
   date: {
     type: Date,
@@ -9,22 +9,22 @@ const postSchema = ({
   },
   startTime: Number,
   endTime: Number,
-  postTypeEn: {
+  postType: {
     type: String,
     enum: ["search", "offer"]
   },
-  postTypeDe: {
-    type: String,
-    enum: ["suchen", "anbieten"]
-  },
-  categoryEn: {
+  // postTypeDe: {
+  //   type: String,
+  //   enum: ["suchen", "anbieten"]
+  // },
+  category: {
     type: String,
     enum: ["language lessons", "tutoring", "government appointment", "doctor appointment", "meet people", "activities for kids", "activities for seniors"]
   },
-  categoryDE: {
-    type: String,
-    enum: ["Sprachunterricht", "Nachhilfe", "Behördentermin", "Arzttermin", "Leute kennenlernen", "Angebote für Kinder", "Angebote für Senioren"]
-  },
+  // categoryDE: {
+  //   type: String,
+  //   enum: ["Sprachunterricht", "Nachhilfe", "Behördentermin", "Arzttermin", "Leute kennenlernen", "Angebote für Kinder", "Angebote für Senioren"]
+  // },
   description: String,
   owner: {
     type: Schema.Types.ObjectId,
@@ -32,17 +32,19 @@ const postSchema = ({
   },
   match: {
     type: Schema.Types.ObjectId,
-    ref: "User"
+    ref: "User",
+    default: null
   },
   messages: [{
     type: Schema.Types.ObjectId,
-    ref: "Message"
+    ref: "Message",
+    default: []
   }]
 }, {
-    timestamps: {
-      createdAt: 'created_at',
-      updatedAt: 'updated_at'
-    }
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  }
   });
 
 
