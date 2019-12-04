@@ -2,23 +2,23 @@ import axios from "axios"
 
 const signup = (username, password, age) => {
   return axios.post("/auth/signup", {
-       username: username,
-       password: password,
-       age: age
-  }).then(respose => {
+    username: username,
+    password: password,
+    age: age
+  }).then(response => {
     return response.data
   }).catch(err => {
     return err.response.data
   })
-  
+
 }
 
 
 const login = (username, password) => {
   return axios.post("/auth/login", {
-     username: username,
-     password: password
-  }).then (response => {
+    username: username,
+    password: password
+  }).then(response => {
     return response.data
   }).catch(err => {
     return err.response.data
