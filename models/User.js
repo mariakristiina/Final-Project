@@ -8,7 +8,7 @@ const userSchema = new Schema({
     data: Buffer,
     contentType: String
   },
-  age: Number,
+  age: Date,
   genderEn: {
     type: String,
     enum: ["diverse", "female", "male"]
