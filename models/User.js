@@ -1,9 +1,19 @@
 const mongoose = require('mongoose');
-const Schema   = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   username: String,
-  password: String
+  password: String,
+  image: String,
+  age: Number,
+  genderEn: {
+    enum: ["diverse", "male", "female"]
+  },
+  role: {
+    type: String,
+    enum: ["admin", "seeking", "volunteer", ""]
+  }
+
 }, {
   timestamps: {
     createdAt: 'created_at',
