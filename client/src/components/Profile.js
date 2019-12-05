@@ -131,17 +131,18 @@ class Profile extends Component {
 
 
             <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
+              <Dropdown.Toggle variant="success" id="dropdown-basic"
+                onChange={this.handleChange}>
                 gender
 </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item className="Item" href="#/action-1">
+                <Dropdown.Item value="diverse" className="Item" href="#/action-1">
                   Divers
   </Dropdown.Item>
-                <Dropdown.Item className="Item" href="#/action-2">
+                <Dropdown.Item value="female" className="Item" href="#/action-2">
                   Female
   </Dropdown.Item>
-                <Dropdown.Item className="Item" href="#/action-3">
+                <Dropdown.Item value="male" className="Item" href="#/action-3">
                   Male
   </Dropdown.Item>
               </Dropdown.Menu>
