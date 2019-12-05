@@ -8,8 +8,8 @@ const postSchema = new Schema(
       type: Date,
       default: Date.now
     },
-    startTime: Number,
-    endTime: Number,
+    startTime: String,
+    endTime: String,
     postType: {
       type: String,
       enum: ["search", "offer"],
