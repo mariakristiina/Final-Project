@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar";
 import { Route } from "react-router-dom";
 import Signup from "./components/Signup"
 import Login from "./components/Login"
+import { Link } from "react-router-dom";
+import Profile from "./components/Profile";
 
 
 
@@ -30,12 +32,16 @@ class App extends React.Component {
           render={props => <Login {...props} setUser={this.setUser} />}
         />
 
+        <Route exact path="/profile/:id" render={props => <Profile user={this.state.user} {...props} />} />
+
         <Route
           exact
           path="/signup"
-         
+
           render={props => <Signup {...props} setUser={this.setUser} />}
-          />
+        />
+
+        <Link to="/signup">Get involved</Link>
 
       </div>
     )
