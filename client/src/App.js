@@ -10,11 +10,13 @@ import NewPost from "./components/Post/PostForm";
 
 import Profile from "./components/Profile";
 import Home from "./components/Home";
+import PostDetail from "./components/Post/PostDetail"
 
 
 class App extends React.Component {
   state = {
     user: this.props.user,
+    posts: []
   };
 
   setUser = user => {
@@ -22,6 +24,19 @@ class App extends React.Component {
       user: user
     });
   };
+
+  // getData = post => {
+  //   axios
+  //     .get('/post')
+  //     .then(response => {
+  //       this.setState({
+  //         posts: response.data
+  //       })
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  // };
 
 
 
@@ -47,9 +62,11 @@ class App extends React.Component {
           render={props => <Signup {...props} setUser={this.setUser} />}
         />
 
-        <Route exact path="/post" render={props => <Posts {...props} serUser={this.setUser} /> } />
+        <Route exact path="/posts" render={props => <Posts {...props} serUser={this.setUser} />} />
 
-<Route exact path="/post/new" render={props => <NewPost {...props} setUser={this.setUser} handleChange={this.handleChange}/> } />
+        <Route exact path="/post/:id" render={props => <PostDetail {...props} post={this.state.posts} />} />
+
+        <Route exact path="/post/new" render={props => <NewPost {...props} setUser={this.setUser} handleChange={this.handleChange} />} />
 
       </div>
     )
