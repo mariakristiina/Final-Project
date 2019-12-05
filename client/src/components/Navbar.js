@@ -2,10 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar as Nav } from "react-bootstrap";
 import { logout } from "../services/auth";
-import Login from "./Login";
 
 const Navbar = props => {
-  console.log(props);
   const handleLogout = () => {
     logout();
 
@@ -20,14 +18,14 @@ const Navbar = props => {
           <Link to="/" onClick={handleLogout}>
             Logout
       </Link>
-          <Link to="/profile/:id">Profile</Link>
+          <Link to={`/profile/${props.user._id}`}>Profile</Link>
         </>
       ) : (
           <React.Fragment>
             <Link to="/">Home</Link>
             <Link to="/about">About</Link>
             <Link to="/signup">Signup</Link>
-            <Login />
+            <Link to="/login">Login</Link>
           </React.Fragment>
         )}
     </Nav>

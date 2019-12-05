@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Dropdown } from "react-bootstrap";
 
 class Profile extends Component {
   state = {
@@ -18,10 +18,12 @@ class Profile extends Component {
   getData = () => {
 
     const id = this.props.match.params.id;
+    console.log(id);
 
     axios
-      .get(`/auth/${id}`)
+      .get(`/profile/${id}`)
       .then(response => {
+        console.log(response.data);
         this.setState({
           profile: response.data,
           username: response.data.username,
@@ -63,7 +65,7 @@ class Profile extends Component {
     const id = this.props.match.params.id;
 
     axios
-      .put(`/auth/${id}`, {
+      .put(`/profile/${id}`, {
         username: this.state.username,
         image: this.state.image,
         age: this.state.age,
@@ -84,36 +86,27 @@ class Profile extends Component {
 
 
   render() {
+    console.log("State", this.state)
+    console.log("Props", this.props)
+
     if (this.state.error) {
       return <p>{this.state.error}</p>;
     } else if (this.state.profile === null) {
       return <div></div>;
     }
 
-    let canUpdate = false;
-
-    if (this.state.profile.owner === this.props.user._id) {
-      canUpdate = true
-    }
-
     return (
       <div>
-        <h1>{this.state.profile.username}</h1>
-        <img src={this.state.profile.image} alt="" />
-        <p>{this.state.profile.age}</p>
-        <p>{this.state.profile.gender}</p>
-        <p>{this.state.profile.languages}</p>
-        <p>{this.state.profile.about}</p>
+        <h2>Hey {this.state.username}</h2>
+        <p>Image: {this.state.image}</p>
+        <p>Age: {this.state.age}</p>
+        <p>Gender: {this.state.gender}</p>
+        <p>Languages: {this.state.language}</p>
 
-        {canUpdate && (
-          <>
-            <Button onClick={this.toggleEdit}>Edit profile</Button>
-          </>
-        )}
+        <Button onClick={this.toggleEdit}>Show Edit Form</Button>
 
         {this.state.editForm && (
           <Form onSubmit={this.handleSubmit}>
-            <h2>Edit profile</h2>
             <Form.Group>
               <Form.Label htmlFor="username">username: </Form.Label>
               <Form.Control
@@ -137,16 +130,22 @@ class Profile extends Component {
             </Form.Group>
 
 
-            <Form.Group>
-              <Form.Label htmlFor="gender">gender: </Form.Label>
-              <Form.Control
-                type="text"
-                name="gender"
-                id="gender"
-                value={this.state.gender}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                gender
+</Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item className="Item" href="#/action-1">
+                  Divers
+  </Dropdown.Item>
+                <Dropdown.Item className="Item" href="#/action-2">
+                  Female
+  </Dropdown.Item>
+                <Dropdown.Item className="Item" href="#/action-3">
+                  Male
+  </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
 
             <Form.Group>
               <Form.Label htmlFor="languages">languages: </Form.Label>
@@ -171,13 +170,11 @@ class Profile extends Component {
             </Form.Group>
 
 
-
-            <Button type="submit">Save</Button>
+            <Button type="submit">Save Profile</Button>
           </Form>
+
         )}
-
       </div>
-
     )
 
   }
