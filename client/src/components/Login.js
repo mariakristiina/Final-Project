@@ -26,7 +26,7 @@ class Login extends Component {
       });
     } else {
       this.props.setUser(data)
-      this.props.history.push("/projects")
+      this.props.history.push("/profile")
     }
   });
   };
@@ -68,3 +68,5 @@ class Login extends Component {
 }
 
 export default Login;
+
+

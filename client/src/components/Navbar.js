@@ -27,7 +27,8 @@ const Navbar = props => {
             <Link to="/">Home</Link>
             <Link to="/about">About</Link>
             <Link to="/signup">Signup</Link>
-            <Login />
+            <Link to="/login">Login</Link>
+            <Login/>
           </React.Fragment>
         )}
     </Nav>
