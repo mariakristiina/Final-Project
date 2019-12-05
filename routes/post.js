@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
     .populate("match")
     .populate("messages")
     .then(posts => {
-      res.json("post");
+      res.json(posts);
     })
     .catch(err => {
       res.status(500).json(err);
