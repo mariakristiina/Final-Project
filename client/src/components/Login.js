@@ -20,7 +20,7 @@ class Login extends Component {
   
   
   login(this.state.username, this.state.password).then(data => {
-    if(data.massage) {
+    if(data.message) {
       this.setState({
         error: data.message
       });

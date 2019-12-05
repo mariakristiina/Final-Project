@@ -88,4 +88,6 @@ app.use('/post', postRoutes);
 const profileRoutes = require('./routes/profile');
 app.use('/profile', profileRoutes);
 
+const messageRoutes = require("./routes/messages")
+app.use("/messages", messageRoutes)
 module.exports = app;
