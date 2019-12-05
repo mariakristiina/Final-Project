@@ -4,7 +4,7 @@ import { Alert, Form, Button } from "react-bootstrap"
 
 
 class Login extends Component {
-  state = { 
+  state = {
     username: "",
     password: "",
     error: ""
@@ -13,7 +13,7 @@ class Login extends Component {
     this.setState({
       [event.target.name]: event.target.value
     })
-}
+  }
 
   handleSubmit = event => {
     event.preventDefault()
@@ -31,14 +31,14 @@ class Login extends Component {
   });
   };
 
-  
+
   render() {
-    return(
+    return (
       <div>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>
             <Form.Label htmlFor="username">Username</Form.Label>
-            <Form.Control 
+            <Form.Control
               type="text"
               name="username"
               id="username"
@@ -49,11 +49,11 @@ class Login extends Component {
           <Form.Group>
             <Form.Label htmlFor="password">Password:</Form.Label>
             <Form.Control
-            type="password"
-            name="password"
-            id="password"
-            value={this.state.password}
-            onChange={this.handleChange}
+              type="password"
+              name="password"
+              id="password"
+              value={this.state.password}
+              onChange={this.handleChange}
             />
           </Form.Group>
           {this.state.error && (

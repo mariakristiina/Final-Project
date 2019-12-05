@@ -4,14 +4,14 @@ import Navbar from "./components/Navbar";
 import { Route } from "react-router-dom";
 import Signup from "./components/Signup"
 import Login from "./components/Login"
-import { Link } from "react-router-dom";
 import Profile from "./components/Profile";
+import Home from "./components/Home";
 
 
 
 class App extends React.Component {
   state = {
-    user: this.props.user
+    user: this.props.user,
   };
 
   setUser = user => {
@@ -24,8 +24,9 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navbar user={this.state.user} clearUser={this.setUser} />
-        <h1>Hei</h1>
-        
+
+        <Home />
+
         <Route
           exact
           path="/login"
@@ -40,8 +41,6 @@ class App extends React.Component {
 
           render={props => <Signup {...props} setUser={this.setUser} />}
         />
-
-        <Link to="/signup">Get involved</Link>
 
       </div>
     )

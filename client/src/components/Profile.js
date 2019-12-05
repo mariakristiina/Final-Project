@@ -18,10 +18,12 @@ class Profile extends Component {
   getData = () => {
 
     const id = this.props.match.params.id;
+    console.log(id);
 
     axios
-      .get(`/auth/${id}`)
+      .get(`/profile/${id}`)
       .then(response => {
+        console.log(response);
         this.setState({
           profile: response.data,
           username: response.data.username,
