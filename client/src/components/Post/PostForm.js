@@ -22,7 +22,7 @@ class NewPost extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state);
+     console.log(this.state)
     axios
       .post("/post/new", {
         title: this.state.title,
@@ -32,9 +32,9 @@ class NewPost extends Component {
         category: this.state.category,
         description: this.state.description
       })
-      .then(console.log(this.state))
+
       .then(response => {
-        console.log(response.data);
+        
         this.props.refershData();
         this.setState({
           title: "",

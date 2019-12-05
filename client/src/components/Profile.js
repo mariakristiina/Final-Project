@@ -23,7 +23,7 @@ class Profile extends Component {
     axios
       .get(`/profile/${id}`)
       .then(response => {
-        console.log(response.data);
+       
         this.setState({
           profile: response.data,
           username: response.data.username,
