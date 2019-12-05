@@ -8,7 +8,6 @@ import Profile from "./components/Profile";
 import Home from "./components/Home";
 
 
-
 class App extends React.Component {
   state = {
     user: this.props.user,

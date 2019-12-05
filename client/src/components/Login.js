@@ -17,17 +17,17 @@ class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    
-    
+
+
     login(this.state.username, this.state.password).then(data => {
       console.log(this.props)
-      if (data.massage) {
+      if (data.message) {
         this.setState({
           error: data.message
         });
       } else {
         this.props.setUser(data)
-        this.props.history.push("/profile")
+        this.props.history.push("/")
       }
     });
   };
