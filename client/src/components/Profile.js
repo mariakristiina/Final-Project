@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Button, Form, Dropdown } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 class Profile extends Component {
   state = {
@@ -102,6 +102,8 @@ class Profile extends Component {
         <p>Age: {this.state.age}</p>
         <p>Gender: {this.state.gender}</p>
         <p>Languages: {this.state.language}</p>
+        <p>About: {this.state.about}</p>
+
 
         <Button onClick={this.toggleEdit}>Show Edit Form</Button>
 
@@ -129,23 +131,12 @@ class Profile extends Component {
               />
             </Form.Group>
 
-
-            <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                gender
-</Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item className="Item" href="#/action-1">
-                  Divers
-  </Dropdown.Item>
-                <Dropdown.Item className="Item" href="#/action-2">
-                  Female
-  </Dropdown.Item>
-                <Dropdown.Item className="Item" href="#/action-3">
-                  Male
-  </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+            <label htmlFor="gender">Gender: </label>
+            <select onChange={this.handleChange} name="gender" id="gender">
+              <option value="diverse">Divers</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+            </select>
 
             <Form.Group>
               <Form.Label htmlFor="languages">languages: </Form.Label>
