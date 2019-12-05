@@ -6,6 +6,10 @@ const userSchema = new Schema({
   username: String,
   password: String,
   age: Number,
+  urlPath: {
+    type: String,
+    default: "https://res.cloudinary.com/mariakristiina/image/upload/v1575542831/avatar-orange_q8rkfz.png",
+  },
   gender: {
     type: String,
     enum: ["select", "diverse", "female", "male"],

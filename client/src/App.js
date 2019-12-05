@@ -4,8 +4,10 @@ import Navbar from "./components/Navbar";
 import { Route } from "react-router-dom";
 import Signup from "./components/Signup"
 import Login from "./components/Login"
-import { Link } from "react-router-dom";
+// import { Link, Switch } from "react-router-dom";
 import Profile from "./components/Profile";
+import Posts from "./components/Post/Posts";
+import NewPost from "./components/Post/PostForm";
 
 
 
@@ -20,12 +22,13 @@ class App extends React.Component {
     });
   };
 
+
+
   render() {
     return (
       <div className="App">
         <Navbar user={this.state.user} clearUser={this.setUser} />
-        <h1>Hei</h1>
-        
+
         <Route
           exact
           path="/login"
@@ -41,7 +44,9 @@ class App extends React.Component {
           render={props => <Signup {...props} setUser={this.setUser} />}
         />
 
-        <Link to="/signup">Get involved</Link>
+        <Route exact path="/post" render={props => <Posts {...props} serUser={this.setUser} /> } />
+
+<Route exact path="/post/new" render={props => <NewPost {...props} setUser={this.setUser} handleChange={this.handleChange}/> } />
 
       </div>
     )
