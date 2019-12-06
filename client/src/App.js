@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Signup from "./components/Signup"
 import Login from "./components/Login"
 // import { Link, Switch } from "react-router-dom";
 import Posts from "./components/Post/Posts";
-import NewPost from "./components/Post/PostForm";
+import NewPost from "./components/Post/NewPost";
 
 import Profile from "./components/Profile";
 import Home from "./components/Home";
@@ -58,7 +58,7 @@ class App extends React.Component {
     const { name, value } = event.target
 
     this.setState({
-      newPost: { ...this.state.newPost, [name]: value }
+      newPost: { [name]: value }
     });
   };
 
@@ -75,7 +75,6 @@ class App extends React.Component {
         description: this.state.newPost.description
       })
       .then(response => {
-        console.log(response.data);
         response.refreshData();
         this.setState({
           title: "",
@@ -96,43 +95,46 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Navbar user={this.state.user} clearUser={this.setUser} />
+        {/* <Switch> */}
+          <Navbar user={this.state.user} clearUser={this.setUser} />
 
-        <Home />
+          <Home />
 
-        <Route
-          exact
-          path="/login"
-          render={props => <Login {...props} setUser={this.setUser} />}
-        />
+          <Route
+            exact
+            path="/login"
+            render={props => <Login {...props} setUser={this.setUser} />}
+          />
 
-        <Route exact path="/profile/:id" render={props => <Profile user={this.state.user} {...props} />} />
+          <Route exact path="/profile/:id" render={props => <Profile user={this.state.user} {...props} />} />
 
-        <Route
-          exact
-          path="/signup"
+          <Route
+            exact
+            path="/signup"
 
-          render={props => <Signup {...props} setUser={this.setUser} />}
-        />
+            render={props => <Signup {...props} setUser={this.setUser} />}
+          />
 
-        <Route exact path="/posts" render={props => <Posts {...props}
-          setUser={this.setUser}
-          posts={this.state.posts}
-          getDataPosts={this.getDataPosts}
-        />} />
+          <Route exact path="/posts" render={props => <Posts {...props}
+            setUser={this.setUser}
+            posts={this.state.posts}
+            getDataPosts={this.getDataPosts}
+            newPost={this.state.newPost}
+          />} />
 
-        <Route exact path="/post/:id" render={props => <PostDetail {...props}
-          postDetail={this.state.posts}
+          <Route exact path="/post/:id" render={props => <PostDetail {...props}
+            postDetail={this.state.posts}
 
-        />} />
+          />} />
 
-        <Route exact path="/post/new" render={props => <NewPost {...props}
-          setUser={this.setUser}
-          handleChangeNewPost={this.handleChangeNewPost}
-          handleSubmitNewPost={this.handleSubmitNewPost}
-
-        />} />
-
+          <Route exact path="/post/new" render={props => <NewPost {...props}
+            a={'b'}
+            setUser={this.setUser}
+            newPost={this.state.newPost}
+            handleChangeNewPost={this.handleChangeNewPost}
+            handleSubmitNewPost={this.handleSubmitNewPost}
+          />} />
+        {/* </Switch> */}
       </div>
     )
 
