@@ -4,7 +4,6 @@
 
 //filter for categories, date, owner, match
 import React, { useEffect } from "react";
-import PostForm from "./PostForm"
 import { Link } from "react-router-dom";
 
 const Posts = props => {
@@ -30,7 +29,8 @@ const Posts = props => {
           </div>
         );
       })}
-      {/* <PostForm /> */}
+      <Link to={`/post/new`}>Create a new post
+              </Link>
     </div>
   )
 }
