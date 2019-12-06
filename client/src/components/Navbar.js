@@ -19,6 +19,7 @@ const Navbar = props => {
             Logout
       </Link>
           <Link to={`/profile/${props.user._id}`}>Profile</Link>
+          <Link to={`/posts`}>Posts</Link>
         </>
       ) : (
           <React.Fragment>
