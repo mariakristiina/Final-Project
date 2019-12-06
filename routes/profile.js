@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Profile = require("../models/User");
 const mongoose = require("mongoose");
-
+const uploadCloud = require("./cloudinary");
 
 //get profile/:id
 router.get("/:id", (req, res) => {
@@ -24,14 +24,23 @@ router.get("/:id", (req, res) => {
     });
 });
 
+// router.post("/profile/:id", uploadCloud.single("urlPath"), (req, res, next) => {
+//   if(!req.file) {
+//       next(new Error("No file uploaded!"));
+//       return
+//   }
+//   res.json({ secure_url: req.file.secure_url });
+// });
+
 //edit profile/:id
-router.put("/:id", (req, res) => {
+router.put("/:id", uploadCloud.single("urlPath"), (req, res, next) => {
+
   Profile.findByIdAndUpdate(
     req.params.id,
     {
       username: req.body.username,
-      image: req.body.image,
       age: req.body.age,
+      urlPath:req.body.urlPath,
       gender: req.body.gender,
       languages: req.body.languages,
       about: req.body.about
@@ -39,12 +48,12 @@ router.put("/:id", (req, res) => {
     { new: true }
   )
     .then(profile => {
+      console.log("res db.....", profile);
       res.json(profile);
     })
     .catch(err => {
       res.status(500).json(err);
     });
 });
-
 
 module.exports = router;
