@@ -7,7 +7,6 @@ import Login from "./components/Login"
 // import { Link, Switch } from "react-router-dom";
 import Posts from "./components/Post/Posts";
 import NewPost from "./components/Post/NewPost";
-
 import Profile from "./components/Profile";
 import Home from "./components/Home";
 import PostDetail from "./components/Post/PostDetail"
@@ -16,7 +15,6 @@ import axios from "axios";
 class App extends React.Component {
   state = {
     user: this.props.user,
-    posts: [],
     profile: {
       error: "",
       username: "",
@@ -26,16 +24,7 @@ class App extends React.Component {
       languages: [],
       about: ""
     },
-    editProfileForm: false,
-    newPost: {
-      title: "",
-      date: "",
-      startTime: "",
-      endTime: "",
-      postType: "",
-      category: "",
-      description: ""
-    }
+    editProfileForm: false
   };
 
   // =================== user functions
@@ -57,14 +46,14 @@ class App extends React.Component {
         console.log(response.data);
         this.setState({
           profile: {
-          username: response.data.username,
-          age: response.data.age,
-          gender: response.data.gender,
-          languages: response.data.languages,
-          about: response.data.about,
-          urlPath: response.data.urlPath
+            username: response.data.username,
+            age: response.data.age,
+            gender: response.data.gender,
+            languages: response.data.languages,
+            about: response.data.about,
+            urlPath: response.data.urlPath
           }
-        },()=>console.log("state after data call", this.state));
+        }, () => console.log("state after data call", this.state));
       })
       .catch(err => {
         if (err.response.status === 404) {
@@ -77,9 +66,9 @@ class App extends React.Component {
 
 
   handleChangeProfile = event => {
-    const {name,value} =event.target
+    const { name, value } = event.target
     this.setState({
-   profile:{...this.state.profile,[name]: value}
+      profile: { ...this.state.profile, [name]: value }
     });
   };
 
@@ -90,15 +79,15 @@ class App extends React.Component {
     });
   };
 
-  
+
 
   handleSubmitProfile = event => {
     event.preventDefault();
 
     // uncertain, if not working ask
     const id = this.state.user._id;
-    console.log("............",this.state.profile);
-    const {username,age,gender,languages,about,urlPath}=this.state.profile
+    console.log("............", this.state.profile);
+    const { username, age, gender, languages, about, urlPath } = this.state.profile
     axios
       .put(`/profile/${id}`, {
         username,
@@ -128,79 +117,25 @@ class App extends React.Component {
 
     upload.append("urlPath", file);
     axios.post(`/profile/${id}`, upload)
-    .then(response => {
-      console.log(response.data.secure_url)
-      this.setState({
-        profile: {
-          ...this.state.profile,
-          urlPath: response.data.secure_url }
-      });
-      console.log(this.state.profile.urlPath)
-    });
-  }
-
-  //============================ posts functions
-  getDataPosts = () => {
-    axios
-      .get('/post')
       .then(response => {
-        console.log(response.data)
+        console.log(response.data.secure_url)
         this.setState({
-          posts: response.data
-        })
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
-
-  //=============================== postForm functions
-
-  handleChangeNewPost = event => {
-    console.log(event.target.value);
-    const { name, value } = event.target
-
-    this.setState({
-      newPost: { [name]: value }
-    });
-  };
-
-  handleSubmitNewPost = event => {
-    event.preventDefault();
-    console.log(this.state);
-    axios
-      .post("/post/new", {
-        title: this.state.newPost.title,
-        startTime: this.state.newPost.startTime,
-        endTime: this.state.newPost.endTime,
-        postType: this.state.newPost.postType,
-        category: this.state.newPost.category,
-        description: this.state.newPost.description
-      })
-      .then(response => {
-        response.refreshData();
-        this.setState({
-          title: "",
-          startTime: "",
-          endTime: "",
-          postType: "",
-          category: "",
-          description: ""
+          profile: {
+            ...this.state.profile,
+            urlPath: response.data.secure_url
+          }
         });
-      })
-      .catch(err => {
-        console.log(err);
+        console.log(this.state.profile.urlPath)
       });
   };
 
 
-
-  
-componentDidMount() {
-  this.getDataProfile();
-}
+  componentDidMount() {
+    this.getDataProfile();
+  }
 
   render() {
+    console.log("user from app: ", this.state.user)
     return (
       <div className="App">
         <Navbar user={this.state.user} clearUser={this.setUser} />
@@ -213,14 +148,14 @@ componentDidMount() {
           render={props => <Login {...props} setUser={this.setUser} />}
         />
 
-        <Route exact path="/profile/:id" render={props => <Profile user={this.state.user} 
-        profile={this.state.profile} 
-        handleChangeProfile={this.handleChangeProfile} toggleEditProfile={this.toggleEditProfile} 
-        handleSubmitProfile={this.handleSubmitProfile}
-        getDataProfile={this.getDataProfile}
-        imageUpload={this.imageUpload}
-        editProfileForm={this.state.editProfileForm}
-        {...props} />} />
+        <Route exact path="/profile/:id" render={props => <Profile user={this.state.user}
+          profile={this.state.profile}
+          handleChangeProfile={this.handleChangeProfile} toggleEditProfile={this.toggleEditProfile}
+          handleSubmitProfile={this.handleSubmitProfile}
+          getDataProfile={this.getDataProfile}
+          imageUpload={this.imageUpload}
+          editProfileForm={this.state.editProfileForm}
+          {...props} />} />
 
         <Route
           exact
@@ -231,20 +166,14 @@ componentDidMount() {
 
         <Route exact path="/posts" render={props => <Posts {...props}
           setUser={this.setUser}
-          posts={this.state.posts}
-          getDataPosts={this.getDataPosts}
+          user={this.state.user}
         />} />
 
-        <Route exact path="/post/:id" render={props => <PostDetail {...props}
-          postDetail={this.state.posts}
-
-        />} />
+        {/* <Route exact path="/post/:id" render={props => <PostDetail {...props}
+        />} /> */}
 
         <Route exact path="/post/new" render={props => <NewPost {...props}
           setUser={this.setUser}
-          handleChangeNewPost={this.handleChangeNewPost}
-          handleSubmitNewPost={this.handleSubmitNewPost}
-
         />} />
 
       </div>
