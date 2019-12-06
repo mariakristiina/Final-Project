@@ -12,8 +12,8 @@ const postSchema = new Schema(
     endTime: String,
     postType: {
       type: String,
-      enum: ["search", "offer"],
-      default: "search"
+     enum: ["search", "offer"],
+     default: "search"
     },
 
     // postTypeDe: {

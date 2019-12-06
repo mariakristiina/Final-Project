@@ -13,7 +13,6 @@ import Home from "./components/Home";
 import PostDetail from "./components/Post/PostDetail"
 import axios from "axios";
 
-
 class App extends React.Component {
   state = {
     user: this.props.user,
@@ -28,8 +27,18 @@ class App extends React.Component {
       about: ""
     },
     editProfileForm: false,
+    newPost: {
+      title: "",
+      date: "",
+      startTime: "",
+      endTime: "",
+      postType: "",
+      category: "",
+      description: ""
+    }
   };
-//-----------------------User func------------
+
+  // =================== user functions
   setUser = user => {
     this.setState({
       user: user
@@ -110,10 +119,6 @@ class App extends React.Component {
       });
   };
 
-
-  
-
-
   imageUpload = event => {
     console.log(event.target.files[0]);
     const file = event.target.files[0];
@@ -133,6 +138,64 @@ class App extends React.Component {
       console.log(this.state.profile.urlPath)
     });
   }
+
+  //============================ posts functions
+  getDataPosts = () => {
+    axios
+      .get('/post')
+      .then(response => {
+        console.log(response.data)
+        this.setState({
+          posts: response.data
+        })
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  //=============================== postForm functions
+
+  handleChangeNewPost = event => {
+    console.log(event.target.value);
+    const { name, value } = event.target
+
+    this.setState({
+      newPost: { ...this.state.newPost, [name]: value }
+    });
+  };
+
+  handleSubmitNewPost = event => {
+    event.preventDefault();
+    console.log(this.state);
+    axios
+      .post("/post/new", {
+        title: this.state.newPost.title,
+        startTime: this.state.newPost.startTime,
+        endTime: this.state.newPost.endTime,
+        postType: this.state.newPost.postType,
+        category: this.state.newPost.category,
+        description: this.state.newPost.description
+      })
+      .then(response => {
+        console.log(response.data);
+        response.refreshData();
+        this.setState({
+          title: "",
+          startTime: "",
+          endTime: "",
+          postType: "",
+          category: "",
+          description: ""
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+
+
   
 componentDidMount() {
   this.getDataProfile();
@@ -167,11 +230,23 @@ componentDidMount() {
           render={props => <Signup {...props} setUser={this.setUser} />}
         />
 
-        <Route exact path="/posts" render={props => <Posts {...props} serUser={this.setUser} />} />
+        <Route exact path="/posts" render={props => <Posts {...props}
+          setUser={this.setUser}
+          posts={this.state.posts}
+          getDataPosts={this.getDataPosts}
+        />} />
 
-        <Route exact path="/post/:id" render={props => <PostDetail {...props} post={this.state.posts} />} />
+        <Route exact path="/post/:id" render={props => <PostDetail {...props}
+          postDetail={this.state.posts}
 
-        <Route exact path="/post/new" render={props => <NewPost {...props} setUser={this.setUser} handleChange={this.handleChange} />} />
+        />} />
+
+        <Route exact path="/post/new" render={props => <NewPost {...props}
+          setUser={this.setUser}
+          handleChangeNewPost={this.handleChangeNewPost}
+          handleSubmitNewPost={this.handleSubmitNewPost}
+
+        />} />
 
       </div>
     )
@@ -183,3 +258,4 @@ componentDidMount() {
 
 
 export default App
+
