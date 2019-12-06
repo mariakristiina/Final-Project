@@ -24,11 +24,13 @@ const Posts = props => {
               <Link to={`/post/${post._id}`}>{post.title}
               </Link>
             </h3>
-            <p>{post.date}</p>
+            <p>User: {post.owner.username}</p>
+            <p>Date: {post.date}</p>
+            <p>Type: {post.postType}</p>
           </div>
         );
       })}
-      {/* <PostForm refreshData={this.getData} /> */}
+      {/* <PostForm /> */}
     </div>
   )
 }
