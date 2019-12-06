@@ -1,8 +1,3 @@
-//state: [] ****************DONE
-
-//setState: api call get posts **************DONE
-
-//filter for categories, date, owner, match
 import React, { Component } from "react"
 import axios from "axios"
 import PostList from "./PostList"
@@ -39,8 +34,9 @@ class Posts extends Component {
 
         {/* <Button onClick={this.toggleEdit}>Add a new Post</Button> */}
 
-{this.state.editForm && (
-        <PostForm refreshData={this.getData} />
+        {this.state.editForm && (
+          <PostForm refreshData={this.getData}
+          />
         )}
       </div>
     )
