@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Signup from "./components/Signup"
 import Login from "./components/Login"
 // import { Link, Switch } from "react-router-dom";
 import Posts from "./components/Post/Posts";
-import NewPost from "./components/Post/PostForm";
+import NewPost from "./components/Post/NewPost";
 
 import Profile from "./components/Profile";
 import Home from "./components/Home";
@@ -169,7 +169,7 @@ class App extends React.Component {
     const { name, value } = event.target
 
     this.setState({
-      newPost: { ...this.state.newPost, [name]: value }
+      newPost: { [name]: value }
     });
   };
 
@@ -186,7 +186,6 @@ class App extends React.Component {
         description: this.state.newPost.description
       })
       .then(response => {
-        console.log(response.data);
         response.refreshData();
         this.setState({
           title: "",
