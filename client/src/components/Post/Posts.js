@@ -11,6 +11,7 @@ import PostForm from "./PostForm"
 class Posts extends Component {
   state = {
     posts: []
+    editForm
   }
 
   getData = () => {
@@ -32,9 +33,15 @@ class Posts extends Component {
 
   render() {
     return (
+
       <div className="post-container">
         <PostList posts={this.state.posts} />
+
+        <Button onClick={this.toggleEdit}>Add a new Post</Button>
+
+{this.state.editForm && (
         <PostForm refreshData={this.getData} />
+        )}
       </div>
     )
   }
