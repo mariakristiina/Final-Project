@@ -4,6 +4,7 @@ import { Button, Form } from "react-bootstrap";
 
 class Profile extends Component {
   state = {
+    
     error: "",
     profile: "",
     editForm: false,
