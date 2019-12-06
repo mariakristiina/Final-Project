@@ -21,7 +21,7 @@ class Signup extends Component {
     event.preventDefault();
   
 
-  signup(this.state.username, this.state.password).then(data => {
+  signup(this.state.username, this.state.password,this.state.age).then(data => {
     if(data.message) {
       this.setState({
         error: data.message
@@ -67,8 +67,8 @@ class Signup extends Component {
           <Form.Label htmlFor="age">Birthday</Form.Label>
           <Form.Control
            type="date"
-           name="birthday"
-           id="birthday"
+           name="age"
+           id="age"
            value={this.state.age}
            onChange={this.handleChange}
           />

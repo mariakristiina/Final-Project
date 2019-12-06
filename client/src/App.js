@@ -17,6 +17,16 @@ class App extends React.Component {
   state = {
     user: this.props.user,
     posts: [],
+    profile: {
+      error: "",
+      username: "",
+      urlPath: "https://res.cloudinary.com/mariakristiina/image/upload/v1575542831/avatar-orange_q8rkfz.png",
+      age: "",
+      gender: "",
+      languages: [],
+      about: ""
+    },
+    editProfileForm: false,
     newPost: {
       title: "",
       date: "",
@@ -35,6 +45,99 @@ class App extends React.Component {
     });
   };
 
+  //-----------------------Profile func------------
+
+  getDataProfile = () => {
+
+    const id = this.state.user._id
+
+    axios
+      .get(`/profile/${id}`)
+      .then(response => {
+        console.log(response.data);
+        this.setState({
+          profile: {
+          username: response.data.username,
+          age: response.data.age,
+          gender: response.data.gender,
+          languages: response.data.languages,
+          about: response.data.about,
+          urlPath: response.data.urlPath
+          }
+        },()=>console.log("state after data call", this.state));
+      })
+      .catch(err => {
+        if (err.response.status === 404) {
+          this.setState({
+            error: err.response.data.message
+          });
+        }
+      })
+  };
+
+
+  handleChangeProfile = event => {
+    const {name,value} =event.target
+    this.setState({
+   profile:{...this.state.profile,[name]: value}
+    });
+  };
+
+  toggleEditProfile = () => {
+    console.log(this.state.editProfileForm)
+    this.setState({
+      editProfileForm: !this.state.editProfileForm
+    });
+  };
+
+  
+
+  handleSubmitProfile = event => {
+    event.preventDefault();
+
+    // uncertain, if not working ask
+    const id = this.state.user._id;
+    console.log("............",this.state.profile);
+    const {username,age,gender,languages,about,urlPath}=this.state.profile
+    axios
+      .put(`/profile/${id}`, {
+        username,
+        age,
+        gender,
+        languages,
+        about,
+        urlPath
+      })
+      .then(response => {
+        this.setState({
+          profile: response.data,
+          editProfileForm: false
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  imageUpload = event => {
+    console.log(event.target.files[0]);
+    const file = event.target.files[0];
+    let upload = new FormData();
+    console.log(upload)
+    const id = this.state.user._id;
+
+    upload.append("urlPath", file);
+    axios.post(`/profile/${id}`, upload)
+    .then(response => {
+      console.log(response.data.secure_url)
+      this.setState({
+        profile: {
+          ...this.state.profile,
+          urlPath: response.data.secure_url }
+      });
+      console.log(this.state.profile.urlPath)
+    });
+  }
 
   //============================ posts functions
   getDataPosts = () => {
@@ -90,51 +193,60 @@ class App extends React.Component {
       });
   };
 
-  //===================================render
+
+
+  
+componentDidMount() {
+  this.getDataProfile();
+}
 
   render() {
     return (
       <div className="App">
-        {/* <Switch> */}
-          <Navbar user={this.state.user} clearUser={this.setUser} />
+        <Navbar user={this.state.user} clearUser={this.setUser} />
 
-          <Home />
+        <Home />
 
-          <Route
-            exact
-            path="/login"
-            render={props => <Login {...props} setUser={this.setUser} />}
-          />
+        <Route
+          exact
+          path="/login"
+          render={props => <Login {...props} setUser={this.setUser} />}
+        />
 
-          <Route exact path="/profile/:id" render={props => <Profile user={this.state.user} {...props} />} />
+        <Route exact path="/profile/:id" render={props => <Profile user={this.state.user} 
+        profile={this.state.profile} 
+        handleChangeProfile={this.handleChangeProfile} toggleEditProfile={this.toggleEditProfile} 
+        handleSubmitProfile={this.handleSubmitProfile}
+        getDataProfile={this.getDataProfile}
+        imageUpload={this.imageUpload}
+        editProfileForm={this.state.editProfileForm}
+        {...props} />} />
 
-          <Route
-            exact
-            path="/signup"
+        <Route
+          exact
+          path="/signup"
 
-            render={props => <Signup {...props} setUser={this.setUser} />}
-          />
+          render={props => <Signup {...props} setUser={this.setUser} />}
+        />
 
-          <Route exact path="/posts" render={props => <Posts {...props}
-            setUser={this.setUser}
-            posts={this.state.posts}
-            getDataPosts={this.getDataPosts}
-            newPost={this.state.newPost}
-          />} />
+        <Route exact path="/posts" render={props => <Posts {...props}
+          setUser={this.setUser}
+          posts={this.state.posts}
+          getDataPosts={this.getDataPosts}
+        />} />
 
-          <Route exact path="/post/:id" render={props => <PostDetail {...props}
-            postDetail={this.state.posts}
+        <Route exact path="/post/:id" render={props => <PostDetail {...props}
+          postDetail={this.state.posts}
 
-          />} />
+        />} />
 
-          <Route exact path="/post/new" render={props => <NewPost {...props}
-            a={'b'}
-            setUser={this.setUser}
-            newPost={this.state.newPost}
-            handleChangeNewPost={this.handleChangeNewPost}
-            handleSubmitNewPost={this.handleSubmitNewPost}
-          />} />
-        {/* </Switch> */}
+        <Route exact path="/post/new" render={props => <NewPost {...props}
+          setUser={this.setUser}
+          handleChangeNewPost={this.handleChangeNewPost}
+          handleSubmitNewPost={this.handleSubmitNewPost}
+
+        />} />
+
       </div>
     )
 
@@ -145,3 +257,4 @@ class App extends React.Component {
 
 
 export default App
+

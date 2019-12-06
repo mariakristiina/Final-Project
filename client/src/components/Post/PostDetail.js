@@ -1,5 +1,6 @@
 import React from "react";
-import Message from "./Messages";
+import Message from "./Messages"
+import { Link } from "react-router-dom"
 
 
 const PostDetail = props => {
@@ -20,6 +21,7 @@ const PostDetail = props => {
         )
       })}
       <Message />
+
     </div>
 
   )

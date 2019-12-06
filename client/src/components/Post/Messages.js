@@ -8,6 +8,7 @@ return(
     <textarea id="message" name="story" rows="5" cols="33">
       Yor message</textarea>
   </div>
+
 )
 
 }
