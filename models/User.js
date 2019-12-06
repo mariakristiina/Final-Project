@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
-  age: Number,
+  age: String,
   urlPath: {
     type: String,
     default: "https://res.cloudinary.com/mariakristiina/image/upload/v1575542831/avatar-orange_q8rkfz.png",
@@ -19,7 +19,7 @@ const userSchema = new Schema({
   //   type: String,
   //   enum: ["divers", "weiblich", "männlich"]
   // },
-  languages: String,
+  languages: [],
   role: {
     type: String,
     enum: ["admin", "private", "company"],
