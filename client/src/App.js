@@ -35,6 +35,18 @@ class App extends React.Component {
       postType: "",
       category: "",
       description: ""
+    },
+    postDetail: {
+      title: "",
+      date: "",
+      startTime: "",
+      endTime: "",
+      postType: "",
+      category: "",
+      description: "",
+      owner: "",
+      match: "",
+      messages: ""
     }
   };
 
@@ -90,14 +102,10 @@ class App extends React.Component {
     });
   };
 
-  
-
   handleSubmitProfile = event => {
     event.preventDefault();
 
-    // uncertain, if not working ask
     const id = this.state.user._id;
-    console.log("............",this.state.profile);
     const {username,age,gender,languages,about,urlPath}=this.state.profile
     axios
       .put(`/profile/${id}`, {
@@ -195,8 +203,9 @@ class App extends React.Component {
   };
 
 
+// POST detail functions
 
-  
+
 componentDidMount() {
   this.getDataProfile();
 }
@@ -206,7 +215,7 @@ componentDidMount() {
       <div className="App">
         <Navbar user={this.state.user} clearUser={this.setUser} />
 
-        <Home />
+        <Route exact path="/" component={Home} />
 
         <Route
           exact
@@ -237,6 +246,7 @@ componentDidMount() {
         />} />
 
         <Route exact path="/post/:id" render={props => <PostDetail {...props}
+          user={this.state.user}
           postDetail={this.state.posts}
 
         />} />

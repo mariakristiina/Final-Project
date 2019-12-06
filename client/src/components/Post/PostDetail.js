@@ -1,31 +1,133 @@
-import React from "react";
+import React, {Component} from "react";
 import Message from "./Messages"
 import { Link } from "react-router-dom"
+import axios from "axios";
 
 
-const PostDetail = props => {
-  console.log(props)
+class PostDetail extends  React.Component {
+  state= {
+    post: "",
+    title: "",
+    date: "",
+    startTime: "",
+    endTime: "",
+    postType: "",
+    category: "",
+    description: "",
+    owner: "",
+    match: "",
+    messages: "",
+
+  }
+
+getDataPostDetail = () => {
+  
+  const id = this.props.match.params.id;
+  console.log(id);
+
+   axios
+   .get(`/post/${id}`)
+   .then(response => {
+    console.log(response.data)
+  this.setState({
+    post: response.data,
+     title: response.data.title,
+     date: response.data.date,
+     startTime: response.data.startTime,
+     endTime: response.data.endTime,
+     postType: response.data.postType,
+     category: response.data.category,
+     description: response.data.description,
+     owner: response.data.owner,
+     match: response.data.match,
+     messages: response.data.messages, 
+ });
+ console.log(this.state.post)
+   })
+   .catch(err => {
+     console.log(err);
+   })
+ }
+
+ handleSubmit = event => {
+   event.preventDefault()
+   console.log("submit")
+   const userId = this.props.user._id
+   const postId = this.props.match.params.id;
+   console.log(userId)
+   console.log(postId)
+   axios
+   .put(`/post/register/${postId}`, {
+     match: this.state.match
+   })
+   .then(post => {
+     this.setState({
+       match: userId
+     })
+   })
+   .catch(err => {
+     console.log(err);
+   })
+ }
+
+ handleSubmitDeRegister = event => {
+  event.preventDefault()
+  console.log("submit")
+  const userId = this.props.user._id
+  const postId = this.props.match.params.id;
+  console.log(userId)
+  console.log(postId)
+  axios
+  .put(`/post/deregister/${postId}`, {
+    match: this.state.match
+  })
+  .then(post => {
+    this.setState({
+      match: ""
+    })
+    console.log(this.state)
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
+
+ componentDidMount() {
+   this.getDataPostDetail();
+ }
+
+ render() {
   return (
     <div>
-      {props.postDetail.map(post => {
-        return (
-          <div key={post._id}>
-            <p>{post.title}</p>
-            <p>{post.description}</p>
-            <p>{post.date}</p>
-            <p>{post.startTime}</p>
-            <p>{post.endTime}</p>
-            <p>{post.postType}</p>
-            <p>{post.category}</p>
+          <div>
+            <h2>{this.state.title}</h2>
+            <p>{this.state.owner.username}</p>
+            <p>{this.state.owner.about}</p>
+            <p>{this.state.description}</p>
+            <p>{this.state.date}</p>
+            <p>{this.state.startTime}</p>
+            <p>{this.state.endTime}</p>
+            <p>{this.state.postType}</p>
+            <p>{this.state.category}</p>
           </div>
-        )
-      })}
+
+          {this.state.match ?
+            <div>
+              <h2>You are registered</h2>
+              <form onSubmit={this.handleSubmitDeRegister}>
+          <button type="submit">De-Register</button>
+          </form> 
+            </div> :
+          <form onSubmit={this.handleSubmit}>
+          <button type="submit">Register</button>
+          </form>  }
       <Message />
 
     </div>
 
-  )
+  ) }
 }
+
 
 //get data from app
 //state: title + content of messages 

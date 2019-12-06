@@ -48,7 +48,6 @@ router.put("/:id", uploadCloud.single("urlPath"), (req, res, next) => {
     { new: true }
   )
     .then(profile => {
-      console.log("res db.....", profile);
       res.json(profile);
     })
     .catch(err => {
