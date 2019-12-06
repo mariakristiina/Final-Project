@@ -1,6 +1,6 @@
 import React from "react";
 import Message from "./Messages"
-import { Link } from "react-router-dom"
+//import { Link } from "react-router-dom"
 
 
 const PostDetail = props => {
