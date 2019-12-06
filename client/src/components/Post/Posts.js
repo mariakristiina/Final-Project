@@ -1,46 +1,38 @@
-import React, { Component } from "react"
-import axios from "axios"
-import PostList from "./PostList"
+//state: [] ****************DONE
+
+//setState: api call get posts **************DONE
+
+//filter for categories, date, owner, match
+import React, { useEffect } from "react";
 import PostForm from "./PostForm"
+import { Link } from "react-router-dom";
 
-class Posts extends Component {
-  state = {
-    posts: []
-    // editForm
-  }
+const Posts = props => {
 
-  getData = () => {
-    axios
-      .get('/post')
-      .then(response => {
-        console.log(response.data)
-        this.setState({
-          posts: response.data
-        })
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
-  componentDidMount() {
-    this.getData()
-  }
+  useEffect(() => {
+    props.getDataPosts()
+  }, []);
 
-  render() {
-    return (
 
-      <div className="post-container">
-        <PostList posts={this.state.posts} />
-
-        {/* <Button onClick={this.toggleEdit}>Add a new Post</Button> */}
-
-        {this.state.editForm && (
-          <PostForm refreshData={this.getData}
-          />
-        )}
-      </div>
-    )
-  }
+  return (
+    <div className="post-container">
+      {props.posts.map(post => {
+        console.log(post)
+        return (
+          <div key={post._id}>
+            <h3>
+              <Link to={`/post/${post._id}`}>{post.title}
+              </Link>
+            </h3>
+            <p>User: {post.owner.username}</p>
+            <p>Date: {post.date}</p>
+            <p>Type: {post.postType}</p>
+          </div>
+        );
+      })}
+      {/* <PostForm /> */}
+    </div>
+  )
 }
 
 export default Posts;
