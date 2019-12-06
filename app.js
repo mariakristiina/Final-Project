@@ -85,6 +85,9 @@ app.use('/auth', authRoutes);
 const postRoutes = require('./routes/post');
 app.use('/post', postRoutes);
 
+const imgUpload = require('./routes/images');
+app.use('/', imgUpload);
+
 const profileRoutes = require('./routes/profile');
 app.use('/profile', profileRoutes);
 

@@ -5,11 +5,11 @@ import { Button, Form, Dropdown } from "react-bootstrap";
 class Profile extends Component {
   state = {
     error: "",
-    profile: null,
+    profile: "",
     editForm: false,
     username: "",
-    image: "",
-    age: null,
+    urlPath: "https://res.cloudinary.com/mariakristiina/image/upload/v1575542831/avatar-orange_q8rkfz.png",
+    age: 0,
     gender: "",
     languages: "",
     about: String
@@ -27,7 +27,7 @@ class Profile extends Component {
         this.setState({
           profile: response.data,
           username: response.data.username,
-          image: response.data.image,
+          urlPath: response.data.urlPath,
           age: response.data.age,
           gender: response.data.gender,
           languages: response.data.languages,
@@ -67,11 +67,11 @@ class Profile extends Component {
     axios
       .put(`/profile/${id}`, {
         username: this.state.username,
-        image: this.state.image,
         age: this.state.age,
         gender: this.state.gender,
         languages: this.state.languages,
-        about: this.state.about
+        about: this.state.about,
+        urlPath:this.state.urlPath
       })
       .then(response => {
         this.setState({
@@ -84,6 +84,23 @@ class Profile extends Component {
       });
   };
 
+  imageUpload = event => {
+    console.log(event.target.files[0]);
+    const file = event.target.files[0];
+    let upload = new FormData();
+    console.log(upload)
+    const id = this.props.match.params.id;
+
+    upload.append("urlPath", file);
+    console.log(upload)
+    axios.post(`/profile/${id}`, upload)
+    .then(response => {
+      console.log(response)
+      this.setState({
+        urlPath: response.data.secure_url
+      });
+    });
+  }
 
   render() {
     console.log("State", this.state)
@@ -98,7 +115,7 @@ class Profile extends Component {
     return (
       <div>
         <h2>Hey {this.state.username}</h2>
-        <p>Image: {this.state.image}</p>
+      <img src={this.state.urlPath} alt="profile"/>
         <p>Age: {this.state.age}</p>
         <p>Gender: {this.state.gender}</p>
         <p>Languages: {this.state.language}</p>
@@ -106,7 +123,18 @@ class Profile extends Component {
         <Button onClick={this.toggleEdit}>Show Edit Form</Button>
 
         {this.state.editForm && (
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit} encType="multipart/form-data">
+
+          <Form.Group>
+              <Form.Label htmlFor="urlPath">Upload Profile Picture</Form.Label>
+              <Form.Control
+                type="file"
+                name="urlPath"
+                id="urlPath"
+                onChange={this.imageUpload}
+              />
+
+            </Form.Group>
             <Form.Group>
               <Form.Label htmlFor="username">username: </Form.Label>
               <Form.Control
@@ -121,7 +149,7 @@ class Profile extends Component {
             <Form.Group>
               <Form.Label htmlFor="age">age: </Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 name="age"
                 id="age"
                 value={this.state.age}
