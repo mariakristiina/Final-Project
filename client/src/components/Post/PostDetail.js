@@ -4,26 +4,24 @@ import Message from "./Messages"
 
 
 const PostDetail = props => {
-  console.log(props)
+
+  //TODO: fetch user and post data in this component
+  
+  let post = props.postDetail.find( (p) => p._id === props.match.params.id )
   return (
     <div>
-      {props.postDetail.map(post => {
-        return (
-          <div key={post._id}>
-            <p>{post.title}</p>
-            <p>{post.description}</p>
-            <p>{post.date}</p>
-            <p>{post.startTime}</p>
-            <p>{post.endTime}</p>
-            <p>{post.postType}</p>
-            <p>{post.category}</p>
-          </div>
-        )
-      })}
-      <Message />
+      <div key={post._id}>
+        <p>{post.title}</p>
+        <p>{post.description}</p>
+        <p>{post.date}</p>
+        <p>{post.startTime}</p>
+        <p>{post.endTime}</p>
+        <p>{post.postType}</p>
+        <p>{post.category}</p>
+      </div>
+      <Message subject={post._id} recipient={post.owner} owner={props.user} />
 
     </div>
-
   )
 }
 
