@@ -4,6 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import { Link, NavLink, Route } from "react-router-dom";
 import MailboxDetail from "./MailboxDetail";
 import { getSentMessages, getReceivedMessages } from "./messageFunctions";
+
 class Mailbox extends Component {
   state = {
     receivedMessages: [],
