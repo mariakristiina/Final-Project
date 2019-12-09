@@ -20,12 +20,14 @@ const Navbar = props => {
       </Link>
           <Link to={`/profile/${props.user._id}`}>Profile</Link>
           <Link to={`/posts`}>Posts</Link>
+          <Link to={`/mailbox/${props.user._id}`}>Mailbox</Link>
         </>
       ) : (
           <React.Fragment>
             <Link to="/about">About</Link>
             <Link to="/signup">Signup</Link>
             <Link to="/login">Login</Link>
+            
           </React.Fragment>
         )}
       <select name="languages" id="languages" onChange={props.handleChangeLanguages}>
