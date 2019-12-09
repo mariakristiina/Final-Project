@@ -94,10 +94,6 @@ class App extends React.Component {
       });
   };
 
-  componentDidMount() {
-    this.getDataProfile();
-  }
-
   handleChangeProfile = event => {
     const { name, value } = event.target;
     this.setState({
@@ -116,14 +112,7 @@ class App extends React.Component {
     event.preventDefault();
 
     const id = this.state.user._id;
-    const {
-      username,
-      age,
-      gender,
-      languages,
-      about,
-      urlPath
-    } = this.state.profile;
+    const { username, age, gender, languages, about, urlPath } = this.state.profile
     axios
       .put(`/profile/${id}`, {
         username,
@@ -192,33 +181,21 @@ class App extends React.Component {
     // </div> */}
     return (
       <div className="App">
-        <Navbar
-          user={this.state.user}
-          clearUser={this.setUser}
-          handleChangeLanguages={this.handleChangeLanguages}
-        />
-        <Route
-          exact
-          path="/"
-          render={props => (
-            <Home
-              user={this.state.user}
-              currentLanguage={this.state.currentLanguage}
-              {...props}
-            />
-          )}
-        />
-        <Route
-          exact
-          path="/about"
-          render={props => (
-            <About
-              user={this.state.user}
-              currentLanguage={this.state.currentLanguage}
-              {...props}
-            />
-          )}
-        />
+        <Navbar user={this.state.user} clearUser={this.setUser} handleChangeLanguages={this.handleChangeLanguages} />
+
+        <Route exact path="/"
+          render={props => <Home
+            user={this.state.user}
+            currentLanguage={this.state.currentLanguage}
+            {...props} />} />
+
+        <Route exact path="/about"
+          render={props => <About
+            user={this.state.user}
+            currentLanguage={this.state.currentLanguage}
+            {...props} />} />
+
+
         <Route
           exact
           path="/login"
