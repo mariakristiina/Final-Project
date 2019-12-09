@@ -150,24 +150,26 @@ class App extends React.Component {
   // languages functions
 
   handleChangeLanguages = event => {
-    if(!this.state.user){
-    this.setState({
-      currentLanguage: event.target.value 
-    });
-  } else {
-    console.log(this.state.currentLanguage)
-    axios.put("/profile/language", {
-      siteLanguage: event.target.value
-    })
-    .then(response => {
-      console.log(response.data)
+    if (!this.state.user) {
       this.setState({
-        currentLanguage: response.data.siteLanguage})
-        console.log(this.state.currentLanguage)
+        currentLanguage: event.target.value
+      });
+    } else {
+      console.log(this.state.currentLanguage)
+      axios.put("/profile/language", {
+        siteLanguage: event.target.value
       })
-    .catch(err => {
-      return err.response.data
-    }) }
+        .then(response => {
+          console.log(response.data)
+          this.setState({
+            currentLanguage: response.data.siteLanguage
+          })
+          console.log(this.state.currentLanguage)
+        })
+        .catch(err => {
+          return err.response.data
+        })
+    }
   };
 
 
@@ -254,11 +256,6 @@ class App extends React.Component {
               user={this.state.user}
             />
           )}
-        />
-        <Route
-          exact
-          path="/post/new"
-          render={props => <NewPost {...props} setUser={this.setUser} />}
         />
         <Route
           path="/mailbox/:user/:messageId?"
