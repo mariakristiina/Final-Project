@@ -154,7 +154,7 @@ class Posts extends Component {
           <option value="doctor appointment">Doctor appointment</option>
           <option value="meet people">Meet people</option>
           <option value="activities for kids">Activities for kids</option>
-          <option value="activities for seniors">"Activities for seniors</option>
+          <option value="activities for seniors">Activities for seniors</option>
         </select>
 
 
