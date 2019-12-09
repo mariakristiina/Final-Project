@@ -6,7 +6,6 @@ import Signup from "./components/Signup"
 import Login from "./components/Login"
 // import { Link, Switch } from "react-router-dom";
 import Posts from "./components/Post/Posts";
-import NewPost from "./components/Post/NewPost";
 import About from "./components/About"
 
 import Profile from "./components/Profile";
@@ -28,15 +27,6 @@ class App extends React.Component {
       about: "",
     },
     editProfileForm: false,
-    newPost: {
-      title: "",
-      date: "",
-      startTime: "",
-      endTime: "",
-      postType: "",
-      category: "",
-      description: "",
-    },
     postDetail: {
       title: "",
       date: "",
@@ -59,9 +49,12 @@ class App extends React.Component {
     });
   };
 
+
+
   //-----------------------Profile func------------
 
   getDataProfile = () => {
+    console.log("user from app: ", this.state.user)
 
     const id = this.state.user._id
 
@@ -218,15 +211,14 @@ class App extends React.Component {
           user={this.state.user}
         />} />
 
-        <Route exact path="/post/:id" render={props => <PostDetail {...props}
-          postDetail={this.state.posts} user={this.state.user}
+        <Route exact path="/post/:id" render={props => <PostDetail {...props} user={this.state.user}
 
         />} />
 
         {/* <Route exact path="/post/new" render={props => <NewPost {...props}
           setUser={this.setUser}
         />} /> */}
-        {/* />} /> */}
+
 
         <Route exact path="/mailbox/:user" render={props => <Mailbox {...props}></Mailbox>} />
 

@@ -13,15 +13,6 @@ import NewPost from "./NewPost";
 class Posts extends Component {
   state = {
     posts: [],
-    newPost: {
-      title: "",
-      date: "",
-      startTime: "",
-      endTime: "",
-      postType: "",
-      category: "",
-      description: ""
-    },
     search: "",
     category: "",
     owner: false,
@@ -35,7 +26,7 @@ class Posts extends Component {
       .then(response => {
         console.log(response.data)
         this.setState({
-          posts: [...response.data]
+          posts: response.data
         })
       })
       .catch(err => {
@@ -46,45 +37,6 @@ class Posts extends Component {
   componentDidMount() {
     this.getDataPosts();
   }
-
-  //=============================== postForm functions
-
-  handleChangeNewPost = event => {
-    console.log(event.target.value);
-    const { name, value } = event.target
-
-    this.setState({
-      newPost: { [name]: value }
-    });
-  };
-
-  handleSubmitNewPost = event => {
-    event.preventDefault();
-    console.log(this.state);
-    axios
-      .post("/post/new", {
-        title: this.state.newPost.title,
-        startTime: this.state.newPost.startTime,
-        endTime: this.state.newPost.endTime,
-        postType: this.state.newPost.postType,
-        category: this.state.newPost.category,
-        description: this.state.newPost.description
-      })
-      .then(response => {
-        this.getDataPosts();
-        this.setState({
-          title: "",
-          startTime: "",
-          endTime: "",
-          postType: "",
-          category: "",
-          description: ""
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
 
   //=============================== filterForm functions
 
@@ -103,13 +55,14 @@ class Posts extends Component {
     const search = this.state.search.toLowerCase();
 
     const filteredPosts = this.state.posts.filter(post => {
-      console.log(post.category);
-      console.log("category from state: ", this.state.category)
+      console.log("user id from app: ", this.props.user._id);
+      console.log("post owner: ", post.owner._id);
+
       return (
-        ((this.state.owner && post.owner._id === this.props.user._id) ||
-          (this.state.match && post.match._id === this.props.user._id)) &&
-        (post.title.toLowerCase().includes(search) ||
-          post.category.toLowerCase().includes(search)) ||
+        (((!this.state.owner) ||
+          (this.state.owner && post.owner._id === this.props.user._id)) &&
+          (this.state.category === post.category || !this.state.category))
+        &&
         (this.state.category === post.category || !this.state.category)
       );
     });
@@ -161,13 +114,8 @@ class Posts extends Component {
 
         <PostList posts={filteredPosts} />
 
-        <Link to={`/post/new`}>Create a new post
-              </Link>
-
         <NewPost
-          newPost={this.state.newPost}
-          handleChangeNewPost={this.handleChangeNewPost}
-          handleSubmitNewPost={this.handleSubmitNewPost}
+          refreshData={this.getDataPosts}
         />
       </div>
     )
