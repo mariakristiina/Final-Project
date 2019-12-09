@@ -6,7 +6,6 @@ class Messages extends Component {
   state = {
      title: "",
      content: ""
- 
   }
  handleChange = event => {
     this.setState({
@@ -19,7 +18,10 @@ class Messages extends Component {
 
     axios.post("/messages", {
         title: this.state.title,
-        content: this.state.content
+        content: this.state.content,
+        subject: this.props.subject,
+        owner: this.props.owner,
+        recipient: this.props.recipient
     }).then(response =>{
 
     })
