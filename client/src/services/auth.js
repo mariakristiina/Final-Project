@@ -1,10 +1,11 @@
 import axios from "axios"
 
-const signup = (username, password, age) => {
+const signup = (username, password, age, siteLanguage) => {
   return axios.post("/auth/signup", {
     username: username,
     password: password,
-    age: age
+    age: age,
+    siteLanguage: siteLanguage
   }).then(response => {
     return response.data
   }).catch(err => {
