@@ -5,7 +5,6 @@ const PostList = props => {
   return (
     <div>
       {props.posts.map(post => {
-        console.log(post)
         return (
           <div key={post._id}>
             <h3>

@@ -54,7 +54,6 @@ class App extends React.Component {
   //-----------------------Profile func------------
 
   getDataProfile = () => {
-    console.log("user from app: ", this.state.user)
 
     const id = this.state.user._id
 

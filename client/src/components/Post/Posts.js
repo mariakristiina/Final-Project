@@ -24,7 +24,7 @@ class Posts extends Component {
     axios
       .get('/post')
       .then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         this.setState({
           posts: response.data
         })
@@ -51,23 +51,41 @@ class Posts extends Component {
   };
 
 
+
   render() {
 
     const filteredPosts = this.state.posts.filter(post => {
-      console.log("user id from app: ", this.props.user._id);
-      console.log("post owner: ", post.owner._id);
+      // console.log("user id from app: ", this.props.user._id);
+      // console.log("post match: ", post.match._id);
 
-      return (
-        (((!this.state.owner) ||
-          (this.state.owner && post.owner._id === this.props.user._id)) &&
-          (this.state.category === post.category || !this.state.category))
-        &&
-        (this.state.category === post.category || !this.state.category)
-      );
+      if (post.match && this.state.match) {
+        return (post.match._id === this.props.user._id)
+      } else if (this.state.owner) {
+        return (post.owner._id === this.props.user._id)
+      } else if (this.state.category) {
+        return (this.state.category === post.category)
+        // } else if ((this.state.category === post.category) && this.state.owner) {
+        //   return (post.owner._id === this.props.user._id)
+      } else return ((!this.state.owner && !this.state.match && !this.state.category))
+
+      //  else return (
+
+      //     (((!this.state.owner) ||
+      //       (this.state.owner && post.owner._id === this.props.user._id)) &&
+      //       (this.state.category === post.category || !this.state.category))
+
+      // && (
+      //   (this.state.match && post.match) &&
+      //   (this.state.match && post.match._id === this.props.user._id))
+
+      // && (this.state.category === post.category || !this.state.category)
+
+
+      // );
     });
 
     return (
-      <div className="post-container">
+      <div className="post-container" >
 
         <label htmlFor="owner">My Posts</label>
         <input
