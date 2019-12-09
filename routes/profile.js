@@ -43,12 +43,11 @@ router.put("/:id", uploadCloud.single("urlPath"), (req, res, next) => {
       urlPath:req.body.urlPath,
       gender: req.body.gender,
       languages: req.body.languages,
-      about: req.body.about
+      about: req.body.about,
     },
     { new: true }
   )
     .then(profile => {
-      console.log("res db.....", profile);
       res.json(profile);
     })
     .catch(err => {

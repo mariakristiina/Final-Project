@@ -6,6 +6,10 @@ const userSchema = new Schema({
   username: String,
   password: String,
   age: String,
+  siteLanguage: {
+    type: String,
+    default: "English"
+  },
   urlPath: {
     type: String,
     default: "https://res.cloudinary.com/mariakristiina/image/upload/v1575542831/avatar-orange_q8rkfz.png",
@@ -32,8 +36,8 @@ const userSchema = new Schema({
   // },
   about: {
     type: String,
-    default: "Write something about yourself" }
-}, 
+    default: "Write something about yourself" },
+},
 {
   timestamps: {
     createdAt: 'created_at',
