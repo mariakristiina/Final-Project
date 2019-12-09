@@ -1,22 +1,20 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
-
-const getSentMessages = userId => {
-  return axios.get(`/messages/sent/${userId}`);
-};
-
-const getReceivedMessages = userId => {
-  return axios.get(`/messages/received/${userId}`);
-};
+import { Link, NavLink, Route } from "react-router-dom";
+import MailboxDetail from "./MailboxDetail";
+import { getSentMessages, getReceivedMessages } from "./messageFunctions";
 class Mailbox extends Component {
   state = {
     receivedMessages: [],
-    sentMessages: []
+    sentMessages: [],
+    showDetail: false,
+    detailMessage: []
   };
 
   componentDidMount() {
-    getSentMessages(this.props.match.params.user)
+    console.log(this.props.match.params);
+    getSentMessages(this.props.user._id)
       .then(res => {
         this.setState({
           sentMessages: res.data
@@ -24,61 +22,46 @@ class Mailbox extends Component {
       })
       .catch(err => console.log(err));
 
-    getReceivedMessages(this.props.match.params.user)
-      .then(res => {
-        this.setState({
-          receivedMessages: res.data
-        });
-      })
+    getReceivedMessages(this.props.user._id).then(res => {
+      this.setState({
+        receivedMessages: res.data
+      });
+    });
   }
 
-render() {
-  const { sentMessages, receivedMessages } = this.state;
-  console.log(this.state);
-  return (
-    <div>
-    {sentMessages.map(msg => {
-      return (
-        <div key={msg._id}>
-        <p>From: {msg.owner.username}</p>
-        <p>To: {msg.recipient.username}</p>
-        <p>Date: {msg.created_at}</p>
-        <p>Type: {msg.title}</p>
-        <p>Message: {msg.content}</p>
-        
-        
-        
-        <Form onSubmit={this.handleSubmit}>
-        <Form.Group controlId="exampleForm.ControlTextarea1">
-        <Form.Label>Your Message</Form.Label>
-        <Form.Control
-        as="textarea"
-        rows="3"
-        name="content"
-        onChange={this.handleChange}
-        />
-        </Form.Group>
-        <Button type="submit">Send Message</Button>
-        </Form>
-        </div>
-        );
-      })}
-      
-      {receivedMessages.map(msg => {
-        return (
-          <div key={msg._id}>
-          <p>From: {msg.owner.username}</p>
-          <p>To: {msg.recipient.username}</p>
-          <p>Date: {msg.created_at}</p>
-          <p>Type: {msg.title}</p>
-          <p>Message: {msg.content}</p>
+  render() {
+    const { sentMessages, receivedMessages } = this.state;
+    console.log("tst", sentMessages, receivedMessages);
+    return (
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div
+          className="col-5"
+          style={{
+            maxHeight: "90vh",
+            overflow: "scroll"
+          }}
+        >
+          <div>
+            {sentMessages.map(msg => {
+              return (
+                <Link to={`/mailbox/detail/${msg._id}`} key={msg._id}>
+                  <div>
+                    <p>Title: {msg.subject.title}</p>
+                    <p>From: {msg.owner.username}</p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
-          )
-        }
-        )}
+
+          {/* {this.state.showDetail && (
+          <MailboxDetail  />
+        )} */}
+          {/* <div>{this.props.children || <h1>Hi</h1>}</div> */}
+        </div>
       </div>
-        );
-      }
+    );
+  }
 }
 
 export default Mailbox;

@@ -1,9 +1,3 @@
-//state: [] ****************DONE
-
-//setState: api call get posts **************DONE
-
-//filter for categories, date, owner, match
-
 import React, { Component } from "react";
 import axios from "axios";
 import PostList from "./PostList";
