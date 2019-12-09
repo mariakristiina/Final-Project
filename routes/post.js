@@ -32,15 +32,46 @@ router.get("/:id", (req, res) => {
     .then(post => {
       if (!post) {
         res.status(400).json({ message: "Post not found" });
-      } else res.json(project);
+      } else res.json(post);
     })
     .catch(err => {
       res.status(500).json(err);
     });
 });
 
+router.put("/register/:id", (req, res) => {
+  const userId = req.user.id;
+  const postId = req.params.id;
+  Post.findByIdAndUpdate(postId, {
+    match: userId
+  },
+  {new: true}
+  )
+  .then(post => {
+  res.json(post);
+  })
+  .catch(err => {
+    res.status(500).json(err);
+  })
+})
+
+router.put("/deregister/:id", (req, res) => {
+  const userId = req.user.id;
+  const postId = req.params.id;
+  Post.findByIdAndUpdate(postId, {
+    match: null
+  },
+  {new: true}
+  )
+  .then(post => {
+  res.json(post);
+  })
+  .catch(err => {
+    res.status(500).json(err);
+  })
+})
+
 router.get("/new", (req, res) => {
-  console.log("htesti");
   res.json("new");
 });
 

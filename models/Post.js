@@ -5,7 +5,7 @@ const postSchema = new Schema(
   {
     title: String,
     date: {
-      type: Date,
+      type: String,
       default: Date.now
     },
     startTime: String,

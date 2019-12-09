@@ -6,6 +6,9 @@ import Signup from "./components/Signup"
 import Login from "./components/Login"
 // import { Link, Switch } from "react-router-dom";
 import Posts from "./components/Post/Posts";
+import NewPost from "./components/Post/NewPost";
+import About from "./components/About"
+
 import Profile from "./components/Profile";
 import Home from "./components/Home";
 import PostDetail from "./components/Post/PostDetail"
@@ -21,9 +24,31 @@ class App extends React.Component {
       age: "",
       gender: "",
       languages: [],
-      about: ""
+      about: "",
     },
-    editProfileForm: false
+    editProfileForm: false,
+    newPost: {
+      title: "",
+      date: "",
+      startTime: "",
+      endTime: "",
+      postType: "",
+      category: "",
+      description: "",
+    },
+    postDetail: {
+      title: "",
+      date: "",
+      startTime: "",
+      endTime: "",
+      postType: "",
+      category: "",
+      description: "",
+      owner: "",
+      match: "",
+      messages: ""
+    },
+    currentLanguage: "English",
   };
 
   // =================== user functions
@@ -50,7 +75,9 @@ class App extends React.Component {
             gender: response.data.gender,
             languages: response.data.languages,
             about: response.data.about,
-            urlPath: response.data.urlPath
+            urlPath: response.data.urlPath,
+            language: response.data.language,
+            siteLanguage: response.data.siteLanguage
           }
         }, () => console.log("state after data call", this.state));
       })
@@ -63,6 +90,9 @@ class App extends React.Component {
       })
   };
 
+  componentDidMount() {
+    this.getDataProfile();
+  }
 
   handleChangeProfile = event => {
     const { name, value } = event.target
@@ -78,14 +108,10 @@ class App extends React.Component {
     });
   };
 
-
-
   handleSubmitProfile = event => {
     event.preventDefault();
 
-    // uncertain, if not working ask
     const id = this.state.user._id;
-    console.log("............", this.state.profile);
     const { username, age, gender, languages, about, urlPath } = this.state.profile
     axios
       .put(`/profile/${id}`, {
@@ -129,17 +155,38 @@ class App extends React.Component {
   };
 
 
-  componentDidMount() {
-    this.getDataProfile();
-  }
+  // POST detail functions
+
+  // languages functions
+
+  handleChangeLanguages = event => {
+    console.log(this.state.currentLanguage)
+    this.setState({
+      currentLanguage: event.target.value,
+      siteLanguage: this.state.currentLanguage
+    });
+    console.log(event.target.value)
+  };
+
 
   render() {
     console.log("user from app: ", this.state.user)
     return (
       <div className="App">
-        <Navbar user={this.state.user} clearUser={this.setUser} />
+        <Navbar user={this.state.user} clearUser={this.setUser} handleChangeLanguages={this.handleChangeLanguages} />
 
-        <Home />
+        <Route exact path="/"
+          render={props => <Home
+            user={this.state.user}
+            currentLanguage={this.state.currentLanguage}
+            {...props} />} />
+
+        <Route exact path="/about"
+          render={props => <About
+            user={this.state.user}
+            currentLanguage={this.state.currentLanguage}
+            {...props} />} />
+
 
         <Route
           exact
@@ -154,13 +201,19 @@ class App extends React.Component {
           getDataProfile={this.getDataProfile}
           imageUpload={this.imageUpload}
           editProfileForm={this.state.editProfileForm}
+          currentLanguage={this.state.currentLanguage}
           {...props} />} />
 
         <Route
           exact
           path="/signup"
 
-          render={props => <Signup {...props} setUser={this.setUser} />}
+          render={props => <Signup
+            {...props}
+            setUser={this.setUser}
+            currentLanguage={this.state.currentLanguage}
+            profile={this.state.profile}
+          />}
         />
 
         <Route exact path="/posts" render={props => <Posts {...props}
@@ -168,8 +221,11 @@ class App extends React.Component {
           user={this.state.user}
         />} />
 
-        {/* <Route exact path="/post/:id" render={props => <PostDetail {...props}
-        />} /> */}
+        <Route exact path="/post/:id" render={props => <PostDetail {...props}
+          user={this.state.user}
+          postDetail={this.state.posts}
+
+        />} />
 
         {/* <Route exact path="/post/new" render={props => <NewPost {...props}
           setUser={this.setUser}
