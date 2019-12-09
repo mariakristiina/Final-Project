@@ -18,7 +18,6 @@ import Mailbox from './components/Post/Mailbox';
 class App extends React.Component {
   state = {
     user: this.props.user,
-    posts: [],
     profile: {
       error: "",
       username: "",
@@ -81,7 +80,7 @@ class App extends React.Component {
           language: response.data.language,
           siteLanguage: response.data.siteLanguage
           }
-        },()=>console.log("state after data call", this.state));
+        }, () => console.log("state after data call", this.state));
       })
       .catch(err => {
         if (err.response.status === 404) {
@@ -97,9 +96,9 @@ class App extends React.Component {
   }
 
   handleChangeProfile = event => {
-    const {name,value} =event.target
+    const { name, value } = event.target
     this.setState({
-   profile:{...this.state.profile,[name]: value}
+      profile: { ...this.state.profile, [name]: value }
     });
   };
 
@@ -144,68 +143,15 @@ class App extends React.Component {
 
     upload.append("urlPath", file);
     axios.post(`/profile/${id}`, upload)
-    .then(response => {
-      console.log(response.data.secure_url)
-      this.setState({
-        profile: {
-          ...this.state.profile,
-          urlPath: response.data.secure_url }
-      });
-      console.log(this.state.profile.urlPath)
-    });
-  }
-
-  //============================ posts functions
-  getDataPosts = () => {
-    axios
-      .get('/post')
       .then(response => {
-        console.log(response.data)
+        console.log(response.data.secure_url)
         this.setState({
-          posts: response.data
-        })
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
-
-  //=============================== postForm functions
-
-  handleChangeNewPost = event => {
-    console.log(event.target.value);
-    const { name, value } = event.target
-
-    this.setState({
-      newPost: { [name]: value }
-    });
-  };
-
-  handleSubmitNewPost = event => {
-    event.preventDefault();
-    console.log(this.state);
-    axios
-      .post("/post/new", {
-        title: this.state.newPost.title,
-        startTime: this.state.newPost.startTime,
-        endTime: this.state.newPost.endTime,
-        postType: this.state.newPost.postType,
-        category: this.state.newPost.category,
-        description: this.state.newPost.description
-      })
-      .then(response => {
-        response.refreshData();
-        this.setState({
-          title: "",
-          startTime: "",
-          endTime: "",
-          postType: "",
-          category: "",
-          description: ""
+          profile: {
+            ...this.state.profile,
+            urlPath: response.data.secure_url
+          }
         });
-      })
-      .catch(err => {
-        console.log(err);
+        console.log(this.state.profile.urlPath)
       });
   };
 
@@ -225,6 +171,7 @@ handleChangeLanguages = event => {
 
 
   render() {
+    console.log("user from app: ", this.state.user)
     return (
       <div className="App">
         <Navbar user={this.state.user} clearUser={this.setUser} handleChangeLanguages={this.handleChangeLanguages}/>
@@ -272,8 +219,7 @@ handleChangeLanguages = event => {
 
         <Route exact path="/posts" render={props => <Posts {...props}
           setUser={this.setUser}
-          posts={this.state.posts}
-          getDataPosts={this.getDataPosts}
+          user={this.state.user}
         />} />
 
         <Route exact path="/post/:id" render={props => <PostDetail {...props}
@@ -283,9 +229,6 @@ handleChangeLanguages = event => {
 
         <Route exact path="/post/new" render={props => <NewPost {...props}
           setUser={this.setUser}
-          handleChangeNewPost={this.handleChangeNewPost}
-          handleSubmitNewPost={this.handleSubmitNewPost}
-
         />} />
         <Route exact path="/mailbox/:user" render={props => <Mailbox {...props}></Mailbox>} />
 
