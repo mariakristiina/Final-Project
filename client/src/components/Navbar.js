@@ -12,7 +12,7 @@ const Navbar = props => {
 
   return (
     <Nav className="nav justify-content-end" bg="light">
-    <Link to="/">Home</Link>
+      <Link to="/">Home</Link>
       {props.user ? (
         <>
           <Link to="/" onClick={handleLogout}>
@@ -20,18 +20,20 @@ const Navbar = props => {
       </Link>
           <Link to={`/profile/${props.user._id}`}>Profile</Link>
           <Link to={`/posts`}>Posts</Link>
+          <Link to={`/mailbox/${props.user._id}`}>Mailbox</Link>
         </>
       ) : (
           <React.Fragment>
             <Link to="/about">About</Link>
             <Link to="/signup">Signup</Link>
             <Link to="/login">Login</Link>
+            
           </React.Fragment>
         )}
-        <select name="languages" id="languages" onChange={props.handleChangeLanguages}>
-          <option value="English">🇬🇧English</option>
-          <option value="German"> 🇩🇪German</option>
-        </select>
+      <select name="languages" id="languages" onChange={props.handleChangeLanguages}>
+        <option value="English">🇬🇧English</option>
+        <option value="German"> 🇩🇪German</option>
+      </select>
     </Nav>
   );
 };
