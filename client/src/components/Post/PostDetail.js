@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Message from "./Messages"
 import { Link } from "react-router-dom"
 import axios from "axios";
+import "./PostCss/postDetail.css"
 
 
 class PostDetail extends  React.Component {
@@ -99,16 +100,18 @@ getDataPostDetail = () => {
  render() {
   return (
     <div>
-          <div>
+          <div className="postContainer">
             <h2>{this.state.title}</h2>
-            <p>{this.state.owner.username}</p>
-            <p>{this.state.owner.about}</p>
-            <p>{this.state.description}</p>
-            <p>{this.state.date}</p>
-            <p>{this.state.startTime}</p>
-            <p>{this.state.endTime}</p>
             <p>{this.state.postType}</p>
             <p>{this.state.category}</p>
+            
+            <p>{this.state.date}</p>
+            <div className="times"> 
+            <p>from: {this.state.startTime}to: </p>
+            <p> {this.state.endTime}</p>
+            </div>
+            <p>{this.state.description}</p>
+           
           </div>
 
           {this.state.match ?
@@ -121,8 +124,13 @@ getDataPostDetail = () => {
           <form onSubmit={this.handleSubmit}>
           <button type="submit">Register</button>
           </form>  }
-      <Message />
-
+          <div className="posterContainer">
+          <p>{this.state.owner.username}</p>
+          <p>{this.state.owner.gender}</p>
+            <p>{this.state.owner.about}</p>
+          </div>
+      
+<Message />
     </div>
 
   ) }

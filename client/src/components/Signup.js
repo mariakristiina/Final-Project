@@ -1,6 +1,8 @@
+
 import React, { Component } from "react"
 import { signup } from "../services/auth"
 import { Alert, Form, Button} from "react-bootstrap"
+import Axios from "axios";
 
 
 class Signup extends Component {
@@ -8,7 +10,8 @@ class Signup extends Component {
     username: "",
     password: "",
     age: "",
-    error: ""
+    error: "",
+    siteLanguage: this.props.currentLanguage
   };
 
   handleChange = event => {
@@ -21,7 +24,10 @@ class Signup extends Component {
     event.preventDefault();
   
 
-  signup(this.state.username, this.state.password,this.state.age).then(data => {
+  signup(this.state.username, this.state.password,this.state.age, this.state.siteLanguage)
+  .then(data => {
+    console.log(data)
+    console.log(this.state.siteLanguage)
     if(data.message) {
       this.setState({
         error: data.message
@@ -73,6 +79,17 @@ class Signup extends Component {
            onChange={this.handleChange}
           />
         </Form.Group>
+
+        <Form.Group>
+          <Form.Label htmlFor="siteLanguage">Langauge</Form.Label>
+          <Form.Control 
+            type= "text"
+            name= "siteLanguage"
+            id= "siteLanguage"
+            defaultValue={this.state.siteLanguage}
+          />
+        </Form.Group>
+
         {this.state.error && (
           <Alert variant="danger">{this.state.error}</Alert>
         )}

@@ -7,6 +7,7 @@ import Login from "./components/Login"
 // import { Link, Switch } from "react-router-dom";
 import Posts from "./components/Post/Posts";
 import NewPost from "./components/Post/NewPost";
+import About from "./components/About"
 
 import Profile from "./components/Profile";
 import Home from "./components/Home";
@@ -24,7 +25,7 @@ class App extends React.Component {
       age: "",
       gender: "",
       languages: [],
-      about: ""
+      about: "",
     },
     editProfileForm: false,
     newPost: {
@@ -34,7 +35,7 @@ class App extends React.Component {
       endTime: "",
       postType: "",
       category: "",
-      description: ""
+      description: "",
     },
     postDetail: {
       title: "",
@@ -47,7 +48,8 @@ class App extends React.Component {
       owner: "",
       match: "",
       messages: ""
-    }
+    },
+    currentLanguage: "English",
   };
 
   // =================== user functions
@@ -74,7 +76,9 @@ class App extends React.Component {
           gender: response.data.gender,
           languages: response.data.languages,
           about: response.data.about,
-          urlPath: response.data.urlPath
+          urlPath: response.data.urlPath,
+          language: response.data.language,
+          siteLanguage: response.data.siteLanguage
           }
         },()=>console.log("state after data call", this.state));
       })
@@ -87,6 +91,9 @@ class App extends React.Component {
       })
   };
 
+  componentDidMount() {
+    this.getDataProfile();
+  }
 
   handleChangeProfile = event => {
     const {name,value} =event.target
@@ -204,17 +211,35 @@ class App extends React.Component {
 
 // POST detail functions
 
+// languages functions
 
-componentDidMount() {
-  this.getDataProfile();
-}
+handleChangeLanguages = event => {
+  console.log(this.state.currentLanguage)
+  this.setState({
+   currentLanguage: event.target.value,
+   siteLanguage: this.state.currentLanguage
+  });
+  console.log(event.target.value)
+};
+
 
   render() {
     return (
       <div className="App">
-        <Navbar user={this.state.user} clearUser={this.setUser} />
+        <Navbar user={this.state.user} clearUser={this.setUser} handleChangeLanguages={this.handleChangeLanguages}/>
 
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" 
+        render={props => <Home 
+        user={this.state.user}
+        currentLanguage={this.state.currentLanguage}
+        {...props} />} />
+
+      <Route exact path="/about" 
+        render={props => <About 
+        user={this.state.user}
+        currentLanguage={this.state.currentLanguage}
+        {...props} />} /> 
+
 
         <Route
           exact
@@ -229,13 +254,19 @@ componentDidMount() {
         getDataProfile={this.getDataProfile}
         imageUpload={this.imageUpload}
         editProfileForm={this.state.editProfileForm}
+        currentLanguage={this.state.currentLanguage}
         {...props} />} />
 
         <Route
           exact
           path="/signup"
 
-          render={props => <Signup {...props} setUser={this.setUser} />}
+          render={props => <Signup 
+          {...props} 
+          setUser={this.setUser} 
+          currentLanguage={this.state.currentLanguage}
+          profile={this.state.profile}
+          />}
         />
 
         <Route exact path="/posts" render={props => <Posts {...props}

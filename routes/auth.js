@@ -5,7 +5,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 
 router.post("/signup", (req, res) => {
-  const { username, password,age } = req.body
+  const { username, password, age, siteLanguage} = req.body
 
   if (!username) {
     return res.status(400).json({ message: "Please enter a Username" });
@@ -25,7 +25,13 @@ router.post("/signup", (req, res) => {
           return bcrypt.hash(password, salt);
         })
         .then(hash => {
-          return User.create({ username: username, password: hash ,age});
+          console.log(req.body);
+          return User.create({ 
+            username: username, 
+            password: hash,
+            age: age,
+            siteLanguage: siteLanguage
+          });
         })
         .then(newUser => {
           req.login(newUser, err => {
@@ -64,5 +70,3 @@ router.get("/loggedin", (req, res) => {
 })
 
 module.exports = router;
-
-
