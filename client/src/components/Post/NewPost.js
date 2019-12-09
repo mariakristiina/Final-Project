@@ -13,7 +13,7 @@ const NewPost = props => {
         name="title"
         id="title"
         onChange={props.handleChangeNewPost}
-        //value={props.newPost.title}
+        value={props.newPost.title}
       />
 
       <label htmlFor="date">Date: </label>
@@ -22,7 +22,7 @@ const NewPost = props => {
         name="date"
         id="date"
         onChange={props.handleChangeNewPost}
-        // value={props.newPost.date}
+        value={props.newPost.date}
       />
 
       <label htmlFor="startTime">Start Time: </label>
@@ -31,7 +31,7 @@ const NewPost = props => {
         name="startTime"
         id="startTime"
         onChange={props.handleChangeNewPost}
-        // value={props.newPost.startTime}
+        value={props.newPost.startTime}
       />
 
       <label htmlFor="endTime">End Time: </label>
@@ -40,7 +40,7 @@ const NewPost = props => {
         name="endTime"
         id="endTime"
         onChange={props.handleChangeNewPost}
-        // value={props.newPost.endTime}
+        value={props.newPost.endTime}
       />
 
       <label htmlFor="postType">Post Type: </label>
@@ -66,7 +66,7 @@ const NewPost = props => {
         name="description"
         id="description"
         onChange={props.handleChangeNewPost}
-        // value={props.newPost.description}
+        value={props.newPost.description}
       />
       <button type="submit">Create a new Post</button>
     </form>

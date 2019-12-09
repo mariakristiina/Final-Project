@@ -8,6 +8,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import PostList from "./PostList";
+import NewPost from "./NewPost";
 
 class Posts extends Component {
   state = {
@@ -70,7 +71,7 @@ class Posts extends Component {
         description: this.state.newPost.description
       })
       .then(response => {
-        response.refreshData();
+        this.getDataPosts();
         this.setState({
           title: "",
           startTime: "",
@@ -108,7 +109,7 @@ class Posts extends Component {
         ((this.state.owner && post.owner._id === this.props.user._id) ||
           (this.state.match && post.match._id === this.props.user._id)) &&
         (post.title.toLowerCase().includes(search) ||
-          post.category.toLowerCase().includes(search)) &&
+          post.category.toLowerCase().includes(search)) ||
         (this.state.category === post.category || !this.state.category)
       );
     });
@@ -154,7 +155,7 @@ class Posts extends Component {
           <option value="doctor appointment">Doctor appointment</option>
           <option value="meet people">Meet people</option>
           <option value="activities for kids">Activities for kids</option>
-          <option value="activities for seniors">"Activities for seniors</option>
+          <option value="activities for seniors">Activities for seniors</option>
         </select>
 
 
@@ -162,6 +163,12 @@ class Posts extends Component {
 
         <Link to={`/post/new`}>Create a new post
               </Link>
+
+        <NewPost
+          newPost={this.state.newPost}
+          handleChangeNewPost={this.handleChangeNewPost}
+          handleSubmitNewPost={this.handleSubmitNewPost}
+        />
       </div>
     )
   }

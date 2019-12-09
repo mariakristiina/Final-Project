@@ -6,7 +6,6 @@ import Signup from "./components/Signup"
 import Login from "./components/Login"
 // import { Link, Switch } from "react-router-dom";
 import Posts from "./components/Post/Posts";
-import NewPost from "./components/Post/NewPost";
 import Profile from "./components/Profile";
 import Home from "./components/Home";
 import PostDetail from "./components/Post/PostDetail"
@@ -172,9 +171,9 @@ class App extends React.Component {
         {/* <Route exact path="/post/:id" render={props => <PostDetail {...props}
         />} /> */}
 
-        <Route exact path="/post/new" render={props => <NewPost {...props}
+        {/* <Route exact path="/post/new" render={props => <NewPost {...props}
           setUser={this.setUser}
-        />} />
+        />} /> */}
 
       </div>
     )
