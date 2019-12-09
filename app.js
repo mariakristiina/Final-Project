@@ -91,4 +91,7 @@ app.use('/', imgUpload);
 const profileRoutes = require('./routes/profile');
 app.use('/profile', profileRoutes);
 
+const messageRoute = require("./routes/messages")
+app.use("/messages", messageRoute)
+
 module.exports = app;
