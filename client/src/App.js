@@ -70,14 +70,14 @@ class App extends React.Component {
         console.log(response.data);
         this.setState({
           profile: {
-          username: response.data.username,
-          age: response.data.age,
-          gender: response.data.gender,
-          languages: response.data.languages,
-          about: response.data.about,
-          urlPath: response.data.urlPath,
-          language: response.data.language,
-          siteLanguage: response.data.siteLanguage
+            username: response.data.username,
+            age: response.data.age,
+            gender: response.data.gender,
+            languages: response.data.languages,
+            about: response.data.about,
+            urlPath: response.data.urlPath,
+            language: response.data.language,
+            siteLanguage: response.data.siteLanguage
           }
         }, () => console.log("state after data call", this.state));
       })
@@ -112,7 +112,7 @@ class App extends React.Component {
     event.preventDefault();
 
     const id = this.state.user._id;
-    const {username,age,gender,languages,about,urlPath}=this.state.profile
+    const { username, age, gender, languages, about, urlPath } = this.state.profile
     axios
       .put(`/profile/${id}`, {
         username,
@@ -155,37 +155,37 @@ class App extends React.Component {
   };
 
 
-// POST detail functions
+  // POST detail functions
 
-// languages functions
+  // languages functions
 
-handleChangeLanguages = event => {
-  console.log(this.state.currentLanguage)
-  this.setState({
-   currentLanguage: event.target.value,
-   siteLanguage: this.state.currentLanguage
-  });
-  console.log(event.target.value)
-};
+  handleChangeLanguages = event => {
+    console.log(this.state.currentLanguage)
+    this.setState({
+      currentLanguage: event.target.value,
+      siteLanguage: this.state.currentLanguage
+    });
+    console.log(event.target.value)
+  };
 
 
   render() {
     console.log("user from app: ", this.state.user)
     return (
       <div className="App">
-        <Navbar user={this.state.user} clearUser={this.setUser} handleChangeLanguages={this.handleChangeLanguages}/>
+        <Navbar user={this.state.user} clearUser={this.setUser} handleChangeLanguages={this.handleChangeLanguages} />
 
-        <Route exact path="/" 
-        render={props => <Home 
-        user={this.state.user}
-        currentLanguage={this.state.currentLanguage}
-        {...props} />} />
+        <Route exact path="/"
+          render={props => <Home
+            user={this.state.user}
+            currentLanguage={this.state.currentLanguage}
+            {...props} />} />
 
-      <Route exact path="/about" 
-        render={props => <About 
-        user={this.state.user}
-        currentLanguage={this.state.currentLanguage}
-        {...props} />} /> 
+        <Route exact path="/about"
+          render={props => <About
+            user={this.state.user}
+            currentLanguage={this.state.currentLanguage}
+            {...props} />} />
 
 
         <Route
@@ -194,25 +194,25 @@ handleChangeLanguages = event => {
           render={props => <Login {...props} setUser={this.setUser} />}
         />
 
-        <Route exact path="/profile/:id" render={props => <Profile user={this.state.user} 
-        profile={this.state.profile} 
-        handleChangeProfile={this.handleChangeProfile} toggleEditProfile={this.toggleEditProfile} 
-        handleSubmitProfile={this.handleSubmitProfile}
-        getDataProfile={this.getDataProfile}
-        imageUpload={this.imageUpload}
-        editProfileForm={this.state.editProfileForm}
-        currentLanguage={this.state.currentLanguage}
-        {...props} />} />
+        <Route exact path="/profile/:id" render={props => <Profile user={this.state.user}
+          profile={this.state.profile}
+          handleChangeProfile={this.handleChangeProfile} toggleEditProfile={this.toggleEditProfile}
+          handleSubmitProfile={this.handleSubmitProfile}
+          getDataProfile={this.getDataProfile}
+          imageUpload={this.imageUpload}
+          editProfileForm={this.state.editProfileForm}
+          currentLanguage={this.state.currentLanguage}
+          {...props} />} />
 
         <Route
           exact
           path="/signup"
 
-          render={props => <Signup 
-          {...props} 
-          setUser={this.setUser} 
-          currentLanguage={this.state.currentLanguage}
-          profile={this.state.profile}
+          render={props => <Signup
+            {...props}
+            setUser={this.setUser}
+            currentLanguage={this.state.currentLanguage}
+            profile={this.state.profile}
           />}
         />
 
