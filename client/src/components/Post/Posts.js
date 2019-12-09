@@ -52,7 +52,6 @@ class Posts extends Component {
 
 
   render() {
-    const search = this.state.search.toLowerCase();
 
     const filteredPosts = this.state.posts.filter(post => {
       console.log("user id from app: ", this.props.user._id);
@@ -70,14 +69,6 @@ class Posts extends Component {
     return (
       <div className="post-container">
 
-        <input
-          type="text"
-          name="search"
-          value={this.state.search}
-          onChange={this.handleChangeFilter}
-          placeholder="search"
-        />
-        <br />
         <label htmlFor="owner">My Posts</label>
         <input
           type="checkbox"
