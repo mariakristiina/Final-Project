@@ -108,7 +108,7 @@ class Posts extends Component {
         ((this.state.owner && post.owner._id === this.props.user._id) ||
           (this.state.match && post.match._id === this.props.user._id)) &&
         (post.title.toLowerCase().includes(search) ||
-          post.category.toLowerCase().includes(search)) &&
+          post.category.toLowerCase().includes(search)) ||
         (this.state.category === post.category || !this.state.category)
       );
     });

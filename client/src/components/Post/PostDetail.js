@@ -142,4 +142,4 @@ getDataPostDetail = () => {
 //to write messages
 
 
-// export default PostDetail;
+export default PostDetail;
