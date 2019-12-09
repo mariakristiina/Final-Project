@@ -37,6 +37,14 @@ const userSchema = new Schema({
   about: {
     type: String,
     default: "Write something about yourself" },
+    posts: [{
+      type: Schema.Types.ObjectId,
+      ref: "Post"
+    }],
+    messages: [{
+      type: Schema.Types.ObjectId,
+      ref: "Messages"
+    }]
 },
 {
   timestamps: {

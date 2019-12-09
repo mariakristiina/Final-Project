@@ -3,6 +3,8 @@ const router = express.Router();
 const Profile = require("../models/User");
 const mongoose = require("mongoose");
 const uploadCloud = require("./cloudinary");
+const Post = require("../models/Post")
+const Messages = require("../models/Messages")
 
 //get profile/:id
 router.get("/:id", (req, res) => {
@@ -24,26 +26,31 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// router.post("/profile/:id", uploadCloud.single("urlPath"), (req, res, next) => {
-//   if(!req.file) {
-//       next(new Error("No file uploaded!"));
-//       return
-//   }
-//   res.json({ secure_url: req.file.secure_url });
-// });
-
-//edit profile/:id
+router.put("/language", (req, res) => {
+  Profile.findByIdAndUpdate(
+    req.user._id,
+    {
+      siteLanguage: req.body.siteLanguage
+    },
+    { new: true }
+  )
+    .then(language => {
+      res.json(language);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+});
 router.put("/:id", uploadCloud.single("urlPath"), (req, res, next) => {
-
   Profile.findByIdAndUpdate(
     req.params.id,
     {
       username: req.body.username,
       age: req.body.age,
-      urlPath:req.body.urlPath,
+      urlPath: req.body.urlPath,
       gender: req.body.gender,
       languages: req.body.languages,
-      about: req.body.about,
+      about: req.body.about
     },
     { new: true }
   )
@@ -54,5 +61,18 @@ router.put("/:id", uploadCloud.single("urlPath"), (req, res, next) => {
       res.status(500).json(err);
     });
 });
+
+router.delete("/:id", (req, res) => {
+Profile.findByIdAndDelete(req.params.id)
+.then(user => {
+  return Post.deleteMany({_id: {$in: user.posts }})
+  .then((() => {
+    res.json({ message: "deleted"})
+  }))
+})
+.catch(err => {
+  res.status(500).json(err);
+})
+})
 
 module.exports = router;

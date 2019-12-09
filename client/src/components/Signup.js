@@ -25,7 +25,6 @@ class Signup extends Component {
 
   signup(this.state.username, this.state.password,this.state.age, this.props.currentLanguage)
   .then(data => {
-    console.log("-after create------",data)
     if(data.message) {
       this.setState({
         error: data.message
@@ -78,16 +77,6 @@ class Signup extends Component {
            onChange={this.handleChange}
           />
         </Form.Group>
-{/* 
-        <Form.Group>
-          <Form.Label htmlFor="siteLanguage">Langauge</Form.Label>
-          <Form.Control 
-            type= "text"
-            name= "siteLanguage"
-            id= "siteLanguage"
-            defaultValue={this.state.siteLanguage}
-          />
-        </Form.Group> */}
 
         {this.state.error && (
           <Alert variant="danger">{this.state.error}</Alert>
