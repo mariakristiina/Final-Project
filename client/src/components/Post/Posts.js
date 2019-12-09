@@ -5,7 +5,6 @@
 //filter for categories, date, owner, match
 
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import PostList from "./PostList";
 import NewPost from "./NewPost";
@@ -15,8 +14,7 @@ class Posts extends Component {
     posts: [],
     search: "",
     category: "",
-    owner: false,
-    match: false
+    owner: ""
   };
 
   //============================ posts functions
@@ -38,15 +36,12 @@ class Posts extends Component {
     this.getDataPosts();
   }
 
-  //=============================== filterForm functions
+  //=============================== filter functions
 
 
   handleChangeFilter = event => {
     this.setState({
-      [event.target.name]:
-        event.target.type === "checkbox"
-          ? event.target.checked
-          : event.target.value
+      [event.target.name]: event.target.value
     });
   };
 
@@ -55,54 +50,40 @@ class Posts extends Component {
   render() {
 
     const filteredPosts = this.state.posts.filter(post => {
-      // console.log("user id from app: ", this.props.user._id);
-      // console.log("post match: ", post.match._id);
+      // console.log("match-id", post.match._id)
 
-      if (post.match && this.state.match) {
-        return (post.match._id === this.props.user._id)
-      } else if (this.state.owner) {
-        return (post.owner._id === this.props.user._id)
-      } else if (this.state.category) {
-        return (this.state.category === post.category)
-        // } else if ((this.state.category === post.category) && this.state.owner) {
-        //   return (post.owner._id === this.props.user._id)
-      } else return ((!this.state.owner && !this.state.match && !this.state.category))
+      return (
 
-      //  else return (
+        ((!this.state.owner) ||
+          ((this.state.owner === "owner" && post.owner._id === this.props.user._id) ||
 
-      //     (((!this.state.owner) ||
-      //       (this.state.owner && post.owner._id === this.props.user._id)) &&
-      //       (this.state.category === post.category || !this.state.category))
+            (((this.state.owner === "match") && post.match) && post.match._id === this.props.user._id)) &&
 
-      // && (
-      //   (this.state.match && post.match) &&
-      //   (this.state.match && post.match._id === this.props.user._id))
+          (this.state.category === post.category || !this.state.category))
 
-      // && (this.state.category === post.category || !this.state.category)
+        && (this.state.category === post.category || !this.state.category)
 
-
-      // );
+      );
     });
 
     return (
       <div className="post-container" >
 
-        <label htmlFor="owner">My Posts</label>
-        <input
-          type="checkbox"
+        <label htmlFor="myposts" > Filter my posts</label>
+        <select
           name="owner"
           id="owner"
+          value={this.state.owner}
           onChange={this.handleChangeFilter}
-          checked={this.state.owner}
-        />
-        <label htmlFor="match">Matched posts</label>
-        <input
-          type="checkbox"
-          name="match"
-          id="match"
-          onChange={this.handleChangeFilter}
-          checked={this.state.match}
-        />
+
+        >
+          <option value="">--</option>
+          <option value="owner">My posts</option>
+          <option value="match">Registered</option>
+        </select>
+
+
+
         <label htmlFor="category">Filter by Category</label>
         <select
           name="category"

@@ -5,6 +5,20 @@ const PostList = props => {
   return (
     <div>
       {props.posts.map(post => {
+        if (post.match) {
+          return (
+            <div key={post._id}>
+              <h3>
+                <Link to={`/post/${post._id}`}>{post.title}
+                </Link> - Matched
+              </h3>
+              <p>User: {post.owner.username}</p>
+              <p>Type: {post.postType}</p>
+              <p>Category: {post.category}</p>
+              <p>Date: {post.date}</p>
+            </div>
+          )
+        }
         return (
           <div key={post._id}>
             <h3>
