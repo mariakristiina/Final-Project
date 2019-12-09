@@ -10,8 +10,7 @@ class Signup extends Component {
     username: "",
     password: "",
     age: "",
-    error: "",
-    siteLanguage: this.props.currentLanguage
+    error: ""
   };
 
   handleChange = event => {
@@ -24,10 +23,9 @@ class Signup extends Component {
     event.preventDefault();
   
 
-  signup(this.state.username, this.state.password,this.state.age, this.state.siteLanguage)
+  signup(this.state.username, this.state.password,this.state.age, this.props.currentLanguage)
   .then(data => {
-    console.log(data)
-    console.log(this.state.siteLanguage)
+    console.log("-after create------",data)
     if(data.message) {
       this.setState({
         error: data.message
@@ -40,6 +38,7 @@ class Signup extends Component {
   }
 
   render() {
+
     return(
       
       <div>
@@ -79,7 +78,7 @@ class Signup extends Component {
            onChange={this.handleChange}
           />
         </Form.Group>
-
+{/* 
         <Form.Group>
           <Form.Label htmlFor="siteLanguage">Langauge</Form.Label>
           <Form.Control 
@@ -88,7 +87,7 @@ class Signup extends Component {
             id= "siteLanguage"
             defaultValue={this.state.siteLanguage}
           />
-        </Form.Group>
+        </Form.Group> */}
 
         {this.state.error && (
           <Alert variant="danger">{this.state.error}</Alert>

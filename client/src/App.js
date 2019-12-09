@@ -91,10 +91,6 @@ class App extends React.Component {
       })
   };
 
-  componentDidMount() {
-    this.getDataProfile();
-  }
-
   handleChangeProfile = event => {
     const {name,value} =event.target
     this.setState({
