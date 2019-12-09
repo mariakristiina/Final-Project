@@ -1,31 +1,32 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 import Navbar from "./components/Navbar";
 import { Route, Switch } from "react-router-dom";
-import Signup from "./components/Signup"
-import Login from "./components/Login"
+import Signup from "./components/Signup";
+import Login from "./components/Login";
 // import { Link, Switch } from "react-router-dom";
 import Posts from "./components/Post/Posts";
 import NewPost from "./components/Post/NewPost";
-import About from "./components/About"
+import About from "./components/About";
 
 import Profile from "./components/Profile";
 import Home from "./components/Home";
-import PostDetail from "./components/Post/PostDetail"
+import PostDetail from "./components/Post/PostDetail";
 import axios from "axios";
-import Mailbox from './components/Post/Mailbox';
-
+import MailboxWrapper from "./components/Post/MailboxWrapper";
+import MailboxDetail from "./components/Post/MailboxDetail";
 class App extends React.Component {
   state = {
     user: this.props.user,
     profile: {
       error: "",
       username: "",
-      urlPath: "https://res.cloudinary.com/mariakristiina/image/upload/v1575542831/avatar-orange_q8rkfz.png",
+      urlPath:
+        "https://res.cloudinary.com/mariakristiina/image/upload/v1575542831/avatar-orange_q8rkfz.png",
       age: "",
       gender: "",
       languages: [],
-      about: "",
+      about: ""
     },
     editProfileForm: false,
     newPost: {
@@ -35,7 +36,7 @@ class App extends React.Component {
       endTime: "",
       postType: "",
       category: "",
-      description: "",
+      description: ""
     },
     postDetail: {
       title: "",
@@ -49,7 +50,7 @@ class App extends React.Component {
       match: "",
       messages: ""
     },
-    currentLanguage: "English",
+    currentLanguage: "English"
   };
 
   // =================== user functions
@@ -62,25 +63,27 @@ class App extends React.Component {
   //-----------------------Profile func------------
 
   getDataProfile = () => {
-
-    const id = this.state.user._id
+    const id = this.state.user._id;
 
     axios
       .get(`/profile/${id}`)
       .then(response => {
         console.log(response.data);
-        this.setState({
-          profile: {
-          username: response.data.username,
-          age: response.data.age,
-          gender: response.data.gender,
-          languages: response.data.languages,
-          about: response.data.about,
-          urlPath: response.data.urlPath,
-          language: response.data.language,
-          siteLanguage: response.data.siteLanguage
-          }
-        }, () => console.log("state after data call", this.state));
+        this.setState(
+          {
+            profile: {
+              username: response.data.username,
+              age: response.data.age,
+              gender: response.data.gender,
+              languages: response.data.languages,
+              about: response.data.about,
+              urlPath: response.data.urlPath,
+              language: response.data.language,
+              siteLanguage: response.data.siteLanguage
+            }
+          },
+          () => console.log("state after data call", this.state)
+        );
       })
       .catch(err => {
         if (err.response.status === 404) {
@@ -88,7 +91,7 @@ class App extends React.Component {
             error: err.response.data.message
           });
         }
-      })
+      });
   };
 
   componentDidMount() {
@@ -96,14 +99,14 @@ class App extends React.Component {
   }
 
   handleChangeProfile = event => {
-    const { name, value } = event.target
+    const { name, value } = event.target;
     this.setState({
       profile: { ...this.state.profile, [name]: value }
     });
   };
 
   toggleEditProfile = () => {
-    console.log(this.state.editProfileForm)
+    console.log(this.state.editProfileForm);
     this.setState({
       editProfileForm: !this.state.editProfileForm
     });
@@ -113,7 +116,14 @@ class App extends React.Component {
     event.preventDefault();
 
     const id = this.state.user._id;
-    const {username,age,gender,languages,about,urlPath}=this.state.profile
+    const {
+      username,
+      age,
+      gender,
+      languages,
+      about,
+      urlPath
+    } = this.state.profile;
     axios
       .put(`/profile/${id}`, {
         username,
@@ -138,108 +148,142 @@ class App extends React.Component {
     console.log(event.target.files[0]);
     const file = event.target.files[0];
     let upload = new FormData();
-    console.log(upload)
+    console.log(upload);
     const id = this.state.user._id;
 
     upload.append("urlPath", file);
-    axios.post(`/profile/${id}`, upload)
-      .then(response => {
-        console.log(response.data.secure_url)
-        this.setState({
-          profile: {
-            ...this.state.profile,
-            urlPath: response.data.secure_url
-          }
-        });
-        console.log(this.state.profile.urlPath)
+    axios.post(`/profile/${id}`, upload).then(response => {
+      console.log(response.data.secure_url);
+      this.setState({
+        profile: {
+          ...this.state.profile,
+          urlPath: response.data.secure_url
+        }
       });
+      console.log(this.state.profile.urlPath);
+    });
   };
 
+  // POST detail functions
 
-// POST detail functions
+  // languages functions
 
-// languages functions
-
-handleChangeLanguages = event => {
-  console.log(this.state.currentLanguage)
-  this.setState({
-   currentLanguage: event.target.value,
-   siteLanguage: this.state.currentLanguage
-  });
-  console.log(event.target.value)
-};
-
+  handleChangeLanguages = event => {
+    console.log(this.state.currentLanguage);
+    this.setState({
+      currentLanguage: event.target.value,
+      siteLanguage: this.state.currentLanguage
+    });
+    console.log(event.target.value);
+  };
 
   render() {
-    console.log("user from app: ", this.state.user)
+    console.log("user from app: ", this.state.user);
+    //   {/* <Route
+    //     exact
+    //     path="/messages/detail/:id"
+    //     render={props => (
+    //       <Mailbox {...props}>
+    //         {" "}
+    //         <MailboxDetail {...props} user={this.state.user} />{" "}
+    //       </Mailbox>
+    //     )}
+    //   />
+    // </div> */}
     return (
       <div className="App">
-        <Navbar user={this.state.user} clearUser={this.setUser} handleChangeLanguages={this.handleChangeLanguages}/>
-
-        <Route exact path="/" 
-        render={props => <Home 
-        user={this.state.user}
-        currentLanguage={this.state.currentLanguage}
-        {...props} />} />
-
-      <Route exact path="/about" 
-        render={props => <About 
-        user={this.state.user}
-        currentLanguage={this.state.currentLanguage}
-        {...props} />} /> 
-
-
+        <Navbar
+          user={this.state.user}
+          clearUser={this.setUser}
+          handleChangeLanguages={this.handleChangeLanguages}
+        />
+        <Route
+          exact
+          path="/"
+          render={props => (
+            <Home
+              user={this.state.user}
+              currentLanguage={this.state.currentLanguage}
+              {...props}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/about"
+          render={props => (
+            <About
+              user={this.state.user}
+              currentLanguage={this.state.currentLanguage}
+              {...props}
+            />
+          )}
+        />
         <Route
           exact
           path="/login"
           render={props => <Login {...props} setUser={this.setUser} />}
         />
-
-        <Route exact path="/profile/:id" render={props => <Profile user={this.state.user} 
-        profile={this.state.profile} 
-        handleChangeProfile={this.handleChangeProfile} toggleEditProfile={this.toggleEditProfile} 
-        handleSubmitProfile={this.handleSubmitProfile}
-        getDataProfile={this.getDataProfile}
-        imageUpload={this.imageUpload}
-        editProfileForm={this.state.editProfileForm}
-        currentLanguage={this.state.currentLanguage}
-        {...props} />} />
-
+        <Route
+          exact
+          path="/profile/:id"
+          render={props => (
+            <Profile
+              user={this.state.user}
+              profile={this.state.profile}
+              handleChangeProfile={this.handleChangeProfile}
+              toggleEditProfile={this.toggleEditProfile}
+              handleSubmitProfile={this.handleSubmitProfile}
+              getDataProfile={this.getDataProfile}
+              imageUpload={this.imageUpload}
+              editProfileForm={this.state.editProfileForm}
+              currentLanguage={this.state.currentLanguage}
+              {...props}
+            />
+          )}
+        />
         <Route
           exact
           path="/signup"
-
-          render={props => <Signup 
-          {...props} 
-          setUser={this.setUser} 
-          currentLanguage={this.state.currentLanguage}
-          profile={this.state.profile}
-          />}
+          render={props => (
+            <Signup
+              {...props}
+              setUser={this.setUser}
+              currentLanguage={this.state.currentLanguage}
+              profile={this.state.profile}
+            />
+          )}
         />
-
-        <Route exact path="/posts" render={props => <Posts {...props}
-          setUser={this.setUser}
-          user={this.state.user}
-        />} />
-
-        <Route exact path="/post/:id" render={props => <PostDetail {...props}
-          postDetail={this.state.posts} user={this.state.user}
-
-        />} />
-
-        <Route exact path="/post/new" render={props => <NewPost {...props}
-          setUser={this.setUser}
-        />} />
-        <Route exact path="/mailbox/:user" render={props => <Mailbox {...props}></Mailbox>} />
-
+        <Route
+          exact
+          path="/posts"
+          render={props => (
+            <Posts {...props} setUser={this.setUser} user={this.state.user} />
+          )}
+        />
+        <Route
+          exact
+          path="/post/:id"
+          render={props => (
+            <PostDetail
+              {...props}
+              postDetail={this.state.posts}
+              user={this.state.user}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/post/new"
+          render={props => <NewPost {...props} setUser={this.setUser} />}
+        />
+        <Route
+          path="/mailbox/:user/:messageId?"
+          render={props => <MailboxWrapper user={this.state.user} {...props} />}
+        />
       </div>
-    )
-
+    );
   }
-
-
 }
 
-
-export default App
-
+export default App;

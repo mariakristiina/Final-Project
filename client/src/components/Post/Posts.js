@@ -1,9 +1,3 @@
-//state: [] ****************DONE
-
-//setState: api call get posts **************DONE
-
-//filter for categories, date, owner, match
-
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -59,7 +53,7 @@ class Posts extends Component {
 
   handleSubmitNewPost = event => {
     event.preventDefault();
-    console.log(this.state);
+    
     axios
       .post("/post/new", {
         title: this.state.newPost.title,
@@ -102,7 +96,7 @@ class Posts extends Component {
     const search = this.state.search.toLowerCase();
 
     const filteredPosts = this.state.posts.filter(post => {
-      console.log(post.category);
+      
       console.log("category from state: ", this.state.category)
       return (
         ((this.state.owner && post.owner._id === this.props.user._id) ||

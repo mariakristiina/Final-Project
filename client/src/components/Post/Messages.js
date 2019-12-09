@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import axios from "axios"
 import { Form, Button } from "react-bootstrap";
+import { Link } from 'react-router-dom'
 
 class Messages extends Component {
   state = {
@@ -39,7 +40,7 @@ return(
     
      />
   </Form.Group>
-  <Button type="submit">Send Message</Button>
+  <Link to={`/mailbox/${this.props.owner._id}`}>Send Message</Link>
   </Form>
   </div>
   
