@@ -11,7 +11,12 @@ const messageSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
     ref: "User"
-  }
+  },
+  recipient: {
+    type: Schema.Types.ObjectId,
+    ref: "User"
+    
+  },
 },
 
   {
@@ -24,3 +29,4 @@ const messageSchema = new Schema({
 
 const Message = mongoose.model('Message', messageSchema);
 module.exports = Message;
+

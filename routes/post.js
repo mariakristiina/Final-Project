@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
-const Message = require("../models/Message");
+const Message = require("../models/Messages");
 const mongoose = require("mongoose");
 
 router.get("/", (req, res) => {
@@ -40,7 +40,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.get("/new", (req, res) => {
-  console.log("htesti");
+
   res.json("new");
 });
 
