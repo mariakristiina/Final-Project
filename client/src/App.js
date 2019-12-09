@@ -157,20 +157,33 @@ class App extends React.Component {
   // languages functions
 
   handleChangeLanguages = event => {
-    console.log(this.state.currentLanguage)
+    if(!this.state.user){
     this.setState({
-      currentLanguage: event.target.value,
-      siteLanguage: this.state.currentLanguage
+      currentLanguage: event.target.value 
     });
-    console.log(event.target.value)
+  } else {
+    console.log(this.state.currentLanguage)
+    axios.put("/profile/language", {
+      siteLanguage: event.target.value
+    })
+    .then(response => {
+      console.log(response.data)
+      this.setState({
+        currentLanguage: response.data.siteLanguage})
+        console.log(this.state.currentLanguage)
+      })
+    .catch(err => {
+      return err.response.data
+    }) }
   };
+
 
 
   render() {
     console.log("user from app: ", this.state.user)
     return (
       <div className="App">
-        <Navbar user={this.state.user} clearUser={this.setUser} handleChangeLanguages={this.handleChangeLanguages} />
+        <Navbar user={this.state.user} clearUser={this.setUser} handleChangeLanguages={this.handleChangeLanguages} currentLanguage={this.state.currentLanguage} />
 
         <Route exact path="/"
           render={props => <Home
