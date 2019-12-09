@@ -13,6 +13,7 @@ import Profile from "./components/Profile";
 import Home from "./components/Home";
 import PostDetail from "./components/Post/PostDetail"
 import axios from "axios";
+import Mailbox from './components/Post/Mailbox';
 
 class App extends React.Component {
   state = {
@@ -222,14 +223,14 @@ class App extends React.Component {
         />} />
 
         <Route exact path="/post/:id" render={props => <PostDetail {...props}
-          user={this.state.user}
-          postDetail={this.state.posts}
+          postDetail={this.state.posts} user={this.state.user}
 
         />} />
 
         <Route exact path="/post/new" render={props => <NewPost {...props}
           setUser={this.setUser}
         />} />
+        <Route exact path="/mailbox/:user" render={props => <Mailbox {...props}></Mailbox>} />
 
       </div>
     )
