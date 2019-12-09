@@ -93,12 +93,14 @@ class NewPost extends Component {
 
         <label htmlFor="postType">Post Type: </label>
         <select onChange={this.handleChangeNewPost} name="postType" id="postType">
+          <option value="select">Select</option>
           <option value="search">Search</option>
           <option value="offer">Offer</option>
         </select>
 
         <label htmlFor="category">Category: </label>
         <select onChange={this.handleChangeNewPost} name="category" id="category">
+          <option value="select">Select</option>
           <option value="language lessons">Language Lessons</option>
           <option value="tutoring">Tutoring</option>
           <option value="government appointment">Government Appointment</option>

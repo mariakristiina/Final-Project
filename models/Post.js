@@ -13,7 +13,7 @@ const postSchema = new Schema(
     postType: {
       type: String,
       enum: ["search", "offer"],
-      default: "search"
+      default: "select"
     },
 
     // postTypeDe: {
@@ -31,7 +31,7 @@ const postSchema = new Schema(
         "activities for kids",
         "activities for seniors"
       ],
-      default: "language lessons"
+      default: "select"
     },
     // categoryDE: {
     //   type: String,
