@@ -4,7 +4,6 @@ const Post = require("../models/Post");
 const Message = require("../models/Messages");
 const mongoose = require("mongoose");
 const User = require("../models/User");
-const q = require('q');
 
 router.get("/", (req, res) => {
   Post.find({})
