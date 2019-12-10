@@ -4,10 +4,7 @@ import { Link } from "react-router-dom";
 
 const Home = props => {
   //console.log(props.user.siteLanguage);
-  if (
-    (props.user && props.user.siteLanguage === "English") ||
-    props.currentLanguage === "English"
-  ) {
+  if (props.currentLanguage === "English") {
     return (
       <div>
         <h1>Hello</h1>
@@ -21,16 +18,13 @@ const Home = props => {
         <Link to="/signup">Get involved</Link>
       </div>
     );
-  } else if (
-    (props.user && props.user.siteLanguage === "German") ||
-    props.currentLanguage === "German"
-  ) {
+  } else if (props.currentLanguage === "German") {
     return (
       <div>
         <h1>Hallo</h1>
         <p>Auf Deutch</p>
         <Link to="/signup">Get involved</Link>
-      </div>
+    </div> 
     );
   }
 };
