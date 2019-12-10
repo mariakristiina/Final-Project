@@ -63,16 +63,21 @@ router.put("/:id", uploadCloud.single("urlPath"), (req, res, next) => {
 });
 
 router.delete("/:id", (req, res) => {
-Profile.findByIdAndDelete(req.params.id)
-.then(user => {
-  return Post.deleteMany({_id: {$in: user.posts }})
-  .then((() => {
-    res.json({ message: "deleted"})
-  }))
+  const id = req.params.id;
+  Profile.findByIdAndDelete(id)
+  // .populate("posts")
+  // .populate("messages")
+    .then(user => {
+      Post.deleteMany({ _id: { $in: user.posts } }).exec()/* ,
+        Messages.deleteMany({ _id: { $in: user.posts.messages } }).exec() */
+        .then((() => {
+          res.json({ message: "deleted" })
+        }))
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    })
 })
-.catch(err => {
-  res.status(500).json(err);
-})
-})
+
 
 module.exports = router;
