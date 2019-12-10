@@ -1,30 +1,38 @@
 import React from "react";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 // import { PromiseProvider } from "mongoose";
 
-const Home = props => {  
-
-if((props.user && props.user.siteLanguage === "English") || (!props.user && props.currentLanguage === "English"))  {
-  return (
-    <div>
-      <h1>Hello</h1>
+const Home = props => {
+  //console.log(props.user.siteLanguage);
+  if (
+    (props.user && props.user.siteLanguage === "English") ||
+    props.currentLanguage === "English"
+  ) {
+    return (
       <div>
-        <p>We are a non-profit organisation that provides a platform and a space for locals in Berlin and recent refugees to help each other on non-profit basis, share skills and connect.</p>
+        <h1>Hello</h1>
+        <div>
+          <p>
+            We are a non-profit organisation that provides a platform and a
+            space for locals in Berlin and recent refugees to help each other on
+            non-profit basis, share skills and connect.
+          </p>
+        </div>
+        <Link to="/signup">Get involved</Link>
       </div>
-      <Link to="/signup">Get involved</Link>
-    </div>
-  )
-} else if ((props.user && props.user.siteLanguage === "German") || (props.currentLanguage === "German")) {
-  return (
-    <div>
-      <h1>Hallo</h1>
-      <p>Auf Deutch</p>
-      <Link to="/signup">Get involved</Link>
-    </div>
-  )
-}
-
-}
-
+    );
+  } else if (
+    (props.user && props.user.siteLanguage === "German") ||
+    props.currentLanguage === "German"
+  ) {
+    return (
+      <div>
+        <h1>Hallo</h1>
+        <p>Auf Deutch</p>
+        <Link to="/signup">Get involved</Link>
+      </div>
+    );
+  }
+};
 
 export default Home;
