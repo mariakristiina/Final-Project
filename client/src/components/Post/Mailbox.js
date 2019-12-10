@@ -33,8 +33,9 @@ class Mailbox extends Component {
   render() {
     const { sentMessages, receivedMessages } = this.state;
     console.log("tst", sentMessages, receivedMessages);
+
     return (
-      <div >
+      <div>
         <div
           className="col-5"
           style={{
@@ -46,8 +47,10 @@ class Mailbox extends Component {
             {sentMessages.map(msg => {
               console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", msg);
               return (
-                <Link to={`/mailbox/detail/${msg.subject._id}`} key={msg._id}
-                className="list-group-item list-group-item-action"
+                <Link
+                  to={`/mailbox/detail/${msg._id}`}
+                  key={msg._id}
+                  className="list-group-item list-group-item-action"
                 >
                   <div>
                     <p>Title: {msg.subject.title}</p>
@@ -57,9 +60,7 @@ class Mailbox extends Component {
               );
             })}
           </div>
-          <div>
-            
-          </div>
+          <div></div>
         </div>
       </div>
     );

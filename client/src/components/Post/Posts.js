@@ -1,24 +1,14 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import PostList from "./PostList";
+import NewPost from "./NewPost";
 
 class Posts extends Component {
   state = {
     posts: [],
-    newPost: {
-      title: "",
-      date: "",
-      startTime: "",
-      endTime: "",
-      postType: "",
-      category: "",
-      description: ""
-    },
     search: "",
     category: "",
-    owner: false,
-    match: false
+    owner: ""
   };
 
   //============================ posts functions
@@ -26,9 +16,9 @@ class Posts extends Component {
     axios
       .get('/post')
       .then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         this.setState({
-          posts: [...response.data]
+          posts: response.data
         })
       })
       .catch(err => {
@@ -40,100 +30,54 @@ class Posts extends Component {
     this.getDataPosts();
   }
 
-  //=============================== postForm functions
-
-  handleChangeNewPost = event => {
-    console.log(event.target.value);
-    const { name, value } = event.target
-
-    this.setState({
-      newPost: { [name]: value }
-    });
-  };
-
-  handleSubmitNewPost = event => {
-    event.preventDefault();
-    
-    axios
-      .post("/post/new", {
-        title: this.state.newPost.title,
-        startTime: this.state.newPost.startTime,
-        endTime: this.state.newPost.endTime,
-        postType: this.state.newPost.postType,
-        category: this.state.newPost.category,
-        description: this.state.newPost.description
-      })
-      .then(response => {
-        response.refreshData();
-        this.setState({
-          title: "",
-          startTime: "",
-          endTime: "",
-          postType: "",
-          category: "",
-          description: ""
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  //=============================== filterForm functions
+  //=============================== filter functions
 
 
   handleChangeFilter = event => {
     this.setState({
-      [event.target.name]:
-        event.target.type === "checkbox"
-          ? event.target.checked
-          : event.target.value
+      [event.target.name]: event.target.value
     });
   };
 
 
+
   render() {
-    const search = this.state.search.toLowerCase();
 
     const filteredPosts = this.state.posts.filter(post => {
-      
-      console.log("category from state: ", this.state.category)
+      // console.log("match-id", post.match._id)
+
       return (
-        ((this.state.owner && post.owner._id === this.props.user._id) ||
-          (this.state.match && post.match._id === this.props.user._id)) &&
-        (post.title.toLowerCase().includes(search) ||
-          post.category.toLowerCase().includes(search)) ||
-        (this.state.category === post.category || !this.state.category)
+
+        ((!this.state.owner) ||
+          ((this.state.owner === "owner" && post.owner._id === this.props.user._id) ||
+
+            (((this.state.owner === "match") && post.match) && post.match._id === this.props.user._id)) &&
+
+          (this.state.category === post.category || !this.state.category))
+
+        && (this.state.category === post.category || !this.state.category)
+
       );
     });
 
     return (
-      <div className="post-container">
+      <div className="post-container" >
 
-        <input
-          type="text"
-          name="search"
-          value={this.state.search}
-          onChange={this.handleChangeFilter}
-          placeholder="search"
-        />
-        <br />
-        <label htmlFor="owner">My Posts</label>
-        <input
-          type="checkbox"
+        <label htmlFor="myposts" > Filter my posts</label>
+        <select
           name="owner"
           id="owner"
+          value={this.state.owner}
           onChange={this.handleChangeFilter}
-          checked={this.state.owner}
-        />
-        <label htmlFor="match">Matched posts</label>
-        <input
-          type="checkbox"
-          name="match"
-          id="match"
-          onChange={this.handleChangeFilter}
-          checked={this.state.match}
-        />
+
+        >
+          <option value="">--</option>
+          <option value="owner">My posts</option>
+          <option value="match">Registered</option>
+        </select>
+
+
+
         <label htmlFor="category">Filter by Category</label>
         <select
           name="category"
@@ -148,14 +92,15 @@ class Posts extends Component {
           <option value="doctor appointment">Doctor appointment</option>
           <option value="meet people">Meet people</option>
           <option value="activities for kids">Activities for kids</option>
-          <option value="activities for seniors">"Activities for seniors</option>
+          <option value="activities for seniors">Activities for seniors</option>
         </select>
 
 
         <PostList posts={filteredPosts} />
 
-        <Link to={`/post/new`}>Create a new post
-              </Link>
+        <NewPost
+          refreshData={this.getDataPosts}
+        />
       </div>
     )
   }

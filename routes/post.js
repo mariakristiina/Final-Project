@@ -99,9 +99,13 @@ router.post("/new", (req, res) => {
     owner: req.user._id
   })
     .then(post => {
-      console.log("hi");
-      res.json(post);
+      res.json(post)
+      return User.findByIdAndUpdate(req.user._id, {
+        $push: {posts: post._id}
+    }).then(()=> {
+      res.json({ message:"added"})
     })
+  })
     .catch(err => {
       console.log(err);
     });
@@ -110,7 +114,11 @@ router.post("/new", (req, res) => {
 router.delete("/:id", (req, res) => {
   Post.findByIdAndDelete(req.params.id)
     .then(post => {
-      return Message.deleteMany({ _id: { $in: post.messages } }).then(() =>
+      Message.deleteMany({ _id: { $in: post.messages } })
+      User.findByIdAndUpdate(req.params._id, {
+        $pull: {posts: id}
+      })
+      .then(() =>
         res.json({ message: "deleted" })
       );
     })

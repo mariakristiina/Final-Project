@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 
 const Profile = props => {
 
+  useEffect(() => {
+    props.getDataProfile();
+  }, []);
 
   return (
     // if (this.state.error) {

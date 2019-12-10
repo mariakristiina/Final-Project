@@ -6,8 +6,7 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 // import { Link, Switch } from "react-router-dom";
 import Posts from "./components/Post/Posts";
-import NewPost from "./components/Post/NewPost";
-import About from "./components/About";
+import About from "./components/About"
 
 import Profile from "./components/Profile";
 import Home from "./components/Home";
@@ -29,15 +28,6 @@ class App extends React.Component {
       about: ""
     },
     editProfileForm: false,
-    newPost: {
-      title: "",
-      date: "",
-      startTime: "",
-      endTime: "",
-      postType: "",
-      category: "",
-      description: ""
-    },
     postDetail: {
       title: "",
       date: "",
@@ -59,6 +49,8 @@ class App extends React.Component {
       user: user
     });
   };
+
+
 
   //-----------------------Profile func------------
 
@@ -93,10 +85,6 @@ class App extends React.Component {
         }
       });
   };
-
-  componentDidMount() {
-    this.getDataProfile();
-  }
 
   handleChangeProfile = event => {
     const { name, value } = event.target;
@@ -169,12 +157,27 @@ class App extends React.Component {
   // languages functions
 
   handleChangeLanguages = event => {
-    console.log(this.state.currentLanguage);
-    this.setState({
-      currentLanguage: event.target.value,
-      siteLanguage: this.state.currentLanguage
-    });
-    console.log(event.target.value);
+    this.setState(
+      {
+        currentLanguage: event.target.value
+      },
+      () => console.log(this.state.currentLanguage)
+    );
+
+    if (this.props.user) {
+      //console.log(this.state.currentLanguage);
+      axios
+        .put("/profile/language", {
+          siteLanguage: event.target.value
+        })
+        .then(response => {
+          console.log(response.data);
+          // console.log(this.state.currentLanguage);
+        })
+        .catch(err => {
+          return err;
+        });
+    }
   };
 
   render() {
@@ -196,7 +199,9 @@ class App extends React.Component {
           user={this.state.user}
           clearUser={this.setUser}
           handleChangeLanguages={this.handleChangeLanguages}
+          currentLanguage={this.state.currentLanguage}
         />
+
         <Route
           exact
           path="/"
@@ -208,6 +213,7 @@ class App extends React.Component {
             />
           )}
         />
+
         <Route
           exact
           path="/about"
@@ -219,6 +225,7 @@ class App extends React.Component {
             />
           )}
         />
+
         <Route
           exact
           path="/login"
@@ -271,11 +278,6 @@ class App extends React.Component {
               user={this.state.user}
             />
           )}
-        />
-        <Route
-          exact
-          path="/post/new"
-          render={props => <NewPost {...props} setUser={this.setUser} />}
         />
         <Route
           path="/mailbox/:user/:messageId?"

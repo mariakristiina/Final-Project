@@ -12,8 +12,8 @@ const postSchema = new Schema(
     endTime: String,
     postType: {
       type: String,
-     enum: ["search", "offer"],
-     default: "search"
+      enum: ["search", "offer"],
+      default: "select"
     },
 
     // postTypeDe: {
@@ -31,7 +31,7 @@ const postSchema = new Schema(
         "activities for kids",
         "activities for seniors"
       ],
-      default: "language lessons"
+      default: "select"
     },
     // categoryDE: {
     //   type: String,

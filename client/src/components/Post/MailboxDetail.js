@@ -6,7 +6,7 @@ import ReplyMailbox from "./ReplyMailbox";
 
 class MailboxDetail extends Component {
   state = {
-    post: null,
+    message: null,
     content: ""
   };
 
@@ -14,22 +14,6 @@ class MailboxDetail extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
-  };
-  handleSubmit = event => {
-    event.preventDefault();
-
-    axios
-      .post("/messages", {
-        title: this.state.post.title,
-        content: this.state.content,
-        subject: this.state.post._id,
-        owner: this.state.post.owner._id,
-        recipient: this.state.post.owner._id
-      })
-      .then(response => {
-        console.log(response);
-        this.props.history.push(`/mailbox/${this.state.post.owner._id}`);
-      });
   };
 
   getMailboxDetail() {
@@ -40,13 +24,35 @@ class MailboxDetail extends Component {
       .then(response => {
         console.log(response.data);
         this.setState({
-          post: response.data
+          message: response.data
         });
       })
       .catch(err => {
         console.log(err);
       });
   }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    const id = this.props.match.params.messageId;
+
+    axios
+      .post("/messages/add", {
+        id: id,
+        content: this.state.content,
+        subject: this.state.message._id,
+        owner: this.state.message.owner._id,
+        recipient: this.state.message.owner._id
+      })
+      .then(message => {
+        console.log(message);
+        this.setState({
+          content: ""
+        });
+        this.getMailboxDetail();
+        //this.props.history.push(`/mailbox/${this.state.post.owner._id}`);
+      });
+  };
 
   componentDidMount() {
     this.getMailboxDetail();
@@ -59,22 +65,21 @@ class MailboxDetail extends Component {
   }
 
   render() {
-    if (this.state.post === null) {
+    if (this.state.message === null) {
       return <div></div>;
     }
 
-    const messages = this.state.post.messages.map(message => {
-      return (
-        <div style={{ marginTop: "-20em", marginLeft: "40%" }}>
-          <p>{message.content}</p>
-          <p>Created at: {message.created_at}</p>
-        </div>
-      );
+    let comments = this.state.message.comments.map(comment => {
+      return <div>{comment.content}</div>;
     });
 
     return (
-      <div>
-        {messages}
+      <div style={{ marginLeft: "40%" }}>
+        <p>{this.state.message.content}</p>
+        <p>Created at: {this.state.message.created_at}</p>
+
+        {comments}
+
         <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId="exampleForm.ControlTextarea1">
             <Form.Label>Your Message</Form.Label>
