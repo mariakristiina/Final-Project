@@ -6,8 +6,7 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 // import { Link, Switch } from "react-router-dom";
 import Posts from "./components/Post/Posts";
-import NewPost from "./components/Post/NewPost";
-import About from "./components/About";
+import About from "./components/About"
 
 import Profile from "./components/Profile";
 import Home from "./components/Home";
@@ -29,15 +28,6 @@ class App extends React.Component {
       about: ""
     },
     editProfileForm: false,
-    newPost: {
-      title: "",
-      date: "",
-      startTime: "",
-      endTime: "",
-      postType: "",
-      category: "",
-      description: ""
-    },
     postDetail: {
       title: "",
       date: "",
@@ -59,6 +49,8 @@ class App extends React.Component {
       user: user
     });
   };
+
+
 
   //-----------------------Profile func------------
 
@@ -286,11 +278,6 @@ class App extends React.Component {
               user={this.state.user}
             />
           )}
-        />
-        <Route
-          exact
-          path="/post/new"
-          render={props => <NewPost {...props} setUser={this.setUser} />}
         />
         <Route
           path="/mailbox/:user/:messageId?"
