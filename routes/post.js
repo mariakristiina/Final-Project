@@ -3,6 +3,8 @@ const router = express.Router();
 const Post = require("../models/Post");
 const Message = require("../models/Messages");
 const mongoose = require("mongoose");
+const User = require("../models/User");
+const q = require('q');
 
 router.get("/", (req, res) => {
   Post.find({})
@@ -45,14 +47,14 @@ router.put("/register/:id", (req, res) => {
   Post.findByIdAndUpdate(postId, {
     match: userId
   },
-  {new: true}
+    { new: true }
   )
-  .then(post => {
-  res.json(post);
-  })
-  .catch(err => {
-    res.status(500).json(err);
-  })
+    .then(post => {
+      res.json(post);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    })
 })
 
 router.put("/deregister/:id", (req, res) => {
@@ -61,14 +63,14 @@ router.put("/deregister/:id", (req, res) => {
   Post.findByIdAndUpdate(postId, {
     match: null
   },
-  {new: true}
+    { new: true }
   )
-  .then(post => {
-  res.json(post);
-  })
-  .catch(err => {
-    res.status(500).json(err);
-  })
+    .then(post => {
+      res.json(post);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    })
 })
 
 router.get("/new", (req, res) => {
@@ -101,30 +103,98 @@ router.post("/new", (req, res) => {
     .then(post => {
       res.json(post)
       return User.findByIdAndUpdate(req.user._id, {
-        $push: {posts: post._id}
-    }).then(()=> {
-      res.json({ message:"added"})
+        $push: { posts: post._id }
+      }).then(() => {
+        res.json({ message: "added" })
+      })
     })
-  })
     .catch(err => {
       console.log(err);
     });
 });
 
+
 router.delete("/:id", (req, res) => {
-  Post.findByIdAndDelete(req.params.id)
+  const id = req.params.id;
+
+  Post.findByIdAndDelete(id)
     .then(post => {
-      Message.deleteMany({ _id: { $in: post.messages } })
-      User.findByIdAndUpdate(req.params._id, {
-        $pull: {posts: id}
+      User.findByIdAndUpdate(
+        post.owner, {
+        $pull: { posts: id }
       })
-      .then(() =>
-        res.json({ message: "deleted" })
-      );
+        .then(() =>
+          res.json({ message: "deleted" })
+        );
     })
     .catch(err => {
       res.status(500).json(err);
     });
 });
+
+
+
+// router.delete("/:id", (req, res) => {
+//   const id = req.params.id;
+
+//   Post.findByIdAndDelete(id)
+//     .then(post => {
+//       Message.deleteMany({ _id: { $in: post.messages } }).exec().then(() =>
+//         User.findByIdAndUpdate(
+//           req.params._id, {
+//           $pull: { posts: id }
+//         }).exec()
+//       ).then(() =>
+//         res.json({ message: "deleted" })
+//       );
+//     })
+//     .catch(err => {
+//       res.status(500).json(err);
+//     });
+// });
+
+
+// router.delete("/:id", (req, res) => {
+//   const id = req.params.id;
+
+//   const promises = [
+//     Message.deleteMany({ _id: { $in: post.messages } }).exec(),
+//     User.findByIdAndUpdate(
+//       req.params._id, {
+//       $pull: { posts: id }
+//     }).exec()
+//   ]
+
+//   Post.findByIdAndDelete(id)
+//     .then(post => {
+//       return q.all(promises)
+//         .then(() =>
+//           res.json({ message: "deleted" })
+//         );
+//     })
+//     .catch(err => {
+//       res.status(500).json(err);
+//     });
+// });
+
+
+// router.delete("/:id", (req, res) => {
+//   const id = req.params.id
+
+//   Post.findByIdAndDelete(id)
+//     .then(post => {
+//       Message.deleteMany({ _id: { $in: post.messages } })
+//       console.log("messages array",post.messages)
+//       User.findByIdAndUpdate(req.params._id, {
+//         $pull: { posts: id }
+//       })
+//         .then(() =>
+//           res.json({ message: "deleted" })
+//         );
+//     })
+//     .catch(err => {
+//       res.status(500).json(err);
+//     });
+// });
 
 module.exports = router;

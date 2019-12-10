@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import Message from "./Messages";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import "./PostCss/postDetail.css";
+import { Button } from "react-bootstrap";
 
 class PostDetail extends React.Component {
   state = {
@@ -18,6 +18,8 @@ class PostDetail extends React.Component {
     match: "",
     messages: ""
   };
+
+  //================= get data
 
   getDataPostDetail = () => {
     const id = this.props.match.params.id;
@@ -47,6 +49,9 @@ class PostDetail extends React.Component {
       });
   };
 
+
+  //=================== register functions
+
   handleSubmit = event => {
     event.preventDefault();
 
@@ -70,7 +75,6 @@ class PostDetail extends React.Component {
   handleSubmitDeRegister = event => {
     event.preventDefault();
 
-    const userId = this.props.user._id;
     const postId = this.props.match.params.id;
 
     axios
@@ -92,7 +96,25 @@ class PostDetail extends React.Component {
     this.getDataPostDetail();
   }
 
+
+  //===================== delete post functions
+
+  deletePost = () => {
+    const id = this.state.post._id;
+    axios
+      .delete(`/post/${id}`)
+      .then(response => {
+        this.props.history.push("/posts"); // 
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+
+  //============================== render
   render() {
+
     return (
       <div>
         <div className="postContainer">
@@ -106,7 +128,18 @@ class PostDetail extends React.Component {
             <p> {this.state.endTime}</p>
           </div>
           <p>{this.state.description}</p>
+
         </div>
+
+        {this.state.owner._id === this.props.user._id ?
+          <>
+            <Button variant="danger" onClick={this.deletePost}>
+              Delete Project
+            </Button>
+          </>
+          :
+          <div></div>
+        }
 
         {this.state.match ? (
           <div>
@@ -116,10 +149,10 @@ class PostDetail extends React.Component {
             </form>
           </div>
         ) : (
-          <form onSubmit={this.handleSubmit}>
-            <button type="submit">Register</button>
-          </form>
-        )}
+            <form onSubmit={this.handleSubmit}>
+              <button type="submit">Register</button>
+            </form>
+          )}
         <div className="posterContainer">
           <p>{this.state.owner.username}</p>
           <p>{this.state.owner.gender}</p>
