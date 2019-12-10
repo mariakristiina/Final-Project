@@ -119,13 +119,14 @@ router.delete("/:id", (req, res) => {
 
   Post.findByIdAndDelete(id)
     .then(post => {
-      User.findByIdAndUpdate(
-        post.owner, {
-        $pull: { posts: id }
-      })
-        .then(() =>
-          res.json({ message: "deleted" })
-        );
+      Message.deleteMany({ _id: { $in: post.messages } }).exec(),
+        User.findByIdAndUpdate(
+          post.owner, {
+          $pull: { posts: id }
+        }).exec()
+          .then(() =>
+            res.json({ message: "deleted" })
+          );
     })
     .catch(err => {
       res.status(500).json(err);
@@ -133,68 +134,5 @@ router.delete("/:id", (req, res) => {
 });
 
 
-
-// router.delete("/:id", (req, res) => {
-//   const id = req.params.id;
-
-//   Post.findByIdAndDelete(id)
-//     .then(post => {
-//       Message.deleteMany({ _id: { $in: post.messages } }).exec().then(() =>
-//         User.findByIdAndUpdate(
-//           req.params._id, {
-//           $pull: { posts: id }
-//         }).exec()
-//       ).then(() =>
-//         res.json({ message: "deleted" })
-//       );
-//     })
-//     .catch(err => {
-//       res.status(500).json(err);
-//     });
-// });
-
-
-// router.delete("/:id", (req, res) => {
-//   const id = req.params.id;
-
-//   const promises = [
-//     Message.deleteMany({ _id: { $in: post.messages } }).exec(),
-//     User.findByIdAndUpdate(
-//       req.params._id, {
-//       $pull: { posts: id }
-//     }).exec()
-//   ]
-
-//   Post.findByIdAndDelete(id)
-//     .then(post => {
-//       return q.all(promises)
-//         .then(() =>
-//           res.json({ message: "deleted" })
-//         );
-//     })
-//     .catch(err => {
-//       res.status(500).json(err);
-//     });
-// });
-
-
-// router.delete("/:id", (req, res) => {
-//   const id = req.params.id
-
-//   Post.findByIdAndDelete(id)
-//     .then(post => {
-//       Message.deleteMany({ _id: { $in: post.messages } })
-//       console.log("messages array",post.messages)
-//       User.findByIdAndUpdate(req.params._id, {
-//         $pull: { posts: id }
-//       })
-//         .then(() =>
-//           res.json({ message: "deleted" })
-//         );
-//     })
-//     .catch(err => {
-//       res.status(500).json(err);
-//     });
-// });
 
 module.exports = router;
