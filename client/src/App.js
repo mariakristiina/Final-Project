@@ -60,7 +60,6 @@ class App extends React.Component {
     axios
       .get(`/profile/${id}`)
       .then(response => {
-        console.log(response.data);
         this.setState(
           {
             profile: {
@@ -145,6 +144,7 @@ class App extends React.Component {
     });
   };
 
+
   // POST detail functions
 
   // languages functions
@@ -175,18 +175,6 @@ class App extends React.Component {
 
 
   render() {
-    console.log("user from app: ", this.state.user);
-    //   {/* <Route
-    //     exact
-    //     path="/messages/detail/:id"
-    //     render={props => (
-    //       <Mailbox {...props}>
-    //         {" "}
-    //         <MailboxDetail {...props} user={this.state.user} />{" "}
-    //       </Mailbox>
-    //     )}
-    //   />
-    // </div> */}
     return (
       <div className="App">
         <Navbar user={this.state.user} clearUser={this.setUser} handleChangeLanguages={this.handleChangeLanguages} currentLanguage={this.state.currentLanguage} />
