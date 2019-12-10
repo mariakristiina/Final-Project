@@ -46,14 +46,14 @@ router.put("/register/:id", (req, res) => {
   Post.findByIdAndUpdate(postId, {
     match: userId
   },
-  {new: true}
+    { new: true }
   )
-  .then(post => {
-  res.json(post);
-  })
-  .catch(err => {
-    res.status(500).json(err);
-  })
+    .then(post => {
+      res.json(post);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    })
 })
 
 router.put("/deregister/:id", (req, res) => {
@@ -62,14 +62,14 @@ router.put("/deregister/:id", (req, res) => {
   Post.findByIdAndUpdate(postId, {
     match: null
   },
-  {new: true}
+    { new: true }
   )
-  .then(post => {
-  res.json(post);
-  })
-  .catch(err => {
-    res.status(500).json(err);
-  })
+    .then(post => {
+      res.json(post);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    })
 })
 
 router.get("/new", (req, res) => {
@@ -102,18 +102,20 @@ router.post("/new", (req, res) => {
     .then(post => {
       res.json(post)
       return User.findByIdAndUpdate(req.user._id, {
-        $push: {posts: post._id}
-    }).then(()=> {
-      res.json({ message:"added"})
+        $push: { posts: post._id }
+      }).then(() => {
+        res.json({ message: "added" })
+      })
     })
-  })
     .catch(err => {
       console.log(err);
     });
 });
 
 router.delete("/:id", (req, res) => {
-  Post.findByIdAndDelete(req.params.id)
+  const id = req.params.id;
+
+  Post.findByIdAndDelete(id)
     .then(post => {
       Message.deleteMany({ _id: { $in: post.messages } }).exec(),
         User.findByIdAndUpdate(
@@ -128,6 +130,23 @@ router.delete("/:id", (req, res) => {
       res.status(500).json(err);
     });
 });
+
+// router.delete("/:id", (req, res) => {
+//   Post.findByIdAndDelete(req.params.id)
+//     .then(post => {
+//       Message.deleteMany({ _id: { $in: post.messages } }).exec(),
+//         User.findByIdAndUpdate(
+//           post.owner, {
+//           $pull: { posts: id }
+//         }).exec()
+//           .then(() =>
+//             res.json({ message: "deleted" })
+//           );
+//     })
+//     .catch(err => {
+//       res.status(500).json(err);
+//     });
+// });
 
 
 
