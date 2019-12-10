@@ -1,11 +1,28 @@
 import React, { useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
+import axios from "axios";
 
 const Profile = props => {
 
   useEffect(() => {
     props.getDataProfile();
   }, []);
+
+
+  const deleteProfile = () => {
+
+    const id = props.user._id;
+
+    axios
+      .delete(`/profile/${id}`)
+      .then(response => {
+        props.history.push("/signup");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
 
   return (
     // if (this.state.error) {
@@ -16,6 +33,11 @@ const Profile = props => {
 
     <div>
       <h2>Hey {props.profile.username}</h2>
+
+      <Button variant="danger" onClick={deleteProfile}>
+        Delete Account
+            </Button>
+
       <img src={props.profile.urlPath} alt="profile" />
       <p>
         Age:{" "}
@@ -28,7 +50,6 @@ const Profile = props => {
       <p>About: {props.profile.about}</p>
 
       <Button onClick={props.toggleEditProfile}>Show Edit Form</Button>
-      {console.log(props.editProfileForm)}
       {props.editProfileForm && (
         <Form
           onSubmit={props.handleSubmitProfile}

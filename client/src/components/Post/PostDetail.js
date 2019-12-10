@@ -134,7 +134,7 @@ class PostDetail extends React.Component {
         {this.state.owner._id === this.props.user._id ?
           <>
             <Button variant="danger" onClick={this.deletePost}>
-              Delete Project
+              Delete Post
             </Button>
           </>
           :
