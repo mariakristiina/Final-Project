@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import axios from "axios";
 import PostList from "./PostList";
 import NewPost from "./NewPost";
+import { Button } from "react-bootstrap";
 
 class Posts extends Component {
   state = {
     posts: [],
     search: "",
     category: "",
-    owner: ""
+    owner: "",
+    addPost: false
   };
 
   //============================ posts functions
@@ -39,6 +41,12 @@ class Posts extends Component {
     });
   };
 
+  toggleEdit = () => {
+    this.setState({
+      addPost: !this.state.addPost
+    });
+  };
+
 
 
   render() {
@@ -60,10 +68,11 @@ class Posts extends Component {
       );
     });
 
+
     return (
       <div className="post-container" >
 
-        <label htmlFor="myposts" > Filter my posts</label>
+        <label htmlFor="myposts" >My posts</label>
         <select
           name="owner"
           id="owner"
@@ -96,11 +105,16 @@ class Posts extends Component {
         </select>
 
 
+
         <PostList posts={filteredPosts} />
 
-        <NewPost
-          refreshData={this.getDataPosts}
-        />
+        <Button onClick={this.toggleEdit}>Add a Post</Button>
+
+        {this.state.addPost &&
+          <NewPost
+            refreshData={this.getDataPosts}
+          />
+        }
       </div>
     )
   }

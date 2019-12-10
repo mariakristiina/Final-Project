@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 
-class Messages extends Component {
+class ReplyMailbox extends Component {
   state = {
     title: "",
     content: ""
@@ -28,7 +28,7 @@ class Messages extends Component {
       })
       .then(response => {
         console.log(response);
-        this.props.history.push(`/mailbox/${this.props.owner._id}`);
+        this.props.history.push(`/mailbox/${this.props.recipient._id}`);
       });
   };
 
@@ -56,4 +56,4 @@ class Messages extends Component {
   }
 }
 
-export default Messages;
+export default ReplyMailbox;

@@ -3,11 +3,11 @@ import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 import { Link, NavLink, Route } from "react-router-dom";
 import MailboxDetail from "./MailboxDetail";
-import { getSentMessages, getReceivedMessages } from "./messageFunctions";
+import { getMessages } from "./messageFunctions";
 
 class Mailbox extends Component {
   state = {
-    receivedMessages: [],
+    //receivedMessages: [],
     sentMessages: [],
     showDetail: false,
     detailMessage: []
@@ -15,7 +15,7 @@ class Mailbox extends Component {
 
   componentDidMount() {
     console.log(this.props.match.params);
-    getSentMessages(this.props.user._id)
+    getMessages(this.props.user._id)
       .then(res => {
         this.setState({
           sentMessages: res.data
@@ -23,18 +23,19 @@ class Mailbox extends Component {
       })
       .catch(err => console.log(err));
 
-    getReceivedMessages(this.props.user._id).then(res => {
+    /*getReceivedMessages(this.props.user._id).then(res => {
       this.setState({
         receivedMessages: res.data
       });
-    });
+    });*/
   }
 
   render() {
     const { sentMessages, receivedMessages } = this.state;
     console.log("tst", sentMessages, receivedMessages);
+
     return (
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div>
         <div
           className="col-5"
           style={{
@@ -44,8 +45,13 @@ class Mailbox extends Component {
         >
           <div>
             {sentMessages.map(msg => {
+              console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", msg);
               return (
-                <Link to={`/mailbox/detail/${msg._id}`} key={msg._id}>
+                <Link
+                  to={`/mailbox/detail/${msg._id}`}
+                  key={msg._id}
+                  className="list-group-item list-group-item-action"
+                >
                   <div>
                     <p>Title: {msg.subject.title}</p>
                     <p>From: {msg.owner.username}</p>
@@ -54,11 +60,7 @@ class Mailbox extends Component {
               );
             })}
           </div>
-
-          {/* {this.state.showDetail && (
-          <MailboxDetail  />
-        )} */}
-          {/* <div>{this.props.children || <h1>Hi</h1>}</div> */}
+          <div></div>
         </div>
       </div>
     );
