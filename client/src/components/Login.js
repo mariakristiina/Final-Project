@@ -9,6 +9,12 @@ class Login extends Component {
     password: "",
     error: ""
   };
+
+  componentWillMount() {
+    this._isMounted = true;
+
+  }
+
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -27,11 +33,18 @@ class Login extends Component {
         });
       } else {
         this.props.setUser(data)
+        console.log(this._isMounted);
+        this.props.changeLanguageLogin()
         this.props.history.push("/")
+        console.log(this.props.currentLanguage)
+        console.log(this.props.user.siteLanguage)
       }
     });
   };
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
 
   render() {
     return (

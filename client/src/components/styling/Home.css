@@ -1,0 +1,41 @@
+.coverImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 60vh;
+    object-fit: cover;
+}
+
+.textContainer {
+    position: absolute;
+    margin: 15vh 15vw 0vh 15vw;
+}
+
+h1 {
+font-size: 15vh;
+}
+
+.textContainer p {
+    margin-top: 20vh;
+    margin-bottom: 10vh;
+}
+
+.getInvolved {
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    text-align: center;
+    border: 1px black solid;
+    padding: 2vw;
+    background-color: white;
+    width: 20vw;
+}
+
+/* .getInvolvedHover {
+    background-color: black;
+    color: white;
+    padding: 2vw;
+    text-transform: uppercase;
+    text-align: center;
+} */

@@ -14,6 +14,9 @@ import PostDetail from "./components/Post/PostDetail";
 import axios from "axios";
 import MailboxWrapper from "./components/Post/MailboxWrapper";
 import MailboxDetail from "./components/Post/MailboxDetail";
+
+
+
 class App extends React.Component {
   state = {
     user: this.props.user,
@@ -40,7 +43,8 @@ class App extends React.Component {
       match: "",
       messages: ""
     },
-    currentLanguage: "English"
+    currentLanguage: "English",
+    hover: false
   };
 
   // =================== user functions
@@ -157,14 +161,18 @@ class App extends React.Component {
   // languages functions
 
   handleChangeLanguages = event => {
+    if(!this.state.user) {
     this.setState(
       {
         currentLanguage: event.target.value
       },
       () => console.log(this.state.currentLanguage)
-    );
-
-    if (this.props.user) {
+    );}
+    else {
+      this.setState(
+        {
+          currentLanguage: event.target.value
+        })
       //console.log(this.state.currentLanguage);
       axios
         .put("/profile/language", {
@@ -172,13 +180,29 @@ class App extends React.Component {
         })
         .then(response => {
           console.log(response.data);
-          // console.log(this.state.currentLanguage);
-        })
+          console.log(this.state.currentLanguage);
+          })
         .catch(err => {
           return err;
         });
     }
   };
+
+  changeLanguageLogin = () => {
+    this.setState({
+      currentLanguage: this.state.user.siteLanguage
+    })
+  }
+
+  // HOVERING
+
+  // mouseOver = () => {
+  //   this.setState({
+  //     hover: !this.state.hover
+  //   })
+  //   console.log("hover:", this.state.hover)
+  // }
+
 
   render() {
     console.log("user from app: ", this.state.user);
@@ -209,6 +233,8 @@ class App extends React.Component {
             <Home
               user={this.state.user}
               currentLanguage={this.state.currentLanguage}
+              mouseOver={this.mouseOver}
+              hover={this.state.hover}
               {...props}
             />
           )}
@@ -229,7 +255,13 @@ class App extends React.Component {
         <Route
           exact
           path="/login"
-          render={props => <Login {...props} setUser={this.setUser} />}
+          render={props => <Login 
+          {...props} 
+          setUser={this.setUser} 
+          currentLanguage={this.state.currentLanguage} 
+          user={this.state.user}
+          changeLanguageLogin={this.changeLanguageLogin}
+          />}
         />
         <Route
           exact
@@ -283,6 +315,8 @@ class App extends React.Component {
           path="/mailbox/:user/:messageId?"
           render={props => <MailboxWrapper user={this.state.user} {...props} />}
         />
+
+
       </div>
     );
   }

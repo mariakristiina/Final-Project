@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar as Nav } from "react-bootstrap";
 import { logout } from "../services/auth";
+import ("./styling/NavBar.css")
 
 const Navbar = props => {
   const handleLogout = () => {
@@ -12,40 +13,54 @@ const Navbar = props => {
 
 
   return (
-    <Nav className="nav justify-content-end" bg="light">
-      <Link to="/">Home</Link>
+    <div className="navContainer">
+    <div className="left">
+      <Link className="textName" to="/"><img className="logo"src="/connection.svg" />
+      NAME</Link>
+      </div>
+     
+      <div className="right">
+      <div>
+      <Link className="text" to="/about">About</Link>
       {props.user ? (
         <>
-          <Link to="/" onClick={handleLogout}>
-            Logout
+          <Link className="text" to={`/profile/${props.user._id}`}>Profile</Link>
+          <Link className="text" to={`/posts`}>Posts</Link>
+          <Link className="text" to={`/mailbox/${props.user._id}`}>Mailbox</Link>
+          <Link className="text" to="/" onClick={handleLogout}>
+            LOGOUT
       </Link>
-          <Link to={`/profile/${props.user._id}`}>Profile</Link>
-          <Link to={`/posts`}>Posts</Link>
-          <Link to={`/mailbox/${props.user._id}`}>Mailbox</Link>
         </>
       ) : (
           <React.Fragment>
-            <Link to="/about">About</Link>
-            <Link to="/signup">Signup</Link>
-            <Link to="/login">Login</Link>
-            
+            <Link className="text" to="/signup">Signup</Link>
+            <Link className="text" to="/login">Login</Link>
           </React.Fragment>
         )}
+        </div>
 
-      <button onClick={props.handleChangeLanguages}
+<div className="languages">
+{props.currentLanguage === "English" ?
+<>
+      <button className="underline" onClick={props.handleChangeLanguages}
       value="English"
-      >🇬🇧English</button>
+      >English</button>
       <button onClick={props.handleChangeLanguages}
       value="German"
-      >🇩🇪German</button>
-
-      
-
-      {/* <select name="languages" id="languages" onChange={props.handleChangeLanguages}>
-        <option value="English">🇬🇧English</option>
-        <option value="German"> 🇩🇪German</option>
-      </select>  */}
-    </Nav>
+      >German</button>
+      </> :
+      <>
+      <button onClick={props.handleChangeLanguages}
+      value="English"
+      >English</button>
+      <button className="underline" onClick={props.handleChangeLanguages}
+      value="German"
+      >German</button>
+      </>
+       }
+      </div>
+    </div>
+    </div>
   );
 };
 

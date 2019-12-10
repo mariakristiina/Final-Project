@@ -2,7 +2,7 @@
 import React, { Component } from "react"
 import { signup } from "../services/auth"
 import { Alert, Form, Button} from "react-bootstrap"
-import Axios from "axios";
+import ("./styling/Home.css")
 
 
 class Signup extends Component {
@@ -81,7 +81,7 @@ class Signup extends Component {
         {this.state.error && (
           <Alert variant="danger">{this.state.error}</Alert>
         )}
-          <Button type="submit">Sign up</Button>
+          <button className="getInvolved" type="submit">Sign up</button>
        </Form>
      </div>
    )}

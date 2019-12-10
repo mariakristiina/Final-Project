@@ -20,6 +20,7 @@ const login = (username, password) => {
     username: username,
     password: password
   }).then(response => {
+    console.log(response.data.siteLanguage)
     return response.data
   }).catch(err => {
     return err.response.data
