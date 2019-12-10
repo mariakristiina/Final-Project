@@ -61,6 +61,8 @@
 .languages button {
     text-transform: uppercase;
     font-size: 2vh;
+    background-color: transparent;
+    border: none;
 }
 
 .underline {
