@@ -104,7 +104,14 @@ class App extends React.Component {
     event.preventDefault();
 
     const id = this.state.user._id;
-    const { username, age, gender, languages, about, urlPath } = this.state.profile
+    const {
+      username,
+      age,
+      gender,
+      languages,
+      about,
+      urlPath
+    } = this.state.profile;
     axios
       .put(`/profile/${id}`, {
         username,
@@ -150,29 +157,28 @@ class App extends React.Component {
   // languages functions
 
   handleChangeLanguages = event => {
-    if (!this.state.user) {
-      this.setState({
+    this.setState(
+      {
         currentLanguage: event.target.value
-      });
-    } else {
-      console.log(this.state.currentLanguage)
-      axios.put("/profile/language", {
-        siteLanguage: event.target.value
-      })
+      },
+      () => console.log(this.state.currentLanguage)
+    );
+
+    if (this.props.user) {
+      //console.log(this.state.currentLanguage);
+      axios
+        .put("/profile/language", {
+          siteLanguage: event.target.value
+        })
         .then(response => {
-          console.log(response.data)
-          this.setState({
-            currentLanguage: response.data.siteLanguage
-          })
-          console.log(this.state.currentLanguage)
+          console.log(response.data);
+          // console.log(this.state.currentLanguage);
         })
         .catch(err => {
-          return err.response.data
-        })
+          return err;
+        });
     }
   };
-
-
 
   render() {
     console.log("user from app: ", this.state.user);
@@ -189,20 +195,36 @@ class App extends React.Component {
     // </div> */}
     return (
       <div className="App">
-        <Navbar user={this.state.user} clearUser={this.setUser} handleChangeLanguages={this.handleChangeLanguages} currentLanguage={this.state.currentLanguage} />
+        <Navbar
+          user={this.state.user}
+          clearUser={this.setUser}
+          handleChangeLanguages={this.handleChangeLanguages}
+          currentLanguage={this.state.currentLanguage}
+        />
 
-        <Route exact path="/"
-          render={props => <Home
-            user={this.state.user}
-            currentLanguage={this.state.currentLanguage}
-            {...props} />} />
+        <Route
+          exact
+          path="/"
+          render={props => (
+            <Home
+              user={this.state.user}
+              currentLanguage={this.state.currentLanguage}
+              {...props}
+            />
+          )}
+        />
 
-        <Route exact path="/about"
-          render={props => <About
-            user={this.state.user}
-            currentLanguage={this.state.currentLanguage}
-            {...props} />} />
-
+        <Route
+          exact
+          path="/about"
+          render={props => (
+            <About
+              user={this.state.user}
+              currentLanguage={this.state.currentLanguage}
+              {...props}
+            />
+          )}
+        />
 
         <Route
           exact
