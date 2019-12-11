@@ -1,0 +1,49 @@
+.formCreate{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10em;
+  margin-bottom: 6em;
+}
+
+.createPost {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 0.5px #e0e0db solid;
+  border-radius: 4px;
+  padding: 1.5em;
+  background-color: #f9f9f4;
+  width: 82vw;
+  margin: 0.7em;
+}
+
+.createPost input {
+  border: 1px solid black;
+  border-radius: 4px;
+  width: 50%;
+}
+
+.createPost select {
+  border: 1px solid black;
+  border-radius: 4px;
+  width: 50%;
+  padding: 0.2em;
+}
+
+.descriplionBar{
+  padding: 1.5em;
+}
+
+.createHeading{
+  color: #f19999
+}
+
+.createButton{
+  background-color: #ffffff;
+  border: 1px solid black;
+  color: #000000;
+  padding: 1.2em 1.5em;
+  margin: 1em 0;
+}

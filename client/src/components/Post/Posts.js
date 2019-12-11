@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import PostList from "./PostList";
 import NewPost from "./NewPost";
-import { Button } from "react-bootstrap";
+import { Button  } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import("./PostCss/posts.css");
 
 class Posts extends Component {
@@ -105,9 +106,9 @@ class Posts extends Component {
 
         <PostList posts={filteredPosts}  />
 
-        <button className="addPost" onClick={this.toggleEdit}>
+        <Link className="addPost" onClick={this.toggleEdit}>
           Add a Post
-        </button>
+        </Link>
 
         {this.state.addPost && <NewPost refreshData={this.getDataPosts} />}
       </div>
