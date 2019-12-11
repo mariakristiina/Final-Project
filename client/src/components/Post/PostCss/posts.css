@@ -1,0 +1,75 @@
+.addPost {
+  background-color: #ffffff;
+  border: 1px solid black;
+  color: #000000;
+  padding: 1.2em 1.5em;
+}
+
+.filterPosts {
+  display: flex;
+  padding: 1.5em;
+}
+
+.postLabels {
+  margin: 0 10px;
+}
+
+.filterPosts select {
+  -webkit-appearance: none;
+  appearance: none;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.filterPosts select > option:checked {
+  box-shadow: 0 0 10px 100px #333232 inset;
+  color: #f19999 !important;
+}
+
+.filterPosts select:focus {
+  border-color: gray;
+  outline: none;
+}
+
+.optionBox {
+  color: slategray;
+}
+
+.posts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 0.5px #e0e0db solid;
+  border-radius: 4px;
+  padding: 1.5em;
+  background-color: #f9f9f4;
+  width: 40vw;
+  margin: 0.7em;
+}
+.posts:hover {
+  background-image: url("/connect.jpg");
+  /*background-size: 100%;*/
+}
+
+.post-wraper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.singlePosts {
+  display: flex;
+  flex-direction: column;
+}
+
+.postLinks {
+  text-decoration: none;
+  color: #f19999;
+}
+
+.postLinks:hover {
+  text-decoration: none;
+  color: #000000;
+}
