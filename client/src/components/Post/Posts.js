@@ -3,6 +3,7 @@ import axios from "axios";
 import PostList from "./PostList";
 import NewPost from "./NewPost";
 import { Button } from "react-bootstrap";
+import("./PostCss/posts.css");
 
 class Posts extends Component {
   state = {
@@ -16,16 +17,16 @@ class Posts extends Component {
   //============================ posts functions
   getDataPosts = () => {
     axios
-      .get('/post')
+      .get("/post")
       .then(response => {
         // console.log(response.data)
         this.setState({
           posts: response.data
-        })
+        });
       })
       .catch(err => {
         console.log(err);
-      })
+      });
   };
 
   componentDidMount() {
@@ -33,7 +34,6 @@ class Posts extends Component {
   }
 
   //=============================== filter functions
-
 
   handleChangeFilter = event => {
     this.setState({
@@ -47,82 +47,72 @@ class Posts extends Component {
     });
   };
 
-
-
   render() {
-
     const filteredPosts = this.state.posts.filter(post => {
       // console.log("match-id", post.match._id)
 
       return (
-
-        ((!this.state.owner) ||
-          ((this.state.owner === "owner" && post.owner._id === this.props.user._id) ||
-
-            (((this.state.owner === "match") && post.match) && post.match._id === this.props.user._id)) &&
-
-          (this.state.category === post.category || !this.state.category))
-
-        && (this.state.category === post.category || !this.state.category)
-
+        (!this.state.owner ||
+          (((this.state.owner === "owner" &&
+            post.owner._id === this.props.user._id) ||
+            (this.state.owner === "match" &&
+              post.match &&
+              post.match._id === this.props.user._id)) &&
+            (this.state.category === post.category || !this.state.category))) &&
+        (this.state.category === post.category || !this.state.category)
       );
     });
 
-
     return (
-      <div className="post-container" >
+      <div className="post-container">
+        <div className="filterPosts">
+          <div className="postLabels">
+            <label htmlFor="myposts">My posts</label>
+          </div>
+          <select
+            name="owner"
+            id="owner"
+            value={this.state.owner}
+            onChange={this.handleChangeFilter}
+          >
+            <option className="optionBox" value="">--</option>
+            <option className="optionBox" value="owner">My posts</option>
+            <option className="optionBox" value="match">Registered</option>
+          </select>
+          <div className="postLabels">
+            <label htmlFor="category">Filter by Category</label>
+          </div>
+          <select
+            name="category"
+            id="category"
+            value={this.state.category}
+            onChange={this.handleChangeFilter}
+          >
+            <option value="">--</option>
+            <option value="language lessons">Language lessons</option>
+            <option value="tutoring">Tutoring</option>
+            <option value="government appointment">
+              Government appointment
+            </option>
+            <option value="doctor appointment">Doctor appointment</option>
+            <option value="meet people">Meet people</option>
+            <option value="activities for kids">Activities for kids</option>
+            <option value="activities for seniors">
+              Activities for seniors
+            </option>
+          </select>
+        </div>
 
-        <label htmlFor="myposts" >My posts</label>
-        <select
-          name="owner"
-          id="owner"
-          value={this.state.owner}
-          onChange={this.handleChangeFilter}
+        <PostList posts={filteredPosts}  />
 
-        >
-          <option value="">--</option>
-          <option value="owner">My posts</option>
-          <option value="match">Registered</option>
-        </select>
+        <button className="addPost" onClick={this.toggleEdit}>
+          Add a Post
+        </button>
 
-
-
-        <label htmlFor="category">Filter by Category</label>
-        <select
-          name="category"
-          id="category"
-          value={this.state.category}
-          onChange={this.handleChangeFilter}
-        >
-          <option value="">--</option>
-          <option value="language lessons">Language lessons</option>
-          <option value="tutoring">Tutoring</option>
-          <option value="government appointment">Government appointment</option>
-          <option value="doctor appointment">Doctor appointment</option>
-          <option value="meet people">Meet people</option>
-          <option value="activities for kids">Activities for kids</option>
-          <option value="activities for seniors">Activities for seniors</option>
-        </select>
-
-
-
-        <PostList posts={filteredPosts} />
-
-        <Button onClick={this.toggleEdit}>Add a Post</Button>
-
-        {this.state.addPost &&
-          <NewPost
-            refreshData={this.getDataPosts}
-          />
-        }
+        {this.state.addPost && <NewPost refreshData={this.getDataPosts} />}
       </div>
-    )
+    );
   }
-
-
 }
 
-
-
 export default Posts;
-
