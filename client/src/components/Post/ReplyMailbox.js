@@ -22,6 +22,7 @@ class ReplyMailbox extends Component {
       .post("/messages", {
         title: this.state.title,
         content: this.state.content,
+        answer: this.props.answer,
         subject: this.props.subject,
         owner: this.props.owner,
         recipient: this.props.recipient

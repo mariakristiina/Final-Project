@@ -40,9 +40,9 @@ class MailboxDetail extends Component {
       .post("/messages/add", {
         id: id,
         content: this.state.content,
-        subject: this.state.message._id,
+        subject: this.state.message.subject._id,
         owner: this.state.message.owner._id,
-        recipient: this.state.message.owner._id
+        recipient: this.state.message.recipient._id
       })
       .then(message => {
         console.log(message);

@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 // import { Link, Switch } from "react-router-dom";
@@ -14,6 +14,7 @@ import PostDetail from "./components/Post/PostDetail";
 import axios from "axios";
 import MailboxWrapper from "./components/Post/MailboxWrapper";
 import MailboxDetail from "./components/Post/MailboxDetail";
+
 
 
 
@@ -44,7 +45,6 @@ class App extends React.Component {
       messages: ""
     },
     currentLanguage: "English",
-    hover: false
   };
 
   // =================== user functions
@@ -161,13 +161,14 @@ class App extends React.Component {
   // languages functions
 
   handleChangeLanguages = event => {
-    if(!this.state.user) {
-    this.setState(
-      {
-        currentLanguage: event.target.value
-      },
-      () => console.log(this.state.currentLanguage)
-    );}
+    if (!this.state.user) {
+      this.setState(
+        {
+          currentLanguage: event.target.value
+        },
+        () => console.log(this.state.currentLanguage)
+      );
+    }
     else {
       this.setState(
         {
@@ -181,7 +182,7 @@ class App extends React.Component {
         .then(response => {
           console.log(response.data);
           console.log(this.state.currentLanguage);
-          })
+        })
         .catch(err => {
           return err;
         });
@@ -194,14 +195,6 @@ class App extends React.Component {
     })
   }
 
-  // HOVERING
-
-  // mouseOver = () => {
-  //   this.setState({
-  //     hover: !this.state.hover
-  //   })
-  //   console.log("hover:", this.state.hover)
-  // }
 
 
   render() {
@@ -221,8 +214,6 @@ class App extends React.Component {
             <Home
               user={this.state.user}
               currentLanguage={this.state.currentLanguage}
-              mouseOver={this.mouseOver}
-              hover={this.state.hover}
               {...props}
             />
           )}
@@ -243,32 +234,15 @@ class App extends React.Component {
         <Route
           exact
           path="/login"
-          render={props => <Login 
-          {...props} 
-          setUser={this.setUser} 
-          currentLanguage={this.state.currentLanguage} 
-          user={this.state.user}
-          changeLanguageLogin={this.changeLanguageLogin}
+          render={props => <Login
+            {...props}
+            setUser={this.setUser}
+            currentLanguage={this.state.currentLanguage}
+            user={this.state.user}
+            changeLanguageLogin={this.changeLanguageLogin}
           />}
         />
-        <Route
-          exact
-          path="/profile/:id"
-          render={props => (
-            <Profile
-              user={this.state.user}
-              profile={this.state.profile}
-              handleChangeProfile={this.handleChangeProfile}
-              toggleEditProfile={this.toggleEditProfile}
-              handleSubmitProfile={this.handleSubmitProfile}
-              getDataProfile={this.getDataProfile}
-              imageUpload={this.imageUpload}
-              editProfileForm={this.state.editProfileForm}
-              currentLanguage={this.state.currentLanguage}
-              {...props}
-            />
-          )}
-        />
+
         <Route
           exact
           path="/signup"
@@ -281,29 +255,56 @@ class App extends React.Component {
             />
           )}
         />
-        <Route
-          exact
-          path="/posts"
-          render={props => (
-            <Posts {...props} setUser={this.setUser} user={this.state.user} />
-          )}
-        />
-        <Route
-          exact
-          path="/post/:id"
-          render={props => (
-            <PostDetail
-              {...props}
-              postDetail={this.state.posts}
-              user={this.state.user}
+        {this.state.user ?
+          <>
+            <Route
+              exact
+              path="/profile/:id"
+              render={props => (
+                <Profile
+                  user={this.state.user}
+                  profile={this.state.profile}
+                  handleChangeProfile={this.handleChangeProfile}
+                  toggleEditProfile={this.toggleEditProfile}
+                  handleSubmitProfile={this.handleSubmitProfile}
+                  getDataProfile={this.getDataProfile}
+                  imageUpload={this.imageUpload}
+                  editProfileForm={this.state.editProfileForm}
+                  currentLanguage={this.state.currentLanguage}
+                  {...props}
+                // clearUser={this.setUser}
+                />
+              )}
             />
-          )}
-        />
-        <Route
-          path="/mailbox/:user/:messageId?"
-          render={props => <MailboxWrapper user={this.state.user} {...props} />}
-        />
 
+            <Route
+              exact
+              path="/posts"
+              render={props => (
+                <Posts {...props} setUser={this.setUser} user={this.state.user} />
+              )}
+            />
+
+            <Route
+              exact
+              path="/post/:id"
+              render={props => (
+                <PostDetail
+                  {...props}
+                  postDetail={this.state.posts}
+                  user={this.state.user}
+                />
+              )}
+            />
+            <Route
+              path="/mailbox/:user/:messageId?"
+              render={props => <MailboxWrapper user={this.state.user} {...props} />}
+            />
+          </>
+          :
+          <>
+          </>
+        }
 
       </div>
     );

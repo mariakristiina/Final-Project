@@ -19,7 +19,7 @@ const Home = props => {
             space for locals in Berlin and recent refugees to help each other on
             non-profit basis, share skills and connect.
           </p>
-        <Link  className="getInvolved" to="/signup"
+        <Link  className="button" to="/signup"
         >Get involved</Link>
       </div>
     </div>      
@@ -27,11 +27,18 @@ const Home = props => {
     );
   } else if (props.currentLanguage === "German") {
     return (
-      <div>
-        <h1>Hallo</h1>
-        <p>Auf Deutch</p>
-        <Link to="/signup">Get involved</Link>
-    </div> 
+      <div className="homeContainer">
+      <img className="coverImage" src="/Cover.jpeg" alt="" />
+      <div className="textContainer">
+      <h1>Hallo</h1>
+      <p> in German.... We are a non-profit organisation that provides a platform and a
+            space for locals in Berlin and recent refugees to help each other on
+            non-profit basis, share skills and connect.</p>
+        <Link  className="button" to="/signup"
+        >Get involved</Link>
+      </div>
+    </div>      
+        
     );
   }
 };

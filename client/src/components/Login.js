@@ -48,11 +48,12 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
+      <div className="formContainer logInContainer">
         <Form onSubmit={this.handleSubmit}>
-          <Form.Group>
-            <Form.Label htmlFor="username">Username</Form.Label>
-            <Form.Control
+        <div className="formBox">
+          <Form.Group className="loginBox">
+            <Form.Label className="formText" htmlFor="username">Username</Form.Label>
+            <input className="input"
               type="text"
               name="username"
               id="username"
@@ -60,9 +61,11 @@ class Login extends Component {
               onChange={this.handleChange}
             />
           </Form.Group>
-          <Form.Group>
-            <Form.Label htmlFor="password">Password:</Form.Label>
-            <Form.Control
+          </div>
+          <div className="formBox">
+          <Form.Group className="loginBox">
+            <Form.Label className="formText" htmlFor="password">Password</Form.Label>
+            <input className="input"
               type="password"
               name="password"
               id="password"
@@ -70,10 +73,11 @@ class Login extends Component {
               onChange={this.handleChange}
             />
           </Form.Group>
+          </div>
           {this.state.error && (
             <Alert variant="danger">{this.state.error}</Alert>
           )}
-          <Button type="submit">Log in</Button>
+          <button className="button signUpLogInButton" type="submit">Log in</button>
 
         </Form>
       </div>

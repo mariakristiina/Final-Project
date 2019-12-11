@@ -25,3 +25,29 @@
 .App {
   font-family: 'Montserrat', sans-serif
 }
+
+.button {
+  text-decoration: none;
+  color: black;
+  text-transform: uppercase;
+  text-align: center;
+  border: 3px rgba(0,0,0, .7) solid;
+  padding: 1.5vw 2vw;
+  background-color: white;
+  width: 20vw;
+  font-size: 3vh;
+  outline: none !important;
+}
+
+.button:hover {
+  background-color: rgba(0,0,0, .7);
+  border: 3px rgba(0,0,0, .7) solid;
+  color: white;
+  padding: 1.5vw 2vw;
+  text-transform: uppercase;
+  text-align: center;
+  width: 20vw;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 3vh;
+}

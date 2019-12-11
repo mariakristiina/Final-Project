@@ -3,7 +3,7 @@ const router = express.Router();
 const Message = require("../models/Messages");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
-
+const User = require("../models/User");
 
 router.get("/sent/:userId", (req, res) => {
   Message.find({
@@ -21,7 +21,6 @@ router.get("/sent/:userId", (req, res) => {
     });
 });
 
-
 router.post("/", (req, res) => {
   const { content, subject, owner, recipient } = req.body;
 
@@ -33,17 +32,27 @@ router.post("/", (req, res) => {
   })
     .then(message => {
       // res.json(message)
-      return Post.findByIdAndUpdate(subject, {
+      Post.findByIdAndUpdate(subject, {
         $push: { messages: message._id }
-      }).then(() => {
-        res.json({ message: "message added" });
-      });
+      })
+        .exec()
+
+        // ,User.findByIdAndUpdate(owner, {
+        //   $push: { messages: message._id }
+        // }).exec(),
+
+        // User.findByIdAndUpdate(recipient, {
+        //   $push: { messages: message._id }
+        // }).exec()
+
+        .then(() => {
+          res.json({ message: "message added" });
+        });
     })
     .catch(err => {
       console.log(err);
     });
 });
-
 
 router.post("/add", (req, res) => {
   const { id, content, subject, owner, recipient } = req.body;
@@ -56,11 +65,24 @@ router.post("/add", (req, res) => {
   })
     .then(comment => {
       // res.json(message)
-      return Message.findByIdAndUpdate(id, {
+      Message.findByIdAndUpdate(id, {
         $push: { comments: comment._id }
-      }).then(message => {
-        res.json(message);
-      });
+      }).exec(),
+        Post.findByIdAndUpdate(subject, {
+          $push: { messages: comment._id }
+        })
+          .exec()
+
+          // ,User.findByIdAndUpdate(owner, {
+          //   $push: { messages: comment._id }
+          // }).exec(),
+
+          // User.findByIdAndUpdate(recipient, {
+          //   $push: { messages: comment._id }
+          // }).exec()
+          .then(message => {
+            res.json(message);
+          });
     })
     .catch(err => {
       console.log(err);
@@ -68,7 +90,6 @@ router.post("/add", (req, res) => {
 });
 
 router.get("/detail/:id", (req, res) => {
- 
   Message.findById({ _id: req.params.id })
     .populate("recipient")
     .populate("owner")
@@ -81,7 +102,6 @@ router.get("/detail/:id", (req, res) => {
       console.log(err);
     });
 });
-
 
 router.delete("/:id", (req, res) => {
   const id = req.params.id;

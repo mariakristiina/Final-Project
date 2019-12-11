@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: 60vh;
+    height: 50vh;
     object-fit: cover;
 }
 
@@ -13,29 +13,11 @@
 }
 
 h1 {
-font-size: 15vh;
+font-size: 14vh;
 }
 
 .textContainer p {
-    margin-top: 20vh;
+    margin-top: 18vh;
     margin-bottom: 10vh;
+    font-size: 3vh;
 }
-
-.getInvolved {
-    text-decoration: none;
-    color: black;
-    text-transform: uppercase;
-    text-align: center;
-    border: 1px black solid;
-    padding: 2vw;
-    background-color: white;
-    width: 20vw;
-}
-
-/* .getInvolvedHover {
-    background-color: black;
-    color: white;
-    padding: 2vw;
-    text-transform: uppercase;
-    text-align: center;
-} */
