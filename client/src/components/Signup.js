@@ -2,7 +2,7 @@
 import React, { Component } from "react"
 import { signup } from "../services/auth"
 import { Alert, Form, Button} from "react-bootstrap"
-import ("./styling/Home.css")
+import ("./styling/SignupLogin.css")
 
 
 class Signup extends Component {
@@ -40,13 +40,16 @@ class Signup extends Component {
 
     return(
       
-      <div>
-        
-      <h3>Create A New Account</h3>
+      <div className="signUpContainer">
+        <div>
+      <h3 className="formHeader">Create A New Account</h3>
+      </div>
+      <div className="formContainer">
       <Form onSubmit={this.handleSubmit}>
+      <div className="formBox">
         <Form.Group>
-          <Form.Label htmlFor="username">Choose Your Username</Form.Label>
-          <Form.Control 
+          <Form.Label  className="formText" htmlFor="username">Choose Your Username</Form.Label>
+          <input className="input"
             type= "text"
             name= "username"
             id= "username"
@@ -54,10 +57,12 @@ class Signup extends Component {
             onChange={this.handleChange}
           />
         </Form.Group>
+        </div>
 
+<div className="formBox">
         <Form.Group>
-          <Form.Label htmlFor="password">Choose Your Password</Form.Label>
-          <Form.Control
+          <Form.Label className="formText" htmlFor="password">Choose Your Password</Form.Label>
+          <input className="input"
             type="password"
             name="password"
             id="password"
@@ -65,11 +70,11 @@ class Signup extends Component {
             onChange={this.handleChange}
           />
         </Form.Group>
-
-
+</div>
+<div className="formBox">
         <Form.Group>
-          <Form.Label htmlFor="age">Birthday</Form.Label>
-          <Form.Control
+          <Form.Label className="formText" htmlFor="age">Birthday</Form.Label>
+          <input className="input"
            type="date"
            name="age"
            id="age"
@@ -77,12 +82,13 @@ class Signup extends Component {
            onChange={this.handleChange}
           />
         </Form.Group>
-
+</div>
         {this.state.error && (
           <Alert variant="danger">{this.state.error}</Alert>
         )}
-          <button className="getInvolved" type="submit">Sign up</button>
+          <button className="button signUpLogInButton" type="submit">Sign up</button>
        </Form>
+     </div>
      </div>
    )}
         }

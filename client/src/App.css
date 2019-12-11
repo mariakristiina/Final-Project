@@ -1,12 +1,12 @@
-/* .App {
+.App {
   text-align: center;
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
-}
+} */
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -15,13 +15,39 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
-.App-link {
+/* .App-link {
   color: #09d3ac;
 } */
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
 .App {
   font-family: 'Montserrat', sans-serif
+}
+
+.button {
+  text-decoration: none;
+  color: black;
+  text-transform: uppercase;
+  text-align: center;
+  border: 3px rgba(0,0,0, .7) solid;
+  padding: 1.5vw 2vw;
+  background-color: white;
+  width: 20vw;
+  font-size: 3vh;
+  outline: none !important;
+}
+
+.button:hover {
+  background-color: rgba(0,0,0, .7);
+  border: 3px rgba(0,0,0, .7) solid;
+  color: white;
+  padding: 1.5vw 2vw;
+  text-transform: uppercase;
+  text-align: center;
+  width: 20vw;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 3vh;
 }

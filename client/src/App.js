@@ -45,7 +45,6 @@ class App extends React.Component {
       messages: ""
     },
     currentLanguage: "English",
-    hover: false
   };
 
   // =================== user functions
@@ -196,14 +195,6 @@ class App extends React.Component {
     })
   }
 
-  // HOVERING
-
-  // mouseOver = () => {
-  //   this.setState({
-  //     hover: !this.state.hover
-  //   })
-  //   console.log("hover:", this.state.hover)
-  // }
 
 
   render() {
@@ -223,8 +214,6 @@ class App extends React.Component {
             <Home
               user={this.state.user}
               currentLanguage={this.state.currentLanguage}
-              mouseOver={this.mouseOver}
-              hover={this.state.hover}
               {...props}
             />
           )}

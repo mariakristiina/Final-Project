@@ -1,0 +1,42 @@
+
+
+.signUpContainer{
+    margin: 4vh 30vw;
+}
+
+.formContainer {
+    margin-top: 4vh;
+}
+
+.signUpLogInButton {
+    margin-top: 10vh;
+}
+
+.formHeader {
+    font-size: 3.5vh;
+}
+
+.input {
+    border: 2px solid rgba(0,0,0, .7);
+    border-radius: 0px;
+    width: 40vw;
+    height: 6vh;
+    outline: none !important;
+    padding: .5vh .5vw
+}
+
+.formBox {
+    margin-top: 4vh;
+}
+
+.loginBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8vh;
+}
+
+.formText {
+    font-size: 3vh;
+    margin-bottom: 4vh;
+}
