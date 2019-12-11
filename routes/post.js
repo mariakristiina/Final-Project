@@ -4,6 +4,7 @@ const Post = require("../models/Post");
 const Message = require("../models/Messages");
 const mongoose = require("mongoose");
 const User = require("../models/User");
+const Comment = require("../models/Comment");
 
 router.get("/", (req, res) => {
   Post.find({})
@@ -121,7 +122,13 @@ router.delete("/:id", (req, res) => {
         User.findByIdAndUpdate(
           post.owner, {
           $pull: { posts: id }
+        }).exec(),
+
+        User.findByIdAndUpdate(
+          post.owner, {
+          $pull: { messages: id }
         }).exec()
+
           .then(() =>
             res.json({ message: "deleted" })
           );
@@ -130,24 +137,6 @@ router.delete("/:id", (req, res) => {
       res.status(500).json(err);
     });
 });
-
-// router.delete("/:id", (req, res) => {
-//   Post.findByIdAndDelete(req.params.id)
-//     .then(post => {
-//       Message.deleteMany({ _id: { $in: post.messages } }).exec(),
-//         User.findByIdAndUpdate(
-//           post.owner, {
-//           $pull: { posts: id }
-//         }).exec()
-//           .then(() =>
-//             res.json({ message: "deleted" })
-//           );
-//     })
-//     .catch(err => {
-//       res.status(500).json(err);
-//     });
-// });
-
 
 
 module.exports = router;

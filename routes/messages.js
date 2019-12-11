@@ -3,11 +3,8 @@ const router = express.Router();
 const Message = require("../models/Messages");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
-/*router.get("/:userId", (req, res) => {
-  Message.find({
-    $or: [{ owner: req.params.userId }, { recipient: req.params.userId }]
-  }).then(messages => res.json(messages));
-});*/
+const User = require("../models/User");
+
 
 router.get("/sent/:userId", (req, res) => {
   Message.find({
@@ -25,21 +22,6 @@ router.get("/sent/:userId", (req, res) => {
     });
 });
 
-/*router.get("/received/:userId", (req, res) => {
-  Message.find({ recipient: req.params.userId })
-    .populate("recipient")
-    .populate("owner")
-    .populate("subject")
-
-    .then(receivedMsgs => {
-      console.log("TEST2", receivedMsgs[0]);
-      res.json(receivedMsgs);
-    })
-    .catch(err => {
-      res.status(500).json(err);
-    })
-});
-*/
 
 router.post("/", (req, res) => {
   const { content, subject, owner, recipient } = req.body;
@@ -52,38 +34,20 @@ router.post("/", (req, res) => {
   })
     .then(message => {
       // res.json(message)
-      return Post.findByIdAndUpdate(subject, {
+      Post.findByIdAndUpdate(subject, {
         $push: { messages: message._id }
-      }).then(() => {
-        res.json({ message: "message added" });
-      });
+      }).exec(),
+
+        User.findByIdAndUpdate(owner, {
+          $push: { messages: message._id }
+        }).exec().then(() => {
+          res.json({ message: "message added" });
+        });
     })
     .catch(err => {
       console.log(err);
     });
 });
-
-// router.post("/add", (req, res) => {
-//   const { content, subject, owner, recipient } = req.body;
-// console.log("CONTENTTTTT", content)
-//   Message.create({
-//     content: content,
-//     subject: subject,
-//     owner: owner,
-//     recipient: recipient
-//   })
-//     .then(message => {
-//       // res.json(message)
-//       return Post.findByIdAndUpdate(subject, {
-//         $push: { messages: message._id }
-//       }).then((post) => {
-//         res.json(post);
-//       });
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-// });
 
 router.post("/add", (req, res) => {
   const { id, content, subject, owner, recipient } = req.body;
@@ -96,11 +60,20 @@ router.post("/add", (req, res) => {
   })
     .then(comment => {
       // res.json(message)
-      return Message.findByIdAndUpdate(id, {
+      Message.findByIdAndUpdate(id, {
         $push: { comments: comment._id }
-      }).then(message => {
-        res.json(message);
-      });
+      }).exec(),
+
+        Post.findByIdAndUpdate(subject, {
+          $push: { messages: comment._id }
+        }).exec(),
+
+        User.findByIdAndUpdate(owner, {
+          $push: { messages: comment._id }
+        }).exec()
+          .then(message => {
+            res.json(message);
+          });
     })
     .catch(err => {
       console.log(err);
@@ -108,12 +81,6 @@ router.post("/add", (req, res) => {
 });
 
 router.get("/detail/:id", (req, res) => {
-  // Post.findById({ _id: req.params.id })
-  //   .populate("owner")
-  //   .populate("match")
-  //   .populate("messages")
-  //   .then(post => res.json(post))
-  //   .catch(err => console.log(err));
 
   Message.findById({ _id: req.params.id })
     .populate("recipient")
@@ -127,17 +94,6 @@ router.get("/detail/:id", (req, res) => {
       console.log(err);
     });
 });
-
-// router.get('/detail/:id', (req, res) => {
-//   Message.findById({ _id: req.params.id }).populate("recipient")
-//     .populate("owner")
-//     .populate("subject").then(response => {
-//       res.json(response)
-//     }).catch(err => {
-//       console.log(err);
-//     })
-
-// })
 
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
