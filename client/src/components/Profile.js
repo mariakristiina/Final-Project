@@ -16,6 +16,7 @@ const Profile = props => {
     axios
       .delete(`/profile/${id}`)
       .then(response => {
+        // props.clearUser(null);
         props.history.push("/signup");
       })
       .catch(err => {

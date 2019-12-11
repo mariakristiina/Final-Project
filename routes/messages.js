@@ -36,13 +36,19 @@ router.post("/", (req, res) => {
       // res.json(message)
       Post.findByIdAndUpdate(subject, {
         $push: { messages: message._id }
-      }).exec(),
+      }).exec()
 
-        User.findByIdAndUpdate(owner, {
-          $push: { messages: message._id }
-        }).exec().then(() => {
-          res.json({ message: "message added" });
-        });
+        // ,User.findByIdAndUpdate(owner, {
+        //   $push: { messages: message._id }
+        // }).exec(),
+
+        // User.findByIdAndUpdate(recipient, {
+        //   $push: { messages: message._id }
+        // }).exec()
+
+          .then(() => {
+            res.json({ message: "message added" });
+          });
     })
     .catch(err => {
       console.log(err);
@@ -66,11 +72,15 @@ router.post("/add", (req, res) => {
 
         Post.findByIdAndUpdate(subject, {
           $push: { messages: comment._id }
-        }).exec(),
-
-        User.findByIdAndUpdate(owner, {
-          $push: { messages: comment._id }
         }).exec()
+
+        // ,User.findByIdAndUpdate(owner, {
+        //   $push: { messages: comment._id }
+        // }).exec(),
+
+        // User.findByIdAndUpdate(recipient, {
+        //   $push: { messages: comment._id }
+        // }).exec()
           .then(message => {
             res.json(message);
           });

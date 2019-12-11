@@ -4,7 +4,8 @@ const Profile = require("../models/User");
 const mongoose = require("mongoose");
 const uploadCloud = require("./cloudinary");
 const Post = require("../models/Post")
-const Messages = require("../models/Messages")
+const Message = require("../models/Messages")
+const Comment = require("../models/Comment")
 
 //get profile/:id
 router.get("/:id", (req, res) => {
@@ -64,16 +65,21 @@ router.put("/:id", uploadCloud.single("urlPath"), (req, res, next) => {
 
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
-  Profile.findByIdAndDelete(id)
-  // .populate("posts")
-  // .populate("messages")
-    .then(user => {
-      Post.deleteMany({ _id: { $in: user.posts } }).exec()/* ,
-        Messages.deleteMany({ _id: { $in: user.posts.messages } }).exec() */
-        .then((() => {
-          res.json({ message: "deleted" })
-        }))
-    })
+
+  Post.deleteMany({ owner: id })
+    .then((() => {
+      console.log("POSTS deleted")
+    }))
+  Message.deleteMany({ $or: [{ owner: id }, { recipient: id }] })
+    .then((() => {
+      console.log("MESSAGES deleted")
+    }))
+  Comment.deleteMany({ $or: [{ owner: id }, { recipient: id }] })
+    .then((() => {
+      console.log("COMMENTS deleted")
+    }))
+
+  Profile.findByIdAndDelete(id).then(user => res.json('user deleted'))
     .catch(err => {
       res.status(500).json(err);
     })
