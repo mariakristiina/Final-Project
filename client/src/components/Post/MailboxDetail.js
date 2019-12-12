@@ -107,14 +107,13 @@ class MailboxDetail extends Component {
     });
 
     return (
-      <div className="list-group" style={{ marginLeft: "40%" }}>
-        <div>
+
+        <div >
           <p className="profLabel">Your conversation with {this.state.message.owner.username}</p>
           <div className="comments">
             <p>Date: {this.state.message.created_at}</p>
             <p>Message: {this.state.message.content}</p>
           </div>
-        </div>
 
         {comments}
 
@@ -136,3 +135,6 @@ class MailboxDetail extends Component {
 }
 
 export default MailboxDetail;
+
+
+// style={{ marginLeft: "40%" }}
