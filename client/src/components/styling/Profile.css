@@ -60,8 +60,14 @@ margin-left: 1vw;
     width: 15vw;
 }
 
+.profButton:hover {
+    font-size: 2vh;
+    padding: .8vw 1vw;
+    width: 15vw;
+}
+
 .profFormInput {
-    border: 2px solid rgba(0,0,0, .7);
+    border: 1px solid rgba(0,0,0, .7);
     border-radius: 0px;
     width: 30vw;
     height: 6vh;
