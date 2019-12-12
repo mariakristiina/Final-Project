@@ -103,6 +103,20 @@ router.get("/detail/:id", (req, res) => {
     });
 });
 
+
+// router.get("/detail/:id", (req, res) => {
+//   Comment.findById({ _id: req.params.id })
+//     .populate("recipient")
+//     .populate("owner")
+//     .populate("subject")
+//     .then(response => {
+//       res.json(response);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+// });
+
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
 

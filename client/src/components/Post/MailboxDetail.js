@@ -3,11 +3,14 @@ import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ReplyMailbox from "./ReplyMailbox";
+import("./PostCss/mailbox.css");
+
 
 class MailboxDetail extends Component {
   state = {
     message: null,
-    content: ""
+    content: "",
+    comment: ""
   };
 
   handleChange = event => {
@@ -24,13 +27,15 @@ class MailboxDetail extends Component {
       .then(response => {
         console.log(response.data);
         this.setState({
-          message: response.data
+          message: response.data,
+          comment: response.data
         });
       })
       .catch(err => {
         console.log(err);
       });
   }
+
 
   handleSubmit = event => {
     event.preventDefault();
@@ -47,20 +52,39 @@ class MailboxDetail extends Component {
       .then(message => {
         console.log(message);
         this.setState({
-          content: ""
+          content: "",
         });
         this.getMailboxDetail();
         //this.props.history.push(`/mailbox/${this.state.post.owner._id}`);
       });
   };
 
+
   componentDidMount() {
     this.getMailboxDetail();
   }
 
+  // getCommentDetail() {
+  //   const id = this.state.message.comments;
+  //   console.log(this.state.message.comments)
+  //   console.log(id);
+  //   axios
+  //     .get(`/messages/detail/comment${id}`)
+  //     .then(response => {
+  //       console.log(response.data);
+  //       this.setState({
+  //         comment: response.data
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
+
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
       this.getMailboxDetail();
+      // this.getCommentDetail();
     }
   }
 
@@ -71,10 +95,11 @@ class MailboxDetail extends Component {
 
     let comments = this.state.message.comments.map(comment => {
       console.log(comment.subject)
+      console.log(this.state.message)
       return (
-        <div>
-          <p>{comment.created_at}</p>
-          <p>{comment.owner.username}</p>
+        <div className="comments">
+          <p>Date: {comment.created_at}</p>
+          {/* <p>Message from: {this.state.message.recipient.username}</p> */}
           <p>{comment.content}</p>
         </div>
 
@@ -82,7 +107,7 @@ class MailboxDetail extends Component {
     });
 
     return (
-      <div style={{ marginLeft: "40%" }}>
+      <div className="comments" style={{ marginLeft: "40%" }}>
         <p>{this.state.message.content}</p>
         <p>Created at: {this.state.message.created_at}</p>
 
