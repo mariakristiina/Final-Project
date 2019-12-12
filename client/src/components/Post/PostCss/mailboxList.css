@@ -1,0 +1,15 @@
+.mailBox{
+  background-color: #f9f9f4;;
+}
+
+.mailBox:hover{
+  background-color: #FCD1D1;
+}
+
+::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+
