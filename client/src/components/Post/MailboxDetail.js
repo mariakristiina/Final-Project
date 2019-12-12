@@ -1,3 +1,5 @@
+import Moment from 'react-moment';
+import 'moment-timezone';
 import React, { Component } from "react";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
@@ -99,8 +101,8 @@ class MailboxDetail extends Component {
       console.log(this.state.message)
       return (
         <div className="comments">
-          <p>Date: {comment.created_at}</p>
-          {/* <p>Message from: {this.state.message.recipient.username}</p> */}
+          <Moment className="date">{comment.created_at}</Moment>
+
           <p>{comment.content}</p>
         </div>
 
@@ -112,8 +114,8 @@ class MailboxDetail extends Component {
       <div>
         <p className="profLabel">Your conversation with {this.state.message.owner.username}</p>
         <div className="comments">
-          <p>Date: {this.state.message.created_at}</p>
-          <p>Message: {this.state.message.content}</p>
+          <Moment className="date">{this.state.message.created_at}</Moment>
+          <p>{this.state.message.content}</p>
         </div>
 
         {comments}
