@@ -10,6 +10,13 @@
 
 .signUpLogInButton {
     margin-top: 5vh;
+    border: 2px rgba(0,0,0, .5) solid;
+}
+
+.signUpLogInButton:hover {
+    margin-top: 5vh;
+    border: 2px white solid;
+    color: white;
 }
 
 .formHeader {

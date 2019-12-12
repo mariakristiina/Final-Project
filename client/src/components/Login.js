@@ -35,7 +35,7 @@ class Login extends Component {
         this.props.setUser(data)
         console.log(this._isMounted);
         this.props.changeLanguageLogin()
-        this.props.history.push("/")
+        this.props.history.push("/profile/:profile")
         console.log(this.props.currentLanguage)
         console.log(this.props.user.siteLanguage)
       }

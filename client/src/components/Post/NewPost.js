@@ -92,12 +92,12 @@ class NewPost extends Component {
           />
 
           <label htmlFor="postType"> Post Type: </label>
-          <select
+          <select 
             onChange={this.handleChangeNewPost}
             name="postType"
             id="postType"
           >
-            <option value="select">Select</option>
+            <option value="select">---</option>
             <option value="search">Search</option>
             <option value="offer">Offer</option>
           </select>
@@ -108,7 +108,7 @@ class NewPost extends Component {
             name="category"
             id="category"
           >
-            <option value="select">Select</option>
+            <option value="select">---</option>
             <option value="language lessons">Language Lessons</option>
             <option value="tutoring">Tutoring</option>
             <option value="government appointment">
@@ -130,7 +130,7 @@ class NewPost extends Component {
             onChange={this.handleChangeNewPost}
             value={this.state.description}
           />
-          <button className="createButton" type="submit">Create a new Post</button>
+          <button className="createButton button" type="submit">Create a new Post</button>
         </form>
       </div>
     );

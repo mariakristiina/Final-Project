@@ -79,7 +79,7 @@ const Profile = props => {
           encType="multipart/form-data"
         >
         <div className="profForm">
-            <label htmlFor="about" className="profLabel">Upload Profile Picture</label>
+            <label htmlFor="profPic" className="profLabel">Upload Profile Picture</label>
             <input className="imageInput"
               type="file"
               name="urlPath"
@@ -99,7 +99,7 @@ const Profile = props => {
             </div>
 
             <div className="profForm">
-            <label htmlFor="age" className="profLabel">My Age </label>
+            <label htmlFor="age" className="profLabel">birthday </label>
             <input className="profFormInput"
               type="date"
               name="age"
@@ -116,7 +116,7 @@ const Profile = props => {
             name="gender"
             id="gender"
           >
-            <option value="diverse">Select</option>
+            <option value="">---</option>
             <option value="diverse">♂︎♀︎</option>
             <option value="female">♀︎</option>
             <option value="male">♂︎</option>
@@ -227,7 +227,7 @@ else if (props.currentLanguage === "German") {
                 </div>
     
                 <div className="profForm">
-                <label htmlFor="age" className="profLabel">My Age </label>
+                <label htmlFor="age" className="profLabel">birthday </label>
                 <input className="profFormInput"
                   type="date"
                   name="age"
@@ -244,7 +244,7 @@ else if (props.currentLanguage === "German") {
                 name="gender"
                 id="gender"
               >
-                <option value="diverse">Select</option>
+                <option value="diverse">---</option>
                 <option value="diverse">♂︎♀︎</option>
                 <option value="female">♀︎</option>
                 <option value="male">♂︎</option>

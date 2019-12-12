@@ -9,7 +9,7 @@ const PostList = props => {
                 <Link className="postLinks" to={`/post/${post._id}`}>
           <div key={post._id} className="posts">
             <div className="singlePosts">
-              <h3>
+              <h3 className="postTitle">
                   {post.title}
               </h3>
               <p className="postText">Posted by: {post.owner.username}</p>
