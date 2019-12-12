@@ -12,7 +12,7 @@ const userSchema = new Schema({
   },
   urlPath: {
     type: String,
-    default: "https://res.cloudinary.com/mariakristiina/image/upload/v1576085857/connection_vazjug.svg",
+    default: "https://res.cloudinary.com/mariakristiina/image/upload/v1576185226/logo_iecpfq.png",
   },
   gender: {
     type: String,
