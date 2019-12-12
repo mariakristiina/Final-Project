@@ -55,7 +55,7 @@ class NewPost extends Component {
       <div className="formCreate">
         <form onSubmit={this.handleSubmitNewPost} className="createPost">
           <h2 className="createHeading">Create New Post</h2>
-          <label htmlFor="title">Post Title: </label>
+          <label className="createPostLabel" htmlFor="title">Post Title </label>
           <input
             type="text"
             name="title"
@@ -64,7 +64,7 @@ class NewPost extends Component {
             value={this.state.title}
           />
 
-          <label htmlFor="date">Available date: </label>
+          <label className="createPostLabel" htmlFor="date">Available date </label>
           <input
             type="date"
             name="date"
@@ -73,7 +73,7 @@ class NewPost extends Component {
             value={this.state.date}
           />
 
-          <label htmlFor="startTime">Start Time: </label>
+          <label className="createPostLabel" htmlFor="startTime">Start Time </label>
           <input
             type="time"
             name="startTime"
@@ -82,7 +82,7 @@ class NewPost extends Component {
             value={this.state.startTime}
           />
 
-          <label htmlFor="endTime">End Time: </label>
+          <label className="createPostLabel" htmlFor="endTime">End Time </label>
           <input
             type="time"
             name="endTime"
@@ -91,7 +91,7 @@ class NewPost extends Component {
             value={this.state.endTime}
           />
 
-          <label htmlFor="postType"> Post Type: </label>
+          <label className="createPostLabel" htmlFor="postType"> Post Type: </label>
           <select 
             onChange={this.handleChangeNewPost}
             name="postType"
@@ -102,7 +102,7 @@ class NewPost extends Component {
             <option value="offer">Offer</option>
           </select>
 
-          <label htmlFor="category"> Category: </label>
+          <label className="createPostLabel" htmlFor="category"> Category </label>
           <select
             onChange={this.handleChangeNewPost}
             name="category"
@@ -122,7 +122,7 @@ class NewPost extends Component {
             </option>
           </select>
 
-          <label htmlFor="description">Description: </label>
+          <label className="createPostLabel" htmlFor="description">Description </label>
           <input className="descriplionBar"
             type="text"
             name="description"

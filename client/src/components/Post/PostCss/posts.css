@@ -1,4 +1,4 @@
-.addPost {
+.addPostButton {
   background-color: #ffffff;
   margin-top: 2em;
   text-decoration: none;
@@ -6,24 +6,24 @@
   text-transform: uppercase;
   text-align: center;
   border: 2px rgba(0,0,0, .5) solid;
-  padding: 1.5vw 2vw;
-  background-color: white;
-  width: 20vw;
-  font-size: 3vh;
+  padding: 2vh 2vw;
+  width: 15vw;
+  font-size: 2.5vh;
   outline: none !important;
 }
 
-.addPost:hover {
+.addPostButton:hover {
   background-color: rgba(0,0,0, .5);
-  border: 1px white solid;
-  color: white;
-  padding: 1.5vw 2vw;
+  margin-top: 2em;
+  text-decoration: none;
+  color: white; 
   text-transform: uppercase;
   text-align: center;
-  width: 20vw;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 3vh;
+  border: 1px white solid;
+  padding: 2.1vh 2vw;
+  width: 15vw;
+  font-size: 2.5vh;
+  outline: none !important;
 }
 
 

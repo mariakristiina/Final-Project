@@ -1,7 +1,7 @@
 .profileInfoContainer {
 display: flex;
 flex: row;
-margin: 5vh 10vw;
+margin: 2vh 10vw;
 justify-content: space-between;
 }
 
@@ -22,7 +22,7 @@ justify-content: space-between;
 }
 
 .profileDetails h2 {
-    font-size: 4.5vh;
+    font-size: 4vh;
 }
 
 .genderPic {
@@ -41,7 +41,7 @@ justify-content: space-between;
 
 
 .profText {
-    font-size: 3vh;
+    font-size: 2vh;
 }
 
 .age {
@@ -53,18 +53,20 @@ margin-left: 1vw;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    /* background-color: red;
+    padding: 1vh 2vw; */
 }
 
 .profButton {
     margin-top: 3vh;
-    font-size: 2vh;
+    font-size: 1.5vh;
     padding: .8vw 1vw;
     width: 15vw;
     border: 1.5px rgba(0,0,0, .5) solid;
 }
 
 .profButton:hover {
-    font-size: 2vh;
+    font-size: 1.5vh;
     padding: .8vw 1vw;
     width: 15vw;
     border: .5px white solid;
@@ -74,13 +76,14 @@ margin-left: 1vw;
     border: 1px solid rgba(0,0,0, .5);
     border-radius: 0px;
     width: 30vw;
-    height: 6vh;
+    height: 4.5vh;
     outline: none !important;
     padding: .5vh .5vw;
     text-align: center;
-    font-size: 3vh;
+    font-size: 2vh;
     margin-bottom: 1vh;
     background-color: transparent;
+    color: rgba(0,0,0, .5);
 }
 
 .profForm {
@@ -90,8 +93,10 @@ margin-left: 1vw;
 }
 
 .imageInput {
-    width: 30vw;
-    font-size: 3vh;
+    width: 15vw;
+    font-size: 2vh;
+    margin-top: 1vh;
+
 }
 
 select {
@@ -102,6 +107,8 @@ select {
     -webkit-border-radius: 0px;
     width: 30vw;
     padding: .5vh .5vw;
-    height: 6vh;
+    height: 4.5vh;
     background-color: transparent;
+    color: rgba(0,0,0, .5);
+    font-size: 2vh;
 }

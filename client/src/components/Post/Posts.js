@@ -132,7 +132,8 @@ class Posts extends Component {
             duration={900}
             className="addPost"
             onClick={this.toggleEdit}
-          >Add a Post
+          ><button className="addPostButton">Add a Post</button>
+          
           </Link>
         </div>
 

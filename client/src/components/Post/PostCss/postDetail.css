@@ -2,14 +2,28 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin: 3vh 0vw 0vh 5vw;
+    /* margin: 3vh 55vw 0vh 3vw; */
+    border: 0.5px #e0e0db solid;
+    border-radius: 4px;
+    padding: 1.5em;
+    background-color: #f9f9f4;
 }
 
 .posterContainer {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    margin-right: 5vw;
+    /* margin: 3vh 3vw 3vw 55vw; */
+    border: 0.5px #e0e0db solid;
+    border-radius: 4px;
+    padding: 1.5em;
+    background-color: #f9f9f4;
+}
+
+.boxAlignment {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 .times {
@@ -25,12 +39,13 @@
 
 h2 {
     color: #f19999;
-    font-size: 5vh;
+    font-size: 4vh;
 }
 
-h3 {
+h4 {
     font-size: 2.5vh; 
     margin-left: 2vw;
+    color: rgba(0,0,0, .5);
 }
 
 .postDetailButton {
@@ -43,46 +58,74 @@ h3 {
 
 .postDetailButton:hover {
     font-size: 2vh;
-    padding: 1vw 1vw;
+    padding: .9vw 1vw;
     width: 15vw;
     border: 0px white solid;
 }
 
 .messageButton {
     border: 1.5px rgba(0,0,0, .5) solid;
+    font-size: 2vh;
+    width: 15vw;
+    padding: 1.5vh 2vw;
 }
 
 .messageButton:hover {
-    border: 1.5px white solid;
+    border: .5px white solid;
+    font-size: 2vh;
+    width: 15vw;
+    padding: 1.7vh 2vw;
 }
 
 .postLabel {
-    font-size: 2vh;
+    font-size: 1.5vh;
     font-weight: 700;
     text-transform: uppercase;
     color: rgba(0,0,0, .5);
     text-decoration: underline;
+    width: 7vw;
+    text-align: start;
 }
 
-.postText {
-    font-size: 3.5vh;
-}
 
 .infoContainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin: 2vh 0vw;
 }
 
 .item {
     margin-right: 3vw;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+h6 {
+    margin-left: 1vw;
+    font-size: 2vh;
+    margin-left: 2vw;
+    width: 30vw;
+    text-align: start;
 }
 
 .messageLabel {
     text-transform: uppercase;
-    font-size: 3vh;
+    font-size: 2.5vh;
 }
 
 .messageInput {
-    margin: 5vh;
+    width: 40vw;
+    outline: none;
+    height: 10vh;
 }
+
+.messageContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.part {
+    margin-bottom: 2vh;
+}
+
