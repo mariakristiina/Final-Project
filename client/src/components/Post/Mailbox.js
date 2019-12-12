@@ -4,6 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import { Link, NavLink, Route } from "react-router-dom";
 import MailboxDetail from "./MailboxDetail";
 import { getMessages } from "./messageFunctions";
+import("./PostCss/mailbox.css");
 
 class Mailbox extends Component {
   state = {
@@ -56,7 +57,7 @@ class Mailbox extends Component {
                     <p>Title: {msg.subject.title}</p>
                     <p>From: {msg.owner.username}</p>
                     <p>Date: {msg.date}</p>
-                
+
                   </div>
                 </Link>
               );
