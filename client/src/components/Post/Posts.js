@@ -119,7 +119,7 @@ class Posts extends Component {
             to="addPost"
             spy={true}
             smooth={true}
-            offset={-5}
+            offset={-50}
             duration={900}
             className="addPost"
             onClick={this.toggleEdit}
