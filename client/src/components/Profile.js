@@ -25,12 +25,6 @@ const Profile = props => {
 
 
   return (
-    // if (this.state.error) {
-    //   return <p>{this.state.error}</p>;
-    // } else if (this.state.profile === null) {
-    //   return <div></div>;
-    // }
-
     <div>
       <h2>Hey {props.profile.username}</h2>
 

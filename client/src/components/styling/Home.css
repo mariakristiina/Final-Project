@@ -1,35 +1,35 @@
 .coverImage {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 60vh;
-    object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 60vh;
+  object-fit: cover;
 }
 
 .textContainer {
-    position: absolute;
-    margin: 15vh 15vw 0vh 15vw;
+  position: absolute;
+  margin: 15vh 15vw 0vh 15vw;
 }
 
 h1 {
-font-size: 15vh;
+  font-size: 15vh;
 }
 
 .textContainer p {
-    margin-top: 20vh;
-    margin-bottom: 10vh;
+  margin-top: 20vh;
+  margin-bottom: 10vh;
 }
 
 .getInvolved {
-    text-decoration: none;
-    color: black;
-    text-transform: uppercase;
-    text-align: center;
-    border: 1px black solid;
-    padding: 2vw;
-    background-color: white;
-    width: 20vw;
+  text-decoration: none;
+  color: black;
+  text-transform: uppercase;
+  text-align: center;
+  border: 1px black solid;
+  padding: 2vw;
+  background-color: white;
+  width: 20vw;
 }
 
 /* .getInvolvedHover {
@@ -40,4 +40,25 @@ font-size: 15vh;
     text-align: center;
 } */
 
+.carousel {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
 
+.homeContainer {
+  height: 60vh;
+  width: 100vw;
+}
+
+.carousel-inner {
+  height: 100%;
+  width: 100%;
+}
+
+.carousel-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom
+}
