@@ -1,7 +1,7 @@
 .profileInfoContainer {
 display: flex;
 flex: row;
-margin: 5vh 8vw;
+margin: 5vh 10vw;
 justify-content: space-between;
 }
 
@@ -17,7 +17,7 @@ justify-content: space-between;
 
 .profilePic {
     margin-bottom: 3vh;
-    border: 3px solid rgba(0,0,0, .7);
+    border: 1.5px solid rgba(0,0,0, .5);
     height: 25vh;
 }
 
@@ -35,7 +35,7 @@ justify-content: space-between;
     font-size: 2vh;
     font-weight: 700;
     text-transform: uppercase;
-    color: rgba(0,0,0, .7);
+    color: rgba(0,0,0, .5);
     text-decoration: underline;
 }
 
@@ -55,19 +55,22 @@ margin-left: 1vw;
 }
 
 .profButton {
+    margin-top: 3vh;
     font-size: 2vh;
     padding: .8vw 1vw;
     width: 15vw;
+    border: 1.5px rgba(0,0,0, .5) solid;
 }
 
 .profButton:hover {
     font-size: 2vh;
     padding: .8vw 1vw;
     width: 15vw;
+    border: 1.5px rgba(0,0,0, .5) solid;
 }
 
 .profFormInput {
-    border: 1px solid rgba(0,0,0, .7);
+    border: 1px solid rgba(0,0,0, .5);
     border-radius: 0px;
     width: 30vw;
     height: 6vh;
@@ -75,6 +78,8 @@ margin-left: 1vw;
     padding: .5vh .5vw;
     text-align: center;
     font-size: 3vh;
+    margin-bottom: 1vh;
+    background-color: transparent;
 }
 
 .profForm {
