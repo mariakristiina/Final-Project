@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-
+import("./PostCss/newPost.css");
 
 class NewPost extends Component {
-
   state = {
     title: "",
     date: "",
@@ -12,12 +11,11 @@ class NewPost extends Component {
     postType: "",
     category: "",
     description: ""
-  }
+  };
 
   handleChangeNewPost = event => {
     // console.log(event.target.value);
     // const { name, value } = event.target
-
 
     this.setState({
       [event.target.name]: event.target.value
@@ -54,72 +52,87 @@ class NewPost extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmitNewPost} >
-        <label htmlFor="title">Title: </label>
-        <input
-          type="text"
-          name="title"
-          id="title"
-          onChange={this.handleChangeNewPost}
-          value={this.state.title}
-        />
+      <div className="formCreate">
+        <form onSubmit={this.handleSubmitNewPost} className="createPost">
+          <h2 className="createHeading">Create New Post</h2>
+          <label htmlFor="title">Post Title: </label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            onChange={this.handleChangeNewPost}
+            value={this.state.title}
+          />
 
-        <label htmlFor="date">Date: </label>
-        <input
-          type="date"
-          name="date"
-          id="date"
-          onChange={this.handleChangeNewPost}
-          value={this.state.date}
-        />
+          <label htmlFor="date">Available date: </label>
+          <input
+            type="date"
+            name="date"
+            id="date"
+            onChange={this.handleChangeNewPost}
+            value={this.state.date}
+          />
 
-        <label htmlFor="startTime">Start Time: </label>
-        <input
-          type="time"
-          name="startTime"
-          id="startTime"
-          onChange={this.handleChangeNewPost}
-          value={this.state.startTime}
-        />
+          <label htmlFor="startTime">Start Time: </label>
+          <input
+            type="time"
+            name="startTime"
+            id="startTime"
+            onChange={this.handleChangeNewPost}
+            value={this.state.startTime}
+          />
 
-        <label htmlFor="endTime">End Time: </label>
-        <input
-          type="time"
-          name="endTime"
-          id="endTime"
-          onChange={this.handleChangeNewPost}
-          value={this.state.endTime}
-        />
+          <label htmlFor="endTime">End Time: </label>
+          <input
+            type="time"
+            name="endTime"
+            id="endTime"
+            onChange={this.handleChangeNewPost}
+            value={this.state.endTime}
+          />
 
-        <label htmlFor="postType">Post Type: </label>
-        <select onChange={this.handleChangeNewPost} name="postType" id="postType">
-          <option value="select">Select</option>
-          <option value="search">Search</option>
-          <option value="offer">Offer</option>
-        </select>
+          <label htmlFor="postType"> Post Type: </label>
+          <select
+            onChange={this.handleChangeNewPost}
+            name="postType"
+            id="postType"
+          >
+            <option value="select">Select</option>
+            <option value="search">Search</option>
+            <option value="offer">Offer</option>
+          </select>
 
-        <label htmlFor="category">Category: </label>
-        <select onChange={this.handleChangeNewPost} name="category" id="category">
-          <option value="select">Select</option>
-          <option value="language lessons">Language Lessons</option>
-          <option value="tutoring">Tutoring</option>
-          <option value="government appointment">Government Appointment</option>
-          <option value="doctor appointment">Doctor appointment</option>
-          <option value="meet people">Meet People</option>
-          <option value="activities for kids">Activities for Kids</option>
-          <option value="activities for seniors">Activities for Seniors</option>
-        </select>
+          <label htmlFor="category"> Category: </label>
+          <select
+            onChange={this.handleChangeNewPost}
+            name="category"
+            id="category"
+          >
+            <option value="select">Select</option>
+            <option value="language lessons">Language Lessons</option>
+            <option value="tutoring">Tutoring</option>
+            <option value="government appointment">
+              Government Appointment
+            </option>
+            <option value="doctor appointment">Doctor appointment</option>
+            <option value="meet people">Meet People</option>
+            <option value="activities for kids">Activities for Kids</option>
+            <option value="activities for seniors">
+              Activities for Seniors
+            </option>
+          </select>
 
-        <label htmlFor="description">Description: </label>
-        <input
-          type="text"
-          name="description"
-          id="description"
-          onChange={this.handleChangeNewPost}
-          value={this.state.description}
-        />
-        <button type="submit">Create a new Post</button>
-      </form>
+          <label htmlFor="description">Description: </label>
+          <input className="descriplionBar"
+            type="text"
+            name="description"
+            id="description"
+            onChange={this.handleChangeNewPost}
+            value={this.state.description}
+          />
+          <button className="createButton" type="submit">Create a new Post</button>
+        </form>
+      </div>
     );
   }
 }
