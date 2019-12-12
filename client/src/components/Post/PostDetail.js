@@ -136,7 +136,10 @@ class PostDetail extends React.Component {
 
           <div className="item">
           <div className="postLabel">Date</div>
-            <div className="postText">{this.state.date}</div>
+            <div className="postText"> {""}
+            {Math.floor(
+              (new Date(this.state.date).getTime())
+            )}</div>
           </div>
           <div className="item">
             <div className="postLabel">Time</div>
