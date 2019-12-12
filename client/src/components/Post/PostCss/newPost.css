@@ -22,7 +22,7 @@
 .createPost input {
   border: 1px solid black;
   width: 50%;
-  height: 6vh;
+  height: 5vh;
   padding: .5vh .5vw;
 }
 
@@ -30,11 +30,12 @@
   border: 1px solid black;
   width: 50%;
   padding: .5vh .5vw;
-  height: 6vh;
+  height: 5vh;
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   -webkit-border-radius: 0px;
+  background-color:white;
 }
 
 
@@ -43,7 +44,8 @@
 }
 
 .createHeading{
-  color: #f19999
+  color: #f19999;
+  font-size: 4vh;
 }
 
 .createButton{
@@ -51,13 +53,20 @@
   border: 2px rgba(0,0,0, .5) solid;
   color: #000000;
   margin: 1em 0;
+  font-size: 2vh;
 }
 
 .createButton:hover{
   border: 2px white solid;
   margin: 1em 0;
+  font-size: 2vh;
 }
 
 label {
   margin-top: 2vh;
+}
+
+.createPostLabel {
+text-transform: uppercase;
+font-size: 1.5vh;
 }

@@ -122,42 +122,54 @@ class PostDetail extends React.Component {
 
     return (
       <div>
+      <div className="boxAlignment">
         <div className="postContainer">
           <div className="headerBox">
             <h2>{this.state.title} </h2>
             {!this.state.match ?
               <div></div> :
-              this.state.match._id === this.props.user._id ? (<h3> You are registered</h3>) : (<div></div>)}
+              this.state.match._id === this.props.user._id ? (<h4> You are registered</h4>) : (<div></div>)}
           </div>
 
           <div className="infoContainer">
             <div className="item">
-              <div className="postLabel">Post type </div>
-              <div className="postText">{this.state.postType}</div>
+              <div className="postLabel">Post type: </div>
+              <h6>{this.state.postType}</h6>
             </div>
             <div className="item">
-              <div className="postLabel">category</div>
-              <div className="postText">{this.state.category}</div>
+              <div className="postLabel">category:</div>
+              <h6>{this.state.category}</h6>
             </div>
 
             <div className="item">
-              <div className="postLabel">Date</div>
-              <div className="postText"> {""}
+              <div className="postLabel">Date:</div>
+              <h6> {""}
                 {Math.floor(
                   (new Date(this.state.date).getTime())
-                )}</div>
+                )}</h6>
             </div>
             <div className="item">
-              <div className="postLabel">Time</div>
-              <div className="postText">{this.state.startTime} - {this.state.endTime}</div>
+              <div className="postLabel">Time:</div>
+              <h6>{this.state.startTime} -{this.state.endTime}</h6>
             </div>
+            
+          <div className="item">
+          <div className="postLabel">Description:</div>
+          <h6>{this.state.description}</h6>
           </div>
-          {/* <div className="postLabel">description</div> */}
-          <div className="postText">{this.state.description}</div>
+          </div>
+          </div>
+      
 
+       
+        <div className="posterContainer">
+          <p>{this.state.owner.username}</p>
+          <p>{this.state.owner.gender}</p>
+          <p>{this.state.owner.about}</p>
         </div>
+</div>
 
-        {this.state.owner._id === this.props.user._id ?
+{this.state.owner._id === this.props.user._id ?
           <>
             <button className="button postDetailButton" onClick={this.deletePost}>
               Delete Post
@@ -177,13 +189,6 @@ class PostDetail extends React.Component {
             ) : (
                 <div></div>
               )}
-        <div className="posterContainer">
-          <p>{this.state.owner.username}</p>
-          <p>{this.state.owner.gender}</p>
-          <p>{this.state.owner.about}</p>
-        </div>
-
-
 
         {!this.state.match ?
           <div></div> :

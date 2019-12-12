@@ -39,18 +39,23 @@ class Messages extends Component {
 
   render() {
     return (
-      <div>
+      <div className="messageContainer">
         <Form onSubmit={this.handleSubmit}>
-          <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label className="messageLabel">Write a Message</Form.Label>
-            <Form.Control className="messageInput"
+         
+         <div className="part">
+            <label className="messageLabel">Write a Message</label>
+            </div>
+            <div className="part">
+            <input className="messageInput"
               as="textarea"
               rows="3"
               name="content"
               onChange={this.handleChange}
             />
-          </Form.Group>
+        </div>
+        <div className="part">
           <button className="button messageButton" onClick={this.myFunction}>Send</button>
+          </div>
         </Form>
       </div>
     );
