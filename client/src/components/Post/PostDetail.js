@@ -143,10 +143,7 @@ class PostDetail extends React.Component {
 
             <div className="item">
               <div className="postLabel">Date:</div>
-              <h6> {""}
-                {Math.floor(
-                  (new Date(this.state.date).getTime())
-                )}</h6>
+              <h6>{this.state.date}</h6>
             </div>
             <div className="item">
               <div className="postLabel">Time:</div>
@@ -163,9 +160,46 @@ class PostDetail extends React.Component {
 
        
         <div className="posterContainer">
-          <p>{this.state.owner.username}</p>
-          <p>{this.state.owner.gender}</p>
-          <p>{this.state.owner.about}</p>
+         <div className="headerBox">
+            <h2>Posted by</h2>
+            </div>
+            <div className="posterMainContainer">
+            <div>
+  <img className="posterImage" src={this.state.owner.urlPath} alt=""/>
+</div>
+            <div className="infoContainer">
+            <div className="item">
+              <div className="postLabel">Name: </div>
+              <h6>{this.state.owner.username}</h6>
+            </div>
+            <div className="item">
+              <div className="postLabel">age: </div>
+              <h6> {""}
+            {Math.floor(
+              (new Date() - new Date(this.state.owner.age).getTime()) / 3.15576e10
+            )}</h6>
+            </div>
+            <div className="item">
+              <div className="postLabel">gender: </div>
+              {this.state.owner.gender === "female" ?
+            <img className="genderPic2" src="/female.png" alt=""/> 
+            :
+            this.state.owner.gender === "male" ?
+            <img className="genderPic2" src="/male.png" alt=""/>  :
+            <img className="genderPic2" src="/diverse.png" alt=""/>
+            }
+            </div>
+            <div className="item">
+              <div className="postLabel">languages: </div>
+              <h6>{this.state.owner.languages}</h6>
+            </div>
+            <div className="item">
+              <div className="postLabel">about: </div>
+              <h6 className="about">{this.state.owner.about}</h6>
+            </div>
+
+        </div>
+        </div>
         </div>
 </div>
 

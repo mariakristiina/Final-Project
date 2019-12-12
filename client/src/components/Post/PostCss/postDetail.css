@@ -7,23 +7,26 @@
     border-radius: 4px;
     padding: 1.5em;
     background-color: #f9f9f4;
+    width: 45vw;
 }
 
 .posterContainer {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     /* margin: 3vh 3vw 3vw 55vw; */
     border: 0.5px #e0e0db solid;
     border-radius: 4px;
     padding: 1.5em;
     background-color: #f9f9f4;
+    width: 45vw;
 }
 
 .boxAlignment {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    margin-top: 4vh;
 }
 
 .times {
@@ -91,7 +94,8 @@ h4 {
 .infoContainer {
     display: flex;
     flex-direction: column;
-    margin: 2vh 0vw;
+    margin: 2vh 2vw;
+    align-items: flex-start;
 }
 
 .item {
@@ -102,10 +106,9 @@ h4 {
 }
 
 h6 {
-    margin-left: 1vw;
     font-size: 2vh;
     margin-left: 2vw;
-    width: 30vw;
+    width: 22vw;
     text-align: start;
 }
 
@@ -118,6 +121,7 @@ h6 {
     width: 40vw;
     outline: none;
     height: 10vh;
+    padding: .5vw;
 }
 
 .messageContainer {
@@ -129,3 +133,22 @@ h6 {
     margin-bottom: 2vh;
 }
 
+.posterMainContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 40vw;
+}
+
+.posterImage {
+    margin-top: 2vh;
+    margin-bottom: 3vh;
+    border: 1.5px solid rgba(0,0,0, .5);
+    height: 15vh;
+}
+
+.genderPic2 {
+    height: 2vh;
+    margin-left: 2vw;
+}

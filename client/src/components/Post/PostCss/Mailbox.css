@@ -1,3 +1,12 @@
 .comments {
-  border: 1.5px rgba(0,0,0, .5) solid;
+  border: 1.5px rgba(0, 0, 0, 0.125) solid;
+  margin: 0.1%;
+}
+
+.commentbox{
+  width: 60vw;
+}
+
+.inbox{
+  /* width: 40vw; */
 }

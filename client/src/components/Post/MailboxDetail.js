@@ -107,22 +107,27 @@ class MailboxDetail extends Component {
     });
 
     return (
-      <div className="comments" style={{ marginLeft: "40%" }}>
-        <p>{this.state.message.content}</p>
-        <p>Created at: {this.state.message.created_at}</p>
+      <div className="list-group" style={{ marginLeft: "40%" }}>
+        <div>
+          <p className="profLabel">Your conversation with {this.state.message.owner.username}</p>
+          <div className="comments">
+            <p>Date: {this.state.message.created_at}</p>
+            <p>Message: {this.state.message.content}</p>
+          </div>
+        </div>
 
         {comments}
 
         <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Answer message</Form.Label>
+            <Form.Label className="profLabel">Answer</Form.Label>
             <Form.Control
               as="textarea"
               rows="3"
               name="content"
               onChange={this.handleChange}
             />
-            <button>Send your answer</button>
+            <button className="button profButton">Send your answer</button>
           </Form.Group>
         </Form>
       </div>
