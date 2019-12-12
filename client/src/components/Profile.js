@@ -57,7 +57,7 @@ const Profile = props => {
       <div className="profLabel">My Languages </div> 
       <div className="profText">{props.profile.languages}</div>
       <div className="profLabel">About Me </div>
-      <div className="profText">"{props.profile.about}"</div>
+      <div className="profText aboutText">"{props.profile.about}"</div>
       </div>
      
 <div>
