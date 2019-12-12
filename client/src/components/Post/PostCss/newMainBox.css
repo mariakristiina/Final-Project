@@ -32,3 +32,7 @@
   .row {
     width: 100vw; 
   }
+
+  .formSubmit{
+    outline: none !important;
+  }

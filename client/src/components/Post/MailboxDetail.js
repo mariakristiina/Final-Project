@@ -55,7 +55,7 @@ class MailboxDetail extends Component {
       .then(message => {
         console.log(message);
         this.setState({
-          content: "",
+          content: ""
         });
         this.getMailboxDetail();
         //this.props.history.push(`/mailbox/${this.state.post.owner._id}`);
@@ -124,6 +124,7 @@ class MailboxDetail extends Component {
           <Form.Group controlId="exampleForm.ControlTextarea1">
             <Form.Label className="profLabel">Answer</Form.Label>
             <Form.Control
+              className="formSubmit"
               as="textarea"
               rows="3"
               name="content"
