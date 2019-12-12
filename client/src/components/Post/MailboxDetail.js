@@ -109,7 +109,7 @@ class MailboxDetail extends Component {
 
     return (
 
-      <div >
+      <div>
         <p className="profLabel">Your conversation with {this.state.message.owner.username}</p>
         <div className="comments">
           <p>Date: {this.state.message.created_at}</p>

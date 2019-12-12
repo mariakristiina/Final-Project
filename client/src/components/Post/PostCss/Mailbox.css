@@ -1,3 +1,4 @@
+
 .comments {
   border: 1.5px rgba(0, 0, 0, 0.125) solid;
   margin: 0.1%;
@@ -7,8 +8,17 @@
   width: 60vw;
 }
 
+.inbox {
+  width: 40vw;
+  padding: 0px;
+  margin: 0px;
+}
 
-/* .mails{
-width: 60vw !important;
-margin: 0px !important;
-} */
+.detail{
+  width: 60vw;
+}
+
+.container {
+  padding: 0px;
+  margin: 0px;
+}

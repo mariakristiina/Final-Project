@@ -38,7 +38,7 @@ class Mailbox extends Component {
 
     return (
 
-      <div className="list-group-item list-group-item-action mailBox">
+      <div>
         {sentMessages.map(msg => {
 
           return (
