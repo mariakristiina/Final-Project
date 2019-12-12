@@ -25,7 +25,7 @@ class App extends React.Component {
       error: "",
       username: "",
       urlPath:
-        "https://res.cloudinary.com/mariakristiina/image/upload/v1575542831/avatar-orange_q8rkfz.png",
+        "https://res.cloudinary.com/mariakristiina/image/upload/v1576085857/connection_vazjug.svg",
       age: "",
       gender: "",
       languages: [],

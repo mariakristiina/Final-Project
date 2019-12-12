@@ -49,6 +49,9 @@ class PostDetail extends React.Component {
       });
   };
 
+  componentDidMount() {
+    this.getDataPostDetail();
+  }
 
   //=================== register functions
 
@@ -92,10 +95,6 @@ class PostDetail extends React.Component {
       });
   };
 
-  componentDidMount() {
-    this.getDataPostDetail();
-  }
-
 
   //===================== delete post functions
 
@@ -118,39 +117,56 @@ class PostDetail extends React.Component {
     return (
       <div>
         <div className="postContainer">
-          <h2>{this.state.title}</h2>
-          <p>{this.state.postType}</p>
-          <p>{this.state.category}</p>
-
-          <p>{this.state.date}</p>
-          <div className="times">
-            <p>from: {this.state.startTime}to: </p>
-            <p> {this.state.endTime}</p>
+        <div className="headerBox">
+          <h2>{this.state.title} </h2>
+          {!this.state.match ?
+          <div></div> :
+          this.state.post.match._id === this.props.user._id ? (<h3> You are registered</h3>) : (<div></div> ) }
           </div>
-          <p>{this.state.description}</p>
+          
+          <div className="infoContainer">
+          <div className="item">
+          <div className="postLabel">Post type </div>
+          <div className="postText">{this.state.postType}</div>
+          </div>
+          <div className="item">
+          <div className="postLabel">category</div>          
+          <div className="postText">{this.state.category}</div>
+          </div>
+
+          <div className="item">
+          <div className="postLabel">Date</div>
+            <div className="postText">{this.state.date}</div>
+          </div>
+          <div className="item">
+            <div className="postLabel">Time</div>
+            <div className="postText">{this.state.startTime} - {this.state.endTime}</div>
+            </div>
+          </div>
+          {/* <div className="postLabel">description</div> */}
+          <div className="postText">{this.state.description}</div>
 
         </div>
 
         {this.state.owner._id === this.props.user._id ?
           <>
-            <Button variant="danger" onClick={this.deletePost}>
+            <button className="button postDetailButton"  onClick={this.deletePost}>
               Delete Post
-            </Button>
+            </button>
           </>
           :
           <div></div>
         }
 
-        {this.state.match ? (
+        {this.state.match === this.props.user._id ? (
           <div>
-            <h2>You are registered</h2>
             <form onSubmit={this.handleSubmitDeRegister}>
-              <button type="submit">De-Register</button>
+              <button className="button postDetailButton"  type="submit">De-Register</button>
             </form>
           </div>
         ) : (
             <form onSubmit={this.handleSubmit}>
-              <button type="submit">Register</button>
+              <button className="button postDetailButton" type="submit">Register</button>
             </form>
           )}
         <div className="posterContainer">

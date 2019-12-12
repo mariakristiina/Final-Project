@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-left: 5vw;
+    margin: 3vh 0vw 0vh 5vw;
 }
 
 .posterContainer {
@@ -15,4 +15,51 @@
 .times {
     display: flex;
     flex-direction: row;
+}
+
+.headerBox {
+    display: flex;
+    flex-direction: row;
+}
+
+h2 {
+    color: #f19999;
+    font-size: 5vh;
+}
+
+.postDetailButton {
+    margin-top: 3vh;
+    font-size: 2vh;
+    padding: .8vw 1vw;
+    width: 15vw;
+    border: 1.5px rgba(0,0,0, .5) solid;
+}
+
+.postDetailButton:hover {
+    font-size: 2vh;
+    padding: .8vw 1vw;
+    width: 15vw;
+    border: 1.5px rgba(0,0,0, .5) solid;
+}
+
+.postLabel {
+    font-size: 2vh;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: rgba(0,0,0, .5);
+    text-decoration: underline;
+}
+
+.postText {
+    font-size: 3.5vh;
+}
+
+.infoContainer {
+    display: flex;
+    flex-direction: row;
+    margin: 2vh 0vw;
+}
+
+.item {
+    margin-right: 3vw;
 }

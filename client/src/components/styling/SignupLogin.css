@@ -9,7 +9,7 @@
 }
 
 .signUpLogInButton {
-    margin-top: 10vh;
+    margin-top: 5vh;
 }
 
 .formHeader {
@@ -17,12 +17,13 @@
 }
 
 .input {
-    border: 2px solid rgba(0,0,0, .7);
+    border: 2px solid rgba(0,0,0, .5);
     border-radius: 0px;
     width: 40vw;
     height: 6vh;
     outline: none !important;
-    padding: .5vh .5vw
+    padding: .5vh .5vw;
+    background-color: transparent;
 }
 
 .formBox {
@@ -39,4 +40,11 @@
 .formText {
     font-size: 3vh;
     margin-bottom: 4vh;
+}
+
+.alert {
+    font-size: 3vh;
+    margin: 0;
+    padding: 0;
+    color: rgb(146, 80, 137);
 }
