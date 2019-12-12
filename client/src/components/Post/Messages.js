@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import ("./PostCss/postDetail.css")
 
 
 class Messages extends Component {
@@ -41,15 +42,15 @@ class Messages extends Component {
       <div>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Your Message</Form.Label>
-            <Form.Control
+            <Form.Label className="messageLabel">Write a Message</Form.Label>
+            <Form.Control className="messageInput"
               as="textarea"
               rows="3"
               name="content"
               onChange={this.handleChange}
             />
           </Form.Group>
-          <button onClick={this.myFunction}>Send Message</button>
+          <button className="button messageButton" onClick={this.myFunction}>Send</button>
         </Form>
       </div>
     );

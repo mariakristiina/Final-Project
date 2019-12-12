@@ -1,8 +1,10 @@
 
 import React, { Component } from "react"
+import {Link} from "react-router-dom"
 import { signup } from "../services/auth"
 import { Alert, Form, Button} from "react-bootstrap"
 import ("./styling/SignupLogin.css")
+
 
 
 class Signup extends Component {
@@ -31,7 +33,7 @@ class Signup extends Component {
       })
     } else {
       this.props.setUser(data)
-      this.props.history.push("/profile");
+      this.props.history.push("/profile/:profile");
     }
   })
   }
@@ -86,12 +88,13 @@ class Signup extends Component {
         {this.state.error && (
           <Alert className="alert" >{this.state.error}</Alert>
         )}
-          <button className="button signUpLogInButton" type="submit">Sign up</button>
+
+          <button className="button signUpLogInButton" type="submit">Sign Up</button>
        </Form>
      </div>
      </div>
    )}
         }
-    
+
 
 export default Signup;

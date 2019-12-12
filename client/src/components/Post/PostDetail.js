@@ -181,12 +181,24 @@ class PostDetail extends React.Component {
           <p>{this.state.owner.about}</p>
         </div>
 
-        <Message
+
+
+        {!this.state.match ?
+          <div></div> :
+          this.state.match._id === this.props.user._id ? ( <Message
           subject={this.state.post._id}
           recipient={this.state.post.owner}
           owner={this.props.user}
           {...this.props}
-        />
+        />) : 
+        this.state.owner._id === this.props.user._id ? ( <Message
+          subject={this.state.post._id}
+          recipient={this.state.post.owner}
+          owner={this.props.user}
+          {...this.props}
+        />) :
+        (<div></div> ) }
+       
       </div>
     );
   }

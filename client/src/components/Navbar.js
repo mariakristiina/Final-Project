@@ -16,7 +16,7 @@ const Navbar = props => {
     <div className="navContainer">
     <div className="left">
       <Link className="textName" to="/"><img className="logo"src="/connection.svg" />
-      NAME</Link>
+      B-connection</Link>
       </div>
      
       <div className="right">

@@ -20,11 +20,17 @@
 .headerBox {
     display: flex;
     flex-direction: row;
+    align-items: baseline;
 }
 
 h2 {
     color: #f19999;
     font-size: 5vh;
+}
+
+h3 {
+    font-size: 2.5vh; 
+    margin-left: 2vw;
 }
 
 .postDetailButton {
@@ -37,9 +43,17 @@ h2 {
 
 .postDetailButton:hover {
     font-size: 2vh;
-    padding: .8vw 1vw;
+    padding: 1vw 1vw;
     width: 15vw;
+    border: 0px white solid;
+}
+
+.messageButton {
     border: 1.5px rgba(0,0,0, .5) solid;
+}
+
+.messageButton:hover {
+    border: 1.5px white solid;
 }
 
 .postLabel {
@@ -62,4 +76,13 @@ h2 {
 
 .item {
     margin-right: 3vw;
+}
+
+.messageLabel {
+    text-transform: uppercase;
+    font-size: 3vh;
+}
+
+.messageInput {
+    margin: 5vh;
 }
