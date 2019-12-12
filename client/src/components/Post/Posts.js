@@ -71,6 +71,7 @@ class Posts extends Component {
           <div className="postLabels">
             <label htmlFor="myposts">My posts</label>
           </div>
+         
           <select
             name="owner"
             id="owner"
@@ -87,6 +88,7 @@ class Posts extends Component {
               Registered
             </option>
           </select>
+            
           <div className="postLabels">
             <label htmlFor="category">Filter by Category</label>
           </div>
