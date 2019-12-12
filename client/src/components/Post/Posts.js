@@ -52,17 +52,23 @@ class Posts extends Component {
   render() {
     const filteredPosts = this.state.posts.filter(post => {
       // console.log("match-id", post.match._id)
+      if ((this.state.owner === "owner" || !this.state.owner) && (this.state.category === post.category || !this.state.category))
+{ return ((post.owner._id === this.props.user._id) && (this.state.category === post.category || !this.state.category))
 
-      return (
-        (!this.state.owner ||
-          (((this.state.owner === "owner" &&
-            post.owner._id === this.props.user._id) ||
-            (this.state.owner === "match" &&
-              post.match &&
-              post.match._id === this.props.user._id)) &&
-            (this.state.category === post.category || !this.state.category))) &&
-        (this.state.category === post.category || !this.state.category)
-      );
+} else if ((this.state.owner === "match" && (post.match)) && (this.state.category === post.category || !this.state.category)){
+  return ((post.match._id === this.props.user._id) && (this.state.category === post.category || !this.state.category))
+}
+
+      // return (
+      //   (!this.state.owner ||
+      //     ((this.state.owner === "owner" &&
+      //       post.owner._id === this.props.user._id) ||
+      //       (this.state.owner === "match" &&
+      //         post.match &&
+      //         post.match._id === this.props.user._id) &&
+      //       (this.state.category === post.category || !this.state.category))) &&
+      //   (this.state.category === post.category || !this.state.category)
+      // );
     });
 
     return (
@@ -114,6 +120,8 @@ class Posts extends Component {
         </div>
 
         <PostList posts={filteredPosts} />
+
+
         <div className="lonelyLink">
           <Link
             to="addPost"
