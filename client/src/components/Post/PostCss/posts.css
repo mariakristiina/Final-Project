@@ -105,8 +105,11 @@ option > a:hover {
 }
 
 .posts:hover {
-  background-image: url("/connect.jpg");
-  /*background-size: 100%;*/
+  background-image: url("/logo.png");
+  background-size: 40%;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.5;
 }
 
 .post-wraper {

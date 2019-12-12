@@ -15,7 +15,7 @@ const Navbar = props => {
   return (
     <div className="navContainer">
     <div className="left">
-      <Link className="textName" to="/"><img className="logo"src="/connection.svg" />
+      <Link className="textName" to="/"><img className="logo"src="/logo.png" />
       B-connection</Link>
       </div>
      
