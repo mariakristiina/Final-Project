@@ -8,7 +8,7 @@ const MailboxWrapper = props => {
   return (
     <>
       <div className="col-5" style={{ "maxHeight": "90vh", "overflow": "scroll" }}>
-        <div className="list-group">
+        <div className="list-group" style={{ marginLeft: "40%" }}>
           <Mailbox user={props.user} {...props} />
           </div>
           </div>

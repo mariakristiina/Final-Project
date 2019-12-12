@@ -6,6 +6,7 @@ import ReplyMailbox from "./ReplyMailbox";
 import("./PostCss/mailbox.css");
 
 
+
 class MailboxDetail extends Component {
   state = {
     message: null,
@@ -108,12 +109,12 @@ class MailboxDetail extends Component {
 
     return (
 
-        <div >
-          <p className="profLabel">Your conversation with {this.state.message.owner.username}</p>
-          <div className="comments">
-            <p>Date: {this.state.message.created_at}</p>
-            <p>Message: {this.state.message.content}</p>
-          </div>
+      <div >
+        <p className="profLabel">Your conversation with {this.state.message.owner.username}</p>
+        <div className="comments">
+          <p>Date: {this.state.message.created_at}</p>
+          <p>Message: {this.state.message.content}</p>
+        </div>
 
         {comments}
 
