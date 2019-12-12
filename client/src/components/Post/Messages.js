@@ -33,9 +33,9 @@ class Messages extends Component {
       });
   };
 
-  myFunction() {
-    alert("Message successfully sent!");
-  }
+  // myFunction() {
+  //   alert("Message successfully sent!");
+  // }
 
   render() {
     return (
