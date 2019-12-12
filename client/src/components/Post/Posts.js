@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import PostList from "./PostList";
 import NewPost from "./NewPost";
-import { Button  } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+//import { Link } from "react-router-dom";
+import { Link, animateScroll as scroll } from "react-scroll";
 import("./PostCss/posts.css");
 
 class Posts extends Component {
@@ -70,16 +71,24 @@ class Posts extends Component {
           <div className="postLabels">
             <label htmlFor="myposts">My posts</label>
           </div>
+         
           <select
             name="owner"
             id="owner"
             value={this.state.owner}
             onChange={this.handleChangeFilter}
           >
-            <option className="optionBox" value="">--</option>
-            <option className="optionBox" value="owner">My posts</option>
-            <option className="optionBox" value="match">Registered</option>
+            <option className="optionBox" value="">
+              --
+            </option>
+            <option className="optionBox" value="owner">
+              My posts
+            </option>
+            <option className="optionBox" value="match">
+              Registered
+            </option>
           </select>
+            
           <div className="postLabels">
             <label htmlFor="category">Filter by Category</label>
           </div>
@@ -104,11 +113,20 @@ class Posts extends Component {
           </select>
         </div>
 
-        <PostList posts={filteredPosts}  />
-
-        <Link className="addPost" onClick={this.toggleEdit}>
-          Add a Post
-        </Link>
+        <PostList posts={filteredPosts} />
+        <div className="lonelyLink">
+          <Link
+            to="addPost"
+            spy={true}
+            smooth={true}
+            offset={-50}
+            duration={900}
+            className="addPost"
+            onClick={this.toggleEdit}
+          >
+            Add a Post
+          </Link>
+        </div>
 
         {this.state.addPost && <NewPost refreshData={this.getDataPosts} />}
       </div>

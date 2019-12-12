@@ -19,19 +19,19 @@ const PostList = props => {
           );
         }
         return (
+                <Link className="postLinks" to={`/post/${post._id}`}>
           <div key={post._id} className="posts">
             <div className="singlePosts">
               <h3>
-                <Link className="postLinks" to={`/post/${post._id}`}>
                   {post.title}
-                </Link>
               </h3>
-              <p>Posted by: {post.owner.username}</p>
-              <p>Type: {post.postType}</p>
-              <p>Category: {post.category}</p>
-              <p>Date: {post.date}</p>
+              <p className="postText">Posted by: {post.owner.username}</p>
+              <p className="postText">Type: {post.postType}</p>
+              <p className="postText">Category: {post.category}</p>
+              <p className="postText">Date: {post.date}</p>
             </div>
           </div>
+                </Link>
         );
       })}
     </div>
