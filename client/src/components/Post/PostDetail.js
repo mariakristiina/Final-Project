@@ -43,6 +43,7 @@ class PostDetail extends React.Component {
           messages: response.data.messages
         });
         console.log(this.state.post);
+        console.log(response.data.match);
       })
       .catch(err => {
         console.log(err);
@@ -63,12 +64,15 @@ class PostDetail extends React.Component {
 
     axios
       .put(`/post/register/${postId}`, {
-        match: this.state.match
+        match: this.state.match,
+        post: { ...this.state.post, match: userId}
       })
       .then(post => {
         this.setState({
-          match: userId
+          match: userId,
+          post: { ...this.state.post, match: userId}
         });
+        this.getDataPostDetail();
       })
       .catch(err => {
         console.log(err);
@@ -86,7 +90,7 @@ class PostDetail extends React.Component {
       })
       .then(post => {
         this.setState({
-          match: ""
+          match: "",
         });
         console.log(this.state);
       })
@@ -121,7 +125,7 @@ class PostDetail extends React.Component {
           <h2>{this.state.title} </h2>
           {!this.state.match ?
           <div></div> :
-          this.state.post.match._id === this.props.user._id ? (<h3> You are registered</h3>) : (<div></div> ) }
+          this.state.match._id === this.props.user._id ? (<h3> You are registered</h3>) : (<div></div> ) }
           </div>
           
           <div className="infoContainer">
@@ -158,19 +162,18 @@ class PostDetail extends React.Component {
             </button>
           </>
           :
-          <div></div>
-        }
-
-        {this.state.match === this.props.user._id ? (
+          !this.state.match ?
+          <form onSubmit={this.handleSubmit}>
+              <button className="button postDetailButton" type="submit">Register</button>
+            </form> :
+            this.state.match._id === this.props.user._id  ?(
           <div>
             <form onSubmit={this.handleSubmitDeRegister}>
               <button className="button postDetailButton"  type="submit">De-Register</button>
             </form>
           </div>
         ) : (
-            <form onSubmit={this.handleSubmit}>
-              <button className="button postDetailButton" type="submit">Register</button>
-            </form>
+            <div></div>
           )}
         <div className="posterContainer">
           <p>{this.state.owner.username}</p>
