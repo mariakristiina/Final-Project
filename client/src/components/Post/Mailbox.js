@@ -1,3 +1,5 @@
+import Moment from 'react-moment';
+import 'moment-timezone';
 import React, { Component } from "react";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
@@ -51,8 +53,7 @@ class Mailbox extends Component {
                 <div>
                   <p>Title: {msg.subject.title}</p>
                   <p>From: {msg.owner.username}</p>
-                  <p>Date: {msg.date}</p>
-
+                  <Moment>{msg.date}</Moment>
                 </div>
               </Link>
             </div>

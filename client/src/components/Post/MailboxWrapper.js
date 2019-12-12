@@ -12,7 +12,7 @@ const MailboxWrapper = props => {
   return (
     <>
       <Container className="container">
-        <Row>
+        <Row classname="row" >
           <Col className="inbox" sm={4} style={{ "maxHeight": "90vh", "overflow": "scroll" }}>
             <div>
               <Mailbox user={props.user} {...props} />
