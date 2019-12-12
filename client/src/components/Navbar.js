@@ -21,7 +21,6 @@ const Navbar = props => {
      
       <div className="right">
       <div>
-      <Link className="text" to="/about">About</Link>
       {props.user ? (
         <>
           <Link className="text" to={`/profile/${props.user._id}`}>Profile</Link>

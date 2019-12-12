@@ -28,6 +28,7 @@ class NewPost extends Component {
     axios
       .post("/post/new", {
         title: this.state.title,
+        date: this.state.date,
         startTime: this.state.startTime,
         endTime: this.state.endTime,
         postType: this.state.postType,

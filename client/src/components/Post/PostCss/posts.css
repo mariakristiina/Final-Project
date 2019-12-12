@@ -93,11 +93,12 @@ option > a:hover {
   padding: 1.5em;
   background-color: #f9f9f4;
   width: 40vw;
+  height: 40vh;
   margin: 0.7em;
 }
 .postText{
   color: #000;
-  font-size: 4vh;
+  font-size: 3.5vh;
 }
 
 .postTitle {

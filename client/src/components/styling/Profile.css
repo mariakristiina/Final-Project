@@ -112,3 +112,7 @@ select {
     color: rgba(0,0,0, .5);
     font-size: 2vh;
 }
+
+.aboutText {
+    width: 30vw;
+}

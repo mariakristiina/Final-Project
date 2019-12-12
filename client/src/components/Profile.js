@@ -28,42 +28,42 @@ const Profile = props => {
   if (props.currentLanguage === "English") {
 
     return (
+<div>
+<div className="profileInfoContainer">
+<div>
+      <div className="profileDetails">
       <div>
-        <div className="profileInfoContainer">
-          <div>
-            <div className="profileDetails">
-              <div>
-                <img className="profilePic" src={props.profile.urlPath} alt="profile" />
-              </div>
+<img className="profilePic" src={props.profile.urlPath} alt="profile" />
+</div>
 
-              <h2>Hello {props.profile.username}</h2>
-              <div className="profLabel">
-                My Age</div>
-              <div className="profText age">
-                {""}
-                {Math.floor(
-                  (new Date() - new Date(props.profile.age).getTime()) / 3.15576e10
-                )} </div>
+      <h2>Hello {props.profile.username}</h2>
+      <div className="profLabel"> 
+        My Age</div>
+        <div className="profText age">
+        {""}
+        {Math.floor(
+          (new Date() - new Date(props.profile.age).getTime()) / 3.15576e10
+        )} </div> 
 
-              <div className="profLabel">My Gender </div>
-              {props.profile.gender === "female" ?
-                <img className="genderPic" src="/female.png" alt="" />
-                :
-                props.profile.gender === "male" ?
-                  <img className="genderPic" src="/male.png" alt="" /> :
-                  <img className="genderPic" src="/diverse.png" alt="" />
-              }
-
-              <div className="profLabel">My Languages </div>
-              <div className="profText">{props.profile.languages}</div>
-              <div className="profLabel">About Me </div>
-              <div className="profText">"{props.profile.about}"</div>
-            </div>
-
-            <div>
-              <button className="button profButton" onClick={props.toggleEditProfile}>Edit Profile Information</button>
-            </div>
-          </div>
+        <div className="profLabel">My Gender </div>
+        {props.profile.gender === "female" ?
+        <img className="genderPic" src="/female.png" alt=""/> 
+        :
+        props.profile.gender === "male" ?
+        <img className="genderPic" src="/male.png" alt=""/>  :
+        <img className="genderPic" src="/diverse.png" alt=""/>
+        }
+      
+      <div className="profLabel">My Languages </div> 
+      <div className="profText">{props.profile.languages}</div>
+      <div className="profLabel">About Me </div>
+      <div className="profText aboutText">"{props.profile.about}"</div>
+      </div>
+     
+<div>
+      <button className="button profButton" onClick={props.toggleEditProfile}>Edit Profile Information</button>
+      </div>
+      </div>
 
           <div className="profFormContainer">
             {props.editProfileForm && (

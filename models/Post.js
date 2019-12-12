@@ -4,10 +4,7 @@ const Schema = mongoose.Schema;
 const postSchema = new Schema(
   {
     title: String,
-    date: {
-      type: String,
-      default: Date.now
-    },
+    date: String,
     startTime: String,
     endTime: String,
     postType: {
