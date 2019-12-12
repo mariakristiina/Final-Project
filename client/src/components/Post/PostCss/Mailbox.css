@@ -22,3 +22,7 @@
   padding: 0px;
   margin: 0px;
 }
+
+.row {
+  width: 100vw; 
+}
