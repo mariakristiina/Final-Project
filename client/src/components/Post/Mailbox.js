@@ -6,8 +6,7 @@ import { Form, Button } from "react-bootstrap";
 import { Link, NavLink, Route } from "react-router-dom";
 import MailboxDetail from "./MailboxDetail";
 import { getMessages } from "./messageFunctions";
-import("./PostCss/mailbox.css");
-import("./PostCss/mailboxList.css")
+import("./PostCss/newMainBox.css")
 
 class Mailbox extends Component {
   state = {

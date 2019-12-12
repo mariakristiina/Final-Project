@@ -5,7 +5,7 @@ import { Route } from "react-router-dom";
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import("./PostCss/mailbox.css");
+import("./PostCss/newMainBox.css");
 
 const MailboxWrapper = props => {
   console.log(props.match.params);

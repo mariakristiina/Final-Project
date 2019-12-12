@@ -5,7 +5,7 @@ import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ReplyMailbox from "./ReplyMailbox";
-import("./PostCss/mailbox.css");
+import("./PostCss/newMainBox.css");
 
 
 
