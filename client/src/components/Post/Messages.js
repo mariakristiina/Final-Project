@@ -32,9 +32,9 @@ class Messages extends Component {
       });
   };
 
-  myFunction() {
-    alert("Message successfully sent!");
-  }
+  // myFunction() {
+  //   alert("Message successfully sent!");
+  // }
 
   render() {
     return (
@@ -49,7 +49,8 @@ class Messages extends Component {
               onChange={this.handleChange}
             />
           </Form.Group>
-          <button onClick={this.myFunction}>Send Message</button>
+          {/* <button onClick={this.myFunction}>Send Message</button> */}
+          <button>Send Message</button>
         </Form>
       </div>
     );

@@ -70,7 +70,15 @@ class MailboxDetail extends Component {
     }
 
     let comments = this.state.message.comments.map(comment => {
-      return <div>{comment.content}</div>;
+      console.log(comment.subject)
+      return (
+        <div>
+          <p>{comment.created_at}</p>
+          <p>{comment.owner.username}</p>
+          <p>{comment.content}</p>
+        </div>
+
+      )
     });
 
     return (
@@ -82,14 +90,14 @@ class MailboxDetail extends Component {
 
         <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Your Message</Form.Label>
+            <Form.Label>Answer message</Form.Label>
             <Form.Control
               as="textarea"
               rows="3"
               name="content"
               onChange={this.handleChange}
             />
-            <button>Send Message</button>
+            <button>Send your answer</button>
           </Form.Group>
         </Form>
       </div>

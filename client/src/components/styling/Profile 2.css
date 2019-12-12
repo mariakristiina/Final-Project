@@ -1,0 +1,83 @@
+.profileInfoContainer {
+display: flex;
+flex: row;
+margin: 5vh 8vw;
+justify-content: space-between;
+}
+
+.profileDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profileDetails div {
+    margin-top: 1vh;
+}
+
+.profilePic {
+    margin-bottom: 3vh;
+    border: 3px solid rgba(0,0,0, .7);
+    height: 25vh;
+}
+
+.profileDetails h2 {
+    font-size: 4.5vh;
+}
+
+.genderPic {
+    height: 4vh;
+    margin-left: 1vw;
+    margin-top: 1vh;
+}
+
+.profLabel {
+    font-size: 2vh;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: rgba(0,0,0, .7);
+    text-decoration: underline;
+}
+
+.profText {
+    font-size: 3vh;
+}
+
+.age {
+margin-left: 1vw;
+}
+
+.profFormContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profButton {
+    font-size: 2vh;
+    padding: .8vw 1vw;
+    width: 15vw;
+}
+
+.profFormInput {
+    border: 2px solid rgba(0,0,0, .7);
+    border-radius: 0px;
+    width: 30vw;
+    height: 6vh;
+    outline: none !important;
+    padding: .5vh .5vw;
+    text-align: center;
+    font-size: 3vh;
+}
+
+.profForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imageInput {
+    width: 30vw;
+    font-size: 3vh;
+}

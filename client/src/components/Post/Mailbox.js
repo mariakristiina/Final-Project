@@ -55,6 +55,8 @@ class Mailbox extends Component {
                   <div>
                     <p>Title: {msg.subject.title}</p>
                     <p>From: {msg.owner.username}</p>
+                    <p>Date: {msg.date}</p>
+                
                   </div>
                 </Link>
               );

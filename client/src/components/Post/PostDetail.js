@@ -65,12 +65,12 @@ class PostDetail extends React.Component {
     axios
       .put(`/post/register/${postId}`, {
         match: this.state.match,
-        post: { ...this.state.post, match: userId}
+        post: { ...this.state.post, match: userId }
       })
       .then(post => {
         this.setState({
           match: userId,
-          post: { ...this.state.post, match: userId}
+          post: { ...this.state.post, match: userId }
         });
         this.getDataPostDetail();
       })
@@ -117,37 +117,39 @@ class PostDetail extends React.Component {
 
   //============================== render
   render() {
+    console.log(Date(this.state.date))
+
 
     return (
       <div>
         <div className="postContainer">
-        <div className="headerBox">
-          <h2>{this.state.title} </h2>
-          {!this.state.match ?
-          <div></div> :
-          this.state.match._id === this.props.user._id ? (<h3> You are registered</h3>) : (<div></div> ) }
-          </div>
-          
-          <div className="infoContainer">
-          <div className="item">
-          <div className="postLabel">Post type </div>
-          <div className="postText">{this.state.postType}</div>
-          </div>
-          <div className="item">
-          <div className="postLabel">category</div>          
-          <div className="postText">{this.state.category}</div>
+          <div className="headerBox">
+            <h2>{this.state.title} </h2>
+            {!this.state.match ?
+              <div></div> :
+              this.state.match._id === this.props.user._id ? (<h3> You are registered</h3>) : (<div></div>)}
           </div>
 
-          <div className="item">
-          <div className="postLabel">Date</div>
-            <div className="postText"> {""}
-            {Math.floor(
-              (new Date(this.state.date).getTime())
-            )}</div>
-          </div>
-          <div className="item">
-            <div className="postLabel">Time</div>
-            <div className="postText">{this.state.startTime} - {this.state.endTime}</div>
+          <div className="infoContainer">
+            <div className="item">
+              <div className="postLabel">Post type </div>
+              <div className="postText">{this.state.postType}</div>
+            </div>
+            <div className="item">
+              <div className="postLabel">category</div>
+              <div className="postText">{this.state.category}</div>
+            </div>
+
+            <div className="item">
+              <div className="postLabel">Date</div>
+              <div className="postText"> {""}
+                {Math.floor(
+                  (new Date(this.state.date).getTime())
+                )}</div>
+            </div>
+            <div className="item">
+              <div className="postLabel">Time</div>
+              <div className="postText">{this.state.startTime} - {this.state.endTime}</div>
             </div>
           </div>
           {/* <div className="postLabel">description</div> */}
@@ -157,24 +159,24 @@ class PostDetail extends React.Component {
 
         {this.state.owner._id === this.props.user._id ?
           <>
-            <button className="button postDetailButton"  onClick={this.deletePost}>
+            <button className="button postDetailButton" onClick={this.deletePost}>
               Delete Post
             </button>
           </>
           :
           !this.state.match ?
-          <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit}>
               <button className="button postDetailButton" type="submit">Register</button>
             </form> :
-            this.state.match._id === this.props.user._id  ?(
-          <div>
-            <form onSubmit={this.handleSubmitDeRegister}>
-              <button className="button postDetailButton"  type="submit">De-Register</button>
-            </form>
-          </div>
-        ) : (
-            <div></div>
-          )}
+            this.state.match._id === this.props.user._id ? (
+              <div>
+                <form onSubmit={this.handleSubmitDeRegister}>
+                  <button className="button postDetailButton" type="submit"> Cancel registration</button>
+                </form>
+              </div>
+            ) : (
+                <div></div>
+              )}
         <div className="posterContainer">
           <p>{this.state.owner.username}</p>
           <p>{this.state.owner.gender}</p>
