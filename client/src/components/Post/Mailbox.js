@@ -6,6 +6,7 @@ import MailboxDetail from "./MailboxDetail";
 import { getMessages } from "./messageFunctions";
 import("./PostCss/mailbox.css");
 
+import ("./PostCss/mailboxList.css")
 class Mailbox extends Component {
   state = {
     //receivedMessages: [],
@@ -46,12 +47,12 @@ class Mailbox extends Component {
         >
           <div>
             {sentMessages.map(msg => {
-              console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", msg);
+              
               return (
                 <Link
                   to={`/mailbox/detail/${msg._id}`}
                   key={msg._id}
-                  className="list-group-item list-group-item-action"
+                  className="list-group-item list-group-item-action mailBox"
                 >
                   <div>
                     <p>Title: {msg.subject.title}</p>
@@ -63,7 +64,7 @@ class Mailbox extends Component {
               );
             })}
           </div>
-          <div></div>
+          
         </div>
       </div>
     );
