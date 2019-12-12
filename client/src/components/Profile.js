@@ -28,12 +28,6 @@ const Profile = props => {
   if (props.currentLanguage === "English") {
 
   return (
-    // if (this.state.error) {
-    //   return <p>{this.state.error}</p>;
-    // } else if (this.state.profile === null) {
-    //   return <div></div>;
-    // }
-
     <div>
 <div className="profileInfoContainer">
 <div>

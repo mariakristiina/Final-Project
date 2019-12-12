@@ -52,7 +52,7 @@ router.post("/", (req, res) => {
     .catch(err => {
       console.log(err);
     });
-});
+})
 
 router.post("/add", (req, res) => {
   const { id, content, subject, owner, recipient } = req.body;
@@ -103,19 +103,6 @@ router.get("/detail/:id", (req, res) => {
     });
 });
 
-
-// router.get("/detail/:id", (req, res) => {
-//   Comment.findById({ _id: req.params.id })
-//     .populate("recipient")
-//     .populate("owner")
-//     .populate("subject")
-//     .then(response => {
-//       res.json(response);
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-// });
 
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
