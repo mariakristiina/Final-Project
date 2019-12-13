@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const PostList = props => {
   return (
-    <div className="post-wraper">
-      {props.posts.map(post => {
+   
+        props.posts.map(post => {
         return (
           <Link className="postLinks" to={`/post/${post._id}`}>
             <div key={post._id} className="posts">
@@ -19,8 +19,7 @@ const PostList = props => {
             </div>
           </Link>
         );
-      })}
-    </div>
+      })
   );
 };
 

@@ -95,18 +95,18 @@ const Navbar = props => {
           <div className="languages">
             {props.currentLanguage === "German" ?
               <>
-                <button className="underline" onClick={props.handleChangeLanguages}
+                <button onClick={props.handleChangeLanguages}
                   value="English"
                 >Englisch</button>
-                <button onClick={props.handleChangeLanguages}
+                <button  className="underline" onClick={props.handleChangeLanguages}
                   value="German"
                 >Deutsch</button>
               </> :
               <>
-                <button onClick={props.handleChangeLanguages}
+                <button  className="underline" onClick={props.handleChangeLanguages}
                   value="English"
                 >English</button>
-                <button className="underline" onClick={props.handleChangeLanguages}
+                <button onClick={props.handleChangeLanguages}
                   value="German"
                 >German</button>
               </>
